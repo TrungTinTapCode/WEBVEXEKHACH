@@ -59,7 +59,7 @@
         </div>
     </div>
 
-
+<br><br>
 
 
 
@@ -73,16 +73,17 @@
 
         <!-- Cột phải: Văn bản -->
         <div class="col-md-6">
-        <h2 class="mb-3">Sự ra đời của COSMO BUS</h2>
+        <h2 class="mb-3">COSMO BUS - Đồng hành cùng kỷ nguyên vươn mình phát triển đất nước</h2>
         <p class="text-muted">
-            Đây là phần mô tả nội dung, bạn có thể thêm bất kỳ đoạn văn nào để giới thiệu về tuyến xe, dịch vụ, hoặc các nội dung cần thiết khác.
+            COSMO BUS được thành lập với sứ mệnh tiên phong trong việc kết nối các vùng miền, góp phần xây dựng hệ thống giao thông hiện đại cho đất nước đang vươn mình phát triển. Với tầm nhìn xa rộng và khát vọng đóng góp vào sự thịnh vượng chung, chúng tôi mang đến trải nghiệm di chuyển an toàn, tiện lợi và thoải mái nhất cho mọi hành khách. Đội ngũ lái xe chuyên nghiệp cùng hệ thống xe hiện đại của COSMO BUS không chỉ đáp ứng nhu cầu vận chuyển đa dạng mà còn thể hiện tinh thần đổi mới sáng tạo - động lực quan trọng thúc đẩy đất nước vươn lên trong kỷ nguyên mới. Chúng tôi cam kết cung cấp dịch vụ vận tải chất lượng cao, góp phần kết nối kinh tế, văn hóa và xã hội giữa các địa phương. Không ngừng cải tiến và đổi mới công nghệ, COSMO BUS tự hào là cầu nối tin cậy cho những chuyến đi đáng nhớ - từ các chuyến công tác ngắn ngày đến những hành trình khám phá dài hơn. Mỗi chuyến xe của chúng tôi đều mang trong mình khát vọng phát triển và tinh thần vượt khó vươn lên của dân tộc.
+            <br> <b>COSMO BUS - Nơi hành trình bắt đầu với sự an tâm và hài lòng, cùng đất nước vươn mình trong kỷ nguyên phát triển mới.</b>
         </p>
-        <ul>
+        <!-- <ul>
             <li>Thông tin 1</li>
             <li>Thông tin 2</li>
             <li>Thông tin 3</li>
-        </ul>
-        <a href="#" class="btn btn-primary mt-2">Xem thêm</a>
+        </ul> -->
+        <!-- <a href="#" class="btn btn-primary mt-2">Xem thêm</a> -->
         </div>
 
     </div>
