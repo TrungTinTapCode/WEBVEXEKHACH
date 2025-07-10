@@ -11,5 +11,6 @@ class HomeController extends Controller
     {
         $routes = Route::all(); // Lấy tất cả tuyến
         return view('home', compact('routes'));
+        
     }
 }

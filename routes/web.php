@@ -14,3 +14,4 @@ Route::get('/search/{type}', ['as' => 'search.transport', 'uses' => 'SearchContr
 Route::get('/search-result', ['as' => 'search.result', 'uses' => 'SearchController@result'])->name('search.result');
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
