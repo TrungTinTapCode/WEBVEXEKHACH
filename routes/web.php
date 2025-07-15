@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController; // Đường dẫn đến Controller của bạn
-
+use App\Http\Controllers\UserController;
 
 
 // Trang chủ
@@ -14,4 +14,19 @@ Route::get('/search/{type}', ['as' => 'search.transport', 'uses' => 'SearchContr
 Route::get('/search-result', ['as' => 'search.result', 'uses' => 'SearchController@result'])->name('search.result');
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+
+//user-login
+Route::get('/user/login', [UserController::class, 'showLoginForm'])->name('login.user');
+Route::post('/user/login', [UserController::class, 'login']);
+
+//user-register
+Route::get('/user/register', [UserController::class, 'showRegisterForm'])->name('register.user');
+Route::post('/user/register', [UserController::class, 'register']);
+
+Route::get('/detail', function () {
+    return view('detail');
+})->name('detail');
+
