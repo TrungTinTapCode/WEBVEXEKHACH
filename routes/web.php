@@ -26,7 +26,20 @@ Route::post('/user/login', [UserController::class, 'login']);
 Route::get('/user/register', [UserController::class, 'showRegisterForm'])->name('register.user');
 Route::post('/user/register', [UserController::class, 'register']);
 
+//trang đặt xe
 Route::get('/detail', function () {
     return view('detail');
 })->name('detail');
+
+//trang ds đơn hàng
+Route::get('/history', function () {
+    return view('user.history');
+})->name('history');
+
+//thong tin - info
+Route::get('/info', function () {
+    return view('user.info');
+})->name('info');
+
+Route::post('/info', [UserController::class, 'store'])->name('info.store');
 
