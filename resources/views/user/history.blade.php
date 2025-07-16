@@ -83,7 +83,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Đơn hàng của tôi</li>
+            <li class="breadcrumb-item active" aria-current="page">Vé xe của tôi</li>
         </ol>
     </nav>
     <div class="row">
@@ -91,7 +91,7 @@
         <div class="col-md-3 mb-3">
             <div class="sidebar">
                 <a href="#"><i class="bi bi-person"></i> Thông tin tài khoản</a>
-                <a href="#"><i class="bi bi-patch-check"></i> Thành viên <strong>Thường</strong></a>
+                <a href="#"><i class="bi bi-patch-check"></i> Thành viên <strong>: Thường</strong></a>
                 <a href="#" class="active"><i class="bi bi-receipt"></i> Đơn hàng của tôi</a>
                 <a href="#"><i class="bi bi-credit-card"></i> Quản lí thẻ</a>
                 <a href="#"><i class="bi bi-chat-dots"></i> Nhận xét chuyến đi</a>
