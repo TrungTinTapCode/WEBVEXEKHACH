@@ -10,7 +10,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item mx-2">
-                    <a class="nav-link fs-5 nav-link-hover-effect" href="#"> <i class="bi bi-ticket-fill me-1" style="font-size: 1.3rem;"></i> Vé xe của tôi
+                    <a class="nav-link fs-5 nav-link-hover-effect" href="{{route('history')}}"> <i class="bi bi-ticket-fill me-1" style="font-size: 1.3rem;"></i> Vé xe của tôi
                     </a>
                 </li>
                 <li class="nav-item mx-2">
@@ -24,7 +24,7 @@
 
                 <li class="nav-item mx-2">
                     @guest
-                        <a class="nav-link fs-5 nav-link-hover-effect" href="#"> <i class="bi bi-box-arrow-in-right me-1" style="font-size: 1.3rem;"></i> Đăng nhập
+                        <a class="nav-link fs-5 nav-link-hover-effect" href="{{route('login.user')}}"> <i class="bi bi-box-arrow-in-right me-1" style="font-size: 1.3rem;"></i> Đăng nhập
                         </a>
                     @else
                         <a class="nav-link fs-5 nav-link-hover-effect" href="#"> <i class="bi bi-box-arrow-right me-1" style="font-size: 1.3rem;"></i> Đăng xuất

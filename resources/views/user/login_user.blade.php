@@ -81,7 +81,7 @@
         </form>
 
         <div class="text-star text-link">
-            Bạn đã có tài khoản? <a href="#">Đăng ký</a>
+            Bạn đã có tài khoản? <a href="{{route('register.user')}}">Đăng ký</a>
         </div>
     </div>
 </body>
