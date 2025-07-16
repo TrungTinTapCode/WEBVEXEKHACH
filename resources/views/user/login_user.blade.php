@@ -12,32 +12,32 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            font-family: 'sans-serif' ;
+            font-family: 'sans-serif';
         }
         .login-box {
             width: 100%;
             max-width: 600px;
-            padding: 40px; 
+            padding: 40px;
         }
         .btn-custom {
             background-color: #ddd;
             border: none;
             color: #000;
-            font-size: 22px; 
-            height: 65px; 
+            font-size: 22px;
+            height: 65px;
         }
         .btn-custom:hover {
             background-color: #ccc;
         }
         .form-select, .form-control {
-            height: 65px; 
-            font-size: 22px; 
+            height: 65px;
+            font-size: 22px;
         }
         .form-label {
-            font-size: 22px; 
+            font-size: 22px;
         }
         h4 {
-            font-size: 26px; 
+            font-size: 26px;
         }
         .text-link a {
             text-decoration: none;
@@ -67,21 +67,26 @@
         <form method="POST" action="{{ route('login.user') }}">
             @csrf
             <div class="mb-4">
-                <label for="phone" class="form-label">Số điện thoại</label>
+                <label for="phone_number" class="form-label">Số điện thoại</label>
                 <div class="input-group">
                     <select class="form-select" style="max-width: 200px;">
                         <option selected>(Việt Nam)+84</option>
                         <!-- Thêm quốc gia khác nếu muốn -->
                     </select>
-                    <input type="text" class="form-control" name="phone" id="phone" placeholder="">
+                    <input type="text" class="form-control" name="phone_number" id="phone_number" placeholder="">
                 </div>
+            </div>
+
+            <div class="mb-4">
+                <label for="password" class="form-label">Mật khẩu</label>
+                <input type="password" class="form-control" name="password" id="password" placeholder="">
             </div>
 
             <button type="submit" class="btn btn-custom w-100 mb-4">TIẾP TỤC</button>
         </form>
 
         <div class="text-star text-link">
-            Bạn đã có tài khoản? <a href="{{route('register.user')}}">Đăng ký</a>
+            Bạn chưa có tài khoản? <a href="{{ route('register.user') }}">Đăng ký</a>
         </div>
     </div>
 </body>

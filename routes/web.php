@@ -18,13 +18,14 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
-//user-login
+// user-login
 Route::get('/user/login', [UserController::class, 'showLoginForm'])->name('login.user');
 Route::post('/user/login', [UserController::class, 'login']);
 
-//user-register
+// user-register
 Route::get('/user/register', [UserController::class, 'showRegisterForm'])->name('register.user');
 Route::post('/user/register', [UserController::class, 'register']);
+
 
 //trang đặt xe
 Route::get('/detail', function () {

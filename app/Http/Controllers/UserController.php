@@ -3,48 +3,56 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Account;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+    // Hiển thị form đăng nhập
     public function showLoginForm()
     {
         return view('user.login_user');
     }
 
-    //login
+    // Xử lý đăng nhập
     public function login(Request $request)
     {
-        // Ví dụ kiểm tra số điện thoại (có thể thêm validate)
         $request->validate([
-            'phone' => 'required|numeric',
+            'phone_number' => 'required|numeric',
+            'password' => 'required',
         ]);
 
-        // Thực hiện xử lý đăng nhập ở đây (ví dụ tạm thời return lại phone)
-        return back()->with('success', 'Đăng nhập thành công với số: ' . $request->phone);
+        $account = Account::where('phone_number', $request->phone_number)->first();
+
+        if ($account && Hash::check($request->password, $account->password)) {
+            // Đăng nhập thành công (nếu muốn dùng Auth::login)
+            Auth::login($account);
+            return redirect('/')->with('success', 'Đăng nhập thành công!');
+        }
+
+        return back()->withErrors(['phone_number' => 'Số điện thoại hoặc mật khẩu không đúng!']);
     }
 
-    //register
+    // Hiển thị form đăng ký
     public function showRegisterForm()
     {
         return view('user.register_user');
     }
 
+    // Xử lý đăng ký
     public function register(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'phone' => 'required|numeric|unique:users,phone', // Nếu có bảng users
-            'password' => 'required|min:6',
+            'phone_number' => 'required|numeric|unique:account,phone_number',
+            'password' => 'required|min:6|confirmed',
         ]);
 
-        // Nếu bạn đã có model User
-        // User::create([
-        //     'name' => $request->name,
-        //     'phone' => $request->phone,
-        //     'password' => bcrypt($request->password),
-        // ]);
+        Account::create([
+            'phone_number' => $request->phone_number,
+            'password' => Hash::make($request->password),
+        ]);
 
-        // Tạm thời chỉ trả thông báo
         return redirect()->route('login.user')->with('success', 'Đăng ký thành công! Vui lòng đăng nhập.');
     }
 }
