@@ -31,7 +31,7 @@ return new class extends Migration
         $table->decimal('old_price', 10, 0)->nullable();
         $table->string('bg_color')->nullable();
         $table->timestamps();
-    });
+        });
     }
 };
 
