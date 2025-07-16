@@ -183,7 +183,7 @@
             <button type="submit" class="btn btn-primary px-4">Cập nhật</button>
         </div>
     </div>
-
+@include('footer')
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
