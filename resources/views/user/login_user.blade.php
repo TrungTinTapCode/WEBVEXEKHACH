@@ -4,27 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Đăng nhập</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
     <style>
         body {
-            margin: 0;
+            background-color: #fff;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-      .dn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    /* background: url('{{ asset('/img/dn.jpg') }}') no-repeat center center; */
-    background-size: 1000px ; /* 👈 bạn chỉnh kích thước tại đây */
-    background-repeat: no-repeat;  /* 👈 nếu muốn lặp thì đổi thành repeat */
-    padding: 20px;
-}
-
+        .main-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 80vh;
+        }
 
         .login-box {
             width: 100%;
@@ -49,8 +48,13 @@
 
         .form-select,
         .form-control {
+
             height: 60px;
             font-size: 20px;
+
+            height: 65px;
+            font-size: 22px;
+
         }
 
         .form-label {
@@ -59,6 +63,7 @@
 
         h4 {
             font-size: 26px;
+
             font-weight: bold;
         }
 
@@ -66,13 +71,23 @@
             font-size: 18px;
         }
 
+
+            /* .font-family: "Times New Roman", Times, serif;
+        } */
+
+
         .text-link a {
             text-decoration: none;
         }
 
+
         .alert {
             padding: 10px;
             border-radius: 8px;
+        }
+        .text-link {
+            font-size: 20px;
+
         }
     </style>
 </head>
@@ -81,6 +96,9 @@
     @include('header')
 
     <div class="dn">
+
+    <div class="main-content">
+
         <div class="login-box">
             <h4 class="text-center mb-4">ĐĂNG NHẬP</h4>
 
@@ -101,22 +119,35 @@
                 <div class="mb-4">
                     <label for="phone_number" class="form-label">Số điện thoại</label>
                     <div class="input-group">
+
                         <select class="form-select" style="max-width: 180px;">
                             <option selected>(Việt Nam)+84</option>
                         </select>
                         <input type="text" class="form-control" name="phone_number" id="phone_number">
+
+                        <select class="form-select" style="max-width: 200px;">
+                            <option selected>(Việt Nam)+84</option>
+                        </select>
+                        <input type="text" class="form-control" name="phone_number" id="phone_number" placeholder="" required>
+
                     </div>
                 </div>
 
                 <div class="mb-4">
                     <label for="password" class="form-label">Mật khẩu</label>
                     <input type="password" class="form-control" name="password" id="password">
+
+                    <input type="password" class="form-control" name="password" id="password" placeholder="" required>
+
                 </div>
 
                 <button type="submit" class="btn btn-custom w-100 mb-4">TIẾP TỤC</button>
             </form>
 
+
             <div class="text-center text-link mt-3">
+            <div class="text-start text-link">
+
                 Bạn chưa có tài khoản? <a href="{{ route('register.user') }}">Đăng ký</a>
             </div>
         </div>
@@ -124,7 +155,10 @@
 
     @include('footer')
 
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
+
+

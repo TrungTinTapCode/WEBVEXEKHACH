@@ -27,7 +27,7 @@ class UserController extends Controller
 
         if ($account && Hash::check($request->password, $account->password)) {
             // Đăng nhập thành công (nếu muốn dùng Auth::login)
-            Auth::login($account);
+            Auth::guard('web')->login($account);
             return redirect('/')->with('success', 'Đăng nhập thành công!');
         }
 
@@ -54,5 +54,9 @@ class UserController extends Controller
         ]);
 
         return redirect()->route('login.user')->with('success', 'Đăng ký thành công! Vui lòng đăng nhập.');
+    }
+    public function profile()
+    {
+        return view('user.profile');
     }
 }
