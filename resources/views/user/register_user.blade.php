@@ -4,25 +4,43 @@
 <head>
     <meta charset="UTF-8">
     <title>Đăng ký</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
     <style>
         body {
             background-color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .register-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            padding: 20px;
         }
 
         .register-box {
             width: 100%;
-            max-width: 600px;
-            padding: 40px;
-            border-radius: 8px;
-            background-color: #f9f9f9;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 700px;
+            padding: 60px 40px;
+            border-radius: 10px;
+            color: #000;
+            /* background: url('{{ asset('/img/dn.jpg') }}') no-repeat center center; */
+            background-size: 1000px auto; /* 👈 Bạn chỉnh kích thước ảnh ở đây */
+            background-repeat: no-repeat;
+            background-position: center;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .register-box form,
+        .register-box h4,
+        .register-box .text-link,
+        .register-box .alert {
+            background-color: rgba(255, 255, 255, 0.92);
+            padding: 10px;
+            border-radius: 10px;
         }
 
         .btn-custom {
@@ -49,7 +67,6 @@
 
         h4 {
             font-size: 26px;
-            font-family: "Times New Roman", Times, serif;
         }
 
         .text-link a {
@@ -60,19 +77,21 @@
         .text-link {
             font-size: 20px;
         }
-
-        footer {
-            background-color: #f1f1f1;
-            padding: 20px 0;
-            text-align: center;
-            font-size: 14px;
-        }
     </style>
 </head>
 
 <body>
-    <div class="register-box">
-        <h4 class="text-center mb-4">ĐĂNG KÝ</h4>
+    @include('header')
+
+    <div class="register-container">
+        <div class="register-box">
+            <h4 class="text-center mb-4">ĐĂNG KÝ</h4>
+
+            @if (session('success'))
+                <div class="alert alert-success text-center">
+                    {{ session('success') }}
+                </div>
+            @endif
 
             @if ($errors->any())
                 <div class="alert alert-danger text-center">
@@ -82,37 +101,43 @@
 
             <form method="POST" action="{{ route('register.user') }}">
                 @csrf
-
-            <div class="mb-4">
-                <label class="form-label" for="phone_number">Số điện thoại</label>
-                <div class="input-group">
-                    <select class="form-select" style="max-width: 200px;">
-                        <option selected>(Việt Nam)+84</option>
-                        <!-- Có thể thêm quốc gia khác -->
-                    </select>
-                    <input type="text" class="form-control" name="phone_number" id="phone_number" placeholder="" required>
+                <div class="mb-4">
+                    <label for="full_name" class="form-label">Họ và tên</label>
+                    <input type="text" class="form-control" name="full_name" id="full_name" required>
                 </div>
-            </div>
 
-            <div class="mb-4">
-                <label for="password" class="form-label">Mật khẩu</label>
-                <input type="password" class="form-control" name="password" id="password" placeholder="Nhập mật khẩu" required>
-            </div>
+                <div class="mb-4">
+                    <label for="phone_number" class="form-label">Số điện thoại</label>
+                    <div class="input-group">
+                        <select class="form-select" style="max-width: 200px;">
+                            <option selected>(Việt Nam)+84</option>
+                        </select>
+                        <input type="text" class="form-control" name="phone_number" id="phone_number" required>
+                    </div>
+                </div>
 
-            <div class="mb-4">
-                <label for="password_confirmation" class="form-label">Nhập lại mật khẩu</label>
-                <input type="password" class="form-control" name="password_confirmation" id="password_confirmation" placeholder="Nhập lại mật khẩu" required>
-            </div>
+                <div class="mb-4">
+                    <label for="password" class="form-label">Mật khẩu</label>
+                    <input type="password" class="form-control" name="password" id="password" required>
+                </div>
 
-                <button type="submit" class="btn btn-custom w-100 mb-4">TIẾP TỤC</button>
+                <div class="mb-4">
+                    <label for="password_confirmation" class="form-label">Xác nhận mật khẩu</label>
+                    <input type="password" class="form-control" name="password_confirmation" id="password_confirmation" required>
+                </div>
+
+                <button type="submit" class="btn btn-custom w-100 mb-4">ĐĂNG KÝ</button>
             </form>
 
-
-        <div class="text-star text-link">
-            Bạn đã có tài khoản? <a href="{{ route('login.user') }}">Đăng nhập</a>
+            <div class="text-link text-center mt-3">
+                Đã có tài khoản? <a href="{{ route('login.user') }}">Đăng nhập</a>
+            </div>
         </div>
     </div>
+
+    @include('footer')
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
 </html>

@@ -13,15 +13,14 @@
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item mx-2">
 
-                    <a class="nav-link fs-5 nav-link-hover-effect" href="#">
                     <a class="nav-link fs-5 nav-link-hover-effect" href="{{ route('history') }}">
 
                         <i class="bi bi-ticket-fill me-1" style="font-size: 1.3rem;"></i> Vé xe của tôi
                     </a>
                 </li>
                 <li class="nav-item mx-2">
-                    <a class="nav-link fs-5 nav-link-hover-effect" href="#">
-                        <i class="bi bi-geo-alt-fill me-1" style="font-size: 1.3rem;"></i> Hệ thống nhà xe
+                    <a class="nav-link fs-5 nav-link-hover-effect" href="{{ route('list') }}">
+                        <i class="bi bi-geo-alt-fill me-1" style="font-size: 1.3rem;"></i> Các chuyến xe
                     </a>
                 </li>
 
@@ -87,30 +86,6 @@
                         </li>
                     </ul>
                 </li>
-
-                    <a class="nav-link fs-5 nav-link-hover-effect" href="{{ route('list') }}">
-                        <i class="bi bi-geo-alt-fill me-1" style="font-size: 1.3rem;"></i> Hệ thống nhà xe
-                    </a>
-                </li>
-                <li class="nav-item mx-2">
-                    <a class="nav-link fs-5 nav-link-hover-effect" href="#">
-                        <i class="bi bi-headset me-1" style="font-size: 1.3rem;"></i> Hotline 24/7
-                    </a>
-                </li>
-
-                @auth('web')
-                    <li class="nav-item mx-2">
-                        <a class="nav-link fs-5 nav-link-hover-effect" href="{{ route('info') }}">
-                            <i class="bi bi-person-circle" style="font-size: 1.3rem;"></i>
-                        </a>
-                    </li>
-                @else
-                    <li class="nav-item mx-2">
-                        <a class="nav-link fs-5 nav-link-hover-effect" href="{{ route('login.user') }}">
-                            <i class="bi bi-box-arrow-in-right me-1" style="font-size: 1.3rem;"></i> Đăng nhập
-                        </a>
-                    </li>
-                @endauth
 
             </ul>
         </div>

@@ -15,7 +15,7 @@
 <div class="marquee-container py-2">
     <div class="marquee-content">
         <span class="marquee-text">
-            <i class="bi bi-bus-front-fill me-2"></i> COSMO BUS kính chào quý khách!
+            <i class="bi bi-bus-front-fill me-2"></i> COSMO BUS kính chào quý khách! Chúc quý khách một ngày tốt lành!
         </span>
     </div>
 </div>

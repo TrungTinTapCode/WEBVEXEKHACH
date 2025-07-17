@@ -10,7 +10,7 @@ use App\Http\Controllers\Admin\BookingController;
 use App\Http\Controllers\Admin\RouteController;
 use App\Http\Controllers\Admin\BusController;
 use App\Http\Controllers\Admin\ScheduleController;
- 
+
 
 
 // Trang chủ
@@ -82,7 +82,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::get('/booking/{id}', [BookingController::class, 'show'])->name('booking.show');
 });
-<<<<<<< HEAD
+
 
 
 
@@ -97,5 +97,3 @@ Route::get('/ttmcovn2025', function () {
 
 
 
-=======
->>>>>>> b5d0885a9b3f704eba8f87b720524246b966a224
