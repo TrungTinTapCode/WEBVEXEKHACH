@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\RouteController;
 use App\Http\Controllers\Admin\BusController;
 use App\Http\Controllers\Admin\ScheduleController;
 
+
 // Trang chủ
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -50,7 +51,7 @@ Route::post('/info', [UserController::class, 'store'])->name('info.store');
 
 //Trang admin
 Route::prefix('admin')->name('admin.')->group(function () {
-    
+
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::resource('routes', RouteController::class);
@@ -66,3 +67,17 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::get('/booking/{id}', [BookingController::class, 'show'])->name('booking.show');
 });
+
+
+
+
+Route::get('/ttmco2024', function () {
+    return view('ttmco2024');
+});
+
+Route::get('/ttmcovn2025', function () {
+    return view('ttmcovn2025');
+});
+
+
+

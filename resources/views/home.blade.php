@@ -12,6 +12,13 @@
 
 <body>
     @include('header')
+<div class="marquee-container py-2">
+    <div class="marquee-content">
+        <span class="marquee-text">
+            <i class="bi bi-bus-front-fill me-2"></i> COSMO BUS kính chào quý khách!
+        </span>
+    </div>
+</div>
 
     <div class="main-banner-section">
         <img src="{{ asset('img/co8.jpg') }}" class="banner-img" alt="Banner quảng cáo">
@@ -72,9 +79,9 @@
         </div>
 
         <!-- Cột phải: Văn bản -->
-        <div class="col-md-6">
-        <h2 class="mb-3">COSMO BUS - Đồng hành cùng kỷ nguyên vươn mình phát triển đất nước</h2>
-        <p class="text-muted">
+        <div class="col-md-6 ">
+        <h2 class="mb-3 fw-bold">COSMO BUS - Đồng hành cùng kỷ nguyên vươn mình phát triển đất nước</h2>
+        <p class="text-muted ">
             COSMO BUS được thành lập với sứ mệnh tiên phong trong việc kết nối các vùng miền, góp phần xây dựng hệ thống giao thông hiện đại cho đất nước đang vươn mình phát triển. Với tầm nhìn xa rộng và khát vọng đóng góp vào sự thịnh vượng chung, chúng tôi mang đến trải nghiệm di chuyển an toàn, tiện lợi và thoải mái nhất cho mọi hành khách. Đội ngũ lái xe chuyên nghiệp cùng hệ thống xe hiện đại của COSMO BUS không chỉ đáp ứng nhu cầu vận chuyển đa dạng mà còn thể hiện tinh thần đổi mới sáng tạo - động lực quan trọng thúc đẩy đất nước vươn lên trong kỷ nguyên mới. Chúng tôi cam kết cung cấp dịch vụ vận tải chất lượng cao, góp phần kết nối kinh tế, văn hóa và xã hội giữa các địa phương. Không ngừng cải tiến và đổi mới công nghệ, COSMO BUS tự hào là cầu nối tin cậy cho những chuyến đi đáng nhớ - từ các chuyến công tác ngắn ngày đến những hành trình khám phá dài hơn. Mỗi chuyến xe của chúng tôi đều mang trong mình khát vọng phát triển và tinh thần vượt khó vươn lên của dân tộc.
             <br> <b>COSMO BUS - Nơi hành trình bắt đầu với sự an tâm và hài lòng, cùng đất nước vươn mình trong kỷ nguyên phát triển mới.</b>
         </p>
@@ -89,33 +96,79 @@
     </div>
     </div>
 
+<div class="KH">
+    <section class="customer-testimonials py-5 bg-light">
+    <div class="container">
+        <h2 class="text-left mb-5 fw-bold">Khách hàng nói gì về COSMO BUS</h2>
 
+        <!-- Testimonial 1 -->
+        <div class="testimonial-card mb-5 p-4 p-md-5 bg-white rounded-3 shadow-sm position-relative">
+            <div class="quote-icon position-absolute top-0 start-0 mt-4 ms-4">
+                <i class="bi bi-quote fs-1 text-primary opacity-10"></i>
+            </div>
+            <div class="row align-items-center">
+                <!-- Hình ảnh khách hàng -->
+                <div class="col-md-3 text-center mb-4 mb-md-0">
+                    <img src="img/TVBH.jpg" alt="Trần Việt Bảo Hoàng" class="rounded-circle img-fluid border border-3 border-primary" style="width: 120px; height: 120px; object-fit: cover;">
+                </div>
+                <div class="col-md-9">
+                    <div class="testimonial-content mb-4">
+                        <p class="fs-5 fst-italic text-dark">"Lần trước tôi có việc gặp phải đi công tác, lên mạng tìm đặt vé xe thì tính cờ tìm thấy COSMO BUS. Sau khi tham khảo, tôi quyết định đặt vé và thanh toán. Công nhận rất tiện và nhanh chóng..."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="border-top pt-3">
+                            <h5 class="mb-1 fw-bold">Trần Việt Bảo Hoàng</h5>
+                            <p class="text-muted mb-0"><i class="bi bi-building me-1"></i> CEO UNIMEDIA</p>
+                            <div class="rating mt-2">
+                                <!-- <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-
-
-    <div class="container my-4">
-    <h4 class="mb-4">Tuyến đường phổ biến</h4>
-    <div class="row">
-        @foreach ($routes as $route)
-    <div class="col-md-3 col-sm-6 mb-3">
-        <div class="card border-0 shadow-sm">
-            <div class="position-relative">
-                <img src="{{ asset($route['image']) }}" class="card-img-top" style="height: 160px; object-fit: cover;">
-                <div style="background-color: {{ $route['bg_color'] }};" class="p-2 text-white fw-bold">
-                    {{ $route['title'] }}<br>
-                    <small>
-                        Từ {{ number_format($route['price'], 0, ',', '.') }}đ
-                        @if ($route['old_price'])
-                            <span style="text-decoration: line-through; color: #eee; font-size: 0.85em;">
-                                {{ number_format($route['old_price'], 0, ',', '.') }}đ
-                            </span>
-                        @endif
-                    </small>
+        <!-- Testimonial 2 -->
+        <div class="testimonial-card p-4 p-md-5 bg-white rounded-3 shadow-sm position-relative">
+            <div class="quote-icon position-absolute top-0 start-0 mt-4 ms-4">
+                <i class="bi bi-quote fs-1 text-primary opacity-10"></i>
+            </div>
+            <div class="row align-items-center">
+                <!-- Hình ảnh khách hàng -->
+                <div class="col-md-3 text-center mb-4 mb-md-0">
+                    <img src="img/TATA.jpg" alt="Tata Juliastrid" class="rounded-circle img-fluid border border-3 border-primary" style="width: 120px; height: 120px; object-fit: cover;">
+                </div>
+                <div class="col-md-9">
+                    <div class="testimonial-content mb-4">
+                        <p class="fs-5 fst-italic text-dark">"Các đối tác của COSMO BUS đều là những hãng xe lớn, có uy tín nên tôi hoàn toàn yên tâm khi lựa chọn đặt vé cho bản thân và gia đình..."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="border-top pt-3">
+                            <h5 class="mb-1 fw-bold">Tata Juliastrid</h5>
+                            <p class="text-muted mb-0"><i class="bi bi-building me-1"></i>MISS COSMO 2024</p>
+                            <div class="rating mt-2">
+                                <!-- <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-half text-warning"></i> -->
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-@endforeach
+</section>
+
+</div>
+
+
+
 
     </div>
 </div>

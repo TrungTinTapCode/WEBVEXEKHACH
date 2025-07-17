@@ -1,3 +1,4 @@
+<?php
 @extends('admin.layouts.app')
 
 @section('title', 'Dashboard')
@@ -8,7 +9,7 @@
     $totalBuses = 8;
     $todayBookings = 23;
     $todayRevenue = 12500000;
-    
+
     $recentBookings = [
         (object)[
             'booking_id' => 1,
@@ -25,7 +26,7 @@
             'created_at' => now()->subHours(5)
         ]
     ];
-    
+
     $revenueChart = [
         'labels' => ['15/05', '16/05', '17/05', '18/05', '19/05', '20/05', '21/05'],
         'data' => [12000000, 8000000, 15000000, 9000000, 11000000, 13000000, 12500000]
@@ -47,7 +48,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="col-md-3">
         <div class="card bg-success text-white mb-4">
             <div class="card-body">
@@ -61,7 +62,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="col-md-3">
         <div class="card bg-info text-white mb-4">
             <div class="card-body">
@@ -75,7 +76,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="col-md-3">
         <div class="card bg-warning text-white mb-4">
             <div class="card-body">
@@ -102,7 +103,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="col-md-4">
         <div class="card mb-4">
             <div class="card-header">
@@ -111,7 +112,7 @@
             <div class="card-body">
                 <div class="list-group">
                     @foreach($recentBookings as $booking)
-                    <a href="{{ route('admin.booking.show', $booking->booking_id) }}" 
+                    <a href="{{ route('admin.booking.show', $booking->booking_id) }}"
                        class="list-group-item list-group-item-action">
                         <div class="d-flex w-100 justify-content-between">
                             <h6 class="mb-1">#{{ $booking->booking_code }}</h6>

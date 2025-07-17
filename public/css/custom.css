@@ -1,3 +1,54 @@
+.marquee-container {
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    width: 100%;
+}
+.marquee-container {
+    background-color: #ede200; /* Màu vàng */
+    color: #000000; /* Chữ màu đen */
+    /* Giữ nguyên các thuộc tính khác */
+}
+
+.marquee-text {
+    color: #020202; /* Đảm bảo chữ màu đen */
+    /* Giữ nguyên các thuộc tính khác */
+}
+
+.marquee-content {
+    display: inline-block;
+    padding-left: 100%; /* Đẩy text ra khỏi container ban đầu */
+    animation: marquee 15s linear infinite;
+}
+
+.marquee-text {
+    display: inline-block;
+    padding-right: 50px; /* Khoảng cách giữa các lần lặp */
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(0); /* Bắt đầu từ bên phải */
+    }
+    100% {
+        transform: translateX(-100%); /* Di chuyển sang trái */
+    }
+}
+
+/* Tối ưu cho mobile */
+@media (max-width: 768px) {
+    .marquee-text {
+        font-size: 0.9rem;
+    }
+    @keyframes marquee {
+        100% {
+            transform: translateX(-150%); /* Di chuyển nhanh hơn trên mobile */
+        }
+    }
+}
+
 /* public/css/custom.css */
 
 .nav-link-hover-effect {
@@ -236,4 +287,74 @@
 .card-img-top {
     border-top-left-radius: 0.5rem;
     border-top-right-radius: 0.5rem;
+}
+.customer-testimonials {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.testimonial-card {
+    transition: all 0.3s ease;
+    border-left: 4px solid var(--bs-primary);
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+}
+
+.testimonial-content p {
+    line-height: 1.8;
+    position: relative;
+    padding-left: 20px;
+}
+
+.rating {
+    font-size: 1.2rem;
+}
+
+@media (max-width: 768px) {
+    .testimonial-card {
+        padding: 1.5rem !important;
+    }
+
+    .testimonial-content p {
+        font-size: 1rem !important;
+    }
+
+    .quote-icon {
+        display: none;
+    }
+}
+
+.KH{
+    margin-bottom: 50px;
+    margin-top: 50px;
+}
+/* public/css/video.css */
+
+.video {
+    background-color: #002147;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 40px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+#video-container {
+    width: 100vw;
+    max-width: 100%;
+    margin: 40px 0;
+}
+
+iframe {
+    width: 80%;
+    height: 720px;
+}
+
+@media screen and (max-width: 768px) {
+    iframe {
+        height: 250px;
+    }
 }
