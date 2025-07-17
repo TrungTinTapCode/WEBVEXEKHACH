@@ -2,6 +2,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,6 +16,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f8f9fa;
         }
+
         .banner-section {
             background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
             padding: 60px 0;
@@ -22,7 +24,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .banner-section::before {
             content: '';
             position: absolute;
@@ -33,12 +35,19 @@
             background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23ffffff" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
             animation: float 20s ease-in-out infinite;
         }
-        
+
         @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
         }
-        
+
         .flash-sale {
             font-size: 2.5rem;
             font-weight: bold;
@@ -46,37 +55,37 @@
             position: relative;
             z-index: 1;
         }
-        
+
         .flash-sale .highlight {
             color: #ffc107;
             font-size: 3rem;
         }
-        
+
         .trip-card {
             background: white;
             border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             overflow: hidden;
             margin-bottom: 30px;
         }
-        
+
         .trip-image {
             width: 100%;
             height: 150px;
             object-fit: cover;
             border-radius: 10px;
         }
-        
+
         .price-tag {
             font-size: 1.5rem;
             font-weight: bold;
             color: #dc3545;
         }
-        
+
         .seat-selection {
             background: white;
             border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             padding: 30px;
             margin-bottom: 30px;
         }
@@ -253,7 +262,7 @@
         .payment-section {
             background: white;
             border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             padding: 30px;
             margin-bottom: 30px;
         }
@@ -348,9 +357,9 @@
         .social-links .tiktok {
             background-color: #000;
         }
-
     </style>
 </head>
+
 <body>
     <!-- Banner Section -->
     <div class="banner-section">
@@ -399,7 +408,7 @@
             </div>
 
             <div class="legend-container">
-               <!-- chu thich -->
+                <!-- chu thich -->
                 <div class="legend-section">
                     <div class="legend-item">
                         <div class="legend-box" style="background-color: #ccc; border: 2px solid #999;"></div>
@@ -454,7 +463,7 @@
                     <!-- Tầng Trên -->
                     <div class="floor-section">
                         <div class="floor-title">Tầng Trên</div>
-                        
+
                         <div class="seat-column">
                             <div class="seat-row">
                                 <div class="seat available" onclick="toggleSeat(this)"></div>
@@ -484,7 +493,7 @@
             <!-- Bottom bar -->
             <div class="bottom-bar">
                 <span class="total-text">Tổng cộng: <span id="totalPrice">0đ</span></span>
-                <button class="continue-btn" onclick="continueBooking()">Tiếp tục</button>
+                <a href="{{ route('payment') }}" class="continue-btn" style="text-decoration: none;">Tiếp tục</a>
             </div>
         </div>
 
@@ -560,7 +569,7 @@
         </div>
     </div>
 
-   @include('footer')
+    @include('footer')
 
     <script>
         const seatPrice = 299000;
@@ -569,7 +578,7 @@
             if (seatElement.classList.contains('unavailable')) {
                 return;
             }
-            
+
             if (seatElement.classList.contains('selected')) {
                 seatElement.classList.remove('selected');
                 seatElement.classList.add('available');
@@ -610,4 +619,5 @@
         });
     </script>
 </body>
+
 </html>

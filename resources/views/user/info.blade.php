@@ -1,4 +1,3 @@
-@include('header')
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,32 +6,28 @@
     <title>Thông tin hành khách</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
     <style>
         body {
             font-family: system-ui, sans-serif;
         }
-
         label {
             font-weight: 600;
         }
-
         .section-title {
             color: #0090ff;
             font-weight: bold;
             font-size: 20px;
             text-transform: uppercase;
         }
-
         .required {
             color: red;
         }
-
         .note {
             font-size: 14px;
             color: #777;
         }
-
         select,
         input[type="text"],
         input[type="email"] {
@@ -42,8 +37,8 @@
 </head>
 
 <body>
+    @include('header')
     <div class="container py-4">
-        <!-- THÔNG TIN HÀNH KHÁCH -->
         <h5 class="section-title">THÔNG TIN HÀNH KHÁCH</h5>
         <div class="row g-3">
             <div class="col-md-3">
@@ -59,11 +54,10 @@
             </div>
             <div class="col-md-6">
                 <label>Họ Và Tên <span class="required">*</span> <span class="note">(Ví Dụ: Nguyễn Văn A)</span></label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" value="{{ Auth::user()->name }}">
             </div>
         </div>
 
-        <!-- THÔNG TIN NGƯỜI LIÊN HỆ -->
         <h5 class="section-title mt-4">THÔNG TIN NGƯỜI LIÊN HỆ</h5>
         <p class="note mb-2">
             Vui lòng điền đầy đủ thông tin, nhân viên sẽ liên lạc với khách hàng qua địa chỉ này để hoàn thành thủ tục đặt vé.
@@ -88,12 +82,12 @@
             </div>
             <div class="col-md-4">
                 <label>Họ Và Tên <span class="required">*</span></label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" value="{{ Auth::user()->name }}">
                 <small class="note">(Để chúng tôi liên lạc với quý khách)</small>
             </div>
             <div class="col-md-3">
                 <label>Số Điện Thoại <span class="required">*</span></label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" value="{{ Auth::user()->phone_number }}">
             </div>
             <div class="col-md-3">
                 <label>Số Điện Thoại Khác</label>
@@ -101,55 +95,21 @@
             </div>
             <div class="col-md-6">
                 <label>E-mail</label>
-                <input type="email" class="form-control">
+                <input type="email" class="form-control" value="{{ Auth::user()->email }}">
                 <small class="note">(Để gửi thông tin vé, hành trình, thanh toán)</small>
             </div>
             <div class="col-md-6">
                 <label>Tỉnh/Thành Phố</label>
                 <select name="province" class="form-select">
-                    <option>An Giang</option>
-                    <option>Bắc Ninh</option>
-                    <option>Cà Mau</option>
-                    <option>Cao Bằng</option>
-                    <option>Cần Thơ</option>
-                    <option>Đà Nẵng</option>
-                    <option>Đắk Lắk</option>
-                    <option>Điện Biên</option>
-                    <option>Đồng Nai</option>
-                    <option>Đồng Tháp</option>
-                    <option>Gia Lai</option>
-                    <option>Hà Nội</option>
-                    <option>Hà Tĩnh</option>
-                    <option>Hải Phòng</option>
-                    <option>Hưng Yên</option>
-                    <option>Khánh Hòa</option>
-                    <option>Lạng Sơn</option>
-                    <option>Lào Cai</option>
-                    <option>Lâm Đồng</option>
-                    <option>Nghệ An</option>
-                    <option>Ninh Bình</option>
-                    <option>Phú Thọ</option>
-                    <option>Quảng Ngãi</option>
-                    <option>Quảng Ninh</option>
-                    <option>Quảng Trị</option>
-                    <option>Sơn La</option>
-                    <option>Thanh Hóa</option>
-                    <option>Thái Nguyên</option>
-                    <option>Thành phố Hồ Chí Minh</option>
-                    <option>Thành phố Huế</option>
-                    <option>Tuyên Quang</option>
-                    <option>Tây Ninh</option>
-                    <option>Vĩnh Long</option>
-                    <option>Yên Bái</option>
+                    <option selected>Cần Thơ</option>
                 </select>
-
             </div>
             <div class="col-md-3">
                 <label>Ngày</label>
                 <select class="form-select">
                     @for ($i = 1; $i <= 31; $i++)
                         <option>{{ str_pad($i, 2, '0', STR_PAD_LEFT) }}</option>
-                        @endfor
+                    @endfor
                 </select>
             </div>
             <div class="col-md-3">
@@ -157,14 +117,14 @@
                 <select class="form-select">
                     @for ($i = 1; $i <= 12; $i++)
                         <option>{{ str_pad($i, 2, '0', STR_PAD_LEFT) }}</option>
-                        @endfor
+                    @endfor
                 </select>
             </div>
             <div class="col-md-3">
                 <label>Năm Sinh</label>
                 <select class="form-select">
                     @for ($i = date('Y'); $i >= 1900; $i--)
-                    <option>{{ $i }}</option>
+                        <option>{{ $i }}</option>
                     @endfor
                 </select>
             </div>
@@ -178,13 +138,17 @@
                 </select>
             </div>
         </div>
-        <!-- Nút cập nhật -->
         <div class="mt-4 text-center">
             <button type="submit" class="btn btn-primary px-4">Cập nhật</button>
+
+            {{-- Nút đăng xuất --}}
+            <form method="POST" action="{{ route('logout') }}" class="d-inline">
+                @csrf
+                <button type="submit" class="btn btn-danger px-4 ms-2">Đăng xuất</button>
+            </form>
         </div>
     </div>
-@include('footer')
+    @include('footer')
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>
