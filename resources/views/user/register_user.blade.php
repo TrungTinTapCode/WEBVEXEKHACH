@@ -28,7 +28,8 @@
             border-radius: 10px;
             color: #000;
             /* background: url('{{ asset('/img/dn.jpg') }}') no-repeat center center; */
-            background-size: 1000px auto; /* 👈 Bạn chỉnh kích thước ảnh ở đây */
+            background-size: 1000px auto;
+            /* 👈 Bạn chỉnh kích thước ảnh ở đây */
             background-repeat: no-repeat;
             background-position: center;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
@@ -88,19 +89,24 @@
             <h4 class="text-center mb-4">ĐĂNG KÝ</h4>
 
             @if (session('success'))
-                <div class="alert alert-success text-center">
-                    {{ session('success') }}
-                </div>
+            <div class="alert alert-success text-center">
+                {{ session('success') }}
+            </div>
             @endif
 
             @if ($errors->any())
-                <div class="alert alert-danger text-center">
-                    {{ $errors->first() }}
-                </div>
+            <div class="alert alert-danger text-center">
+                {{ $errors->first() }}
+            </div>
             @endif
 
             <form method="POST" action="{{ route('register.user') }}">
                 @csrf
+                <div class="mb-4">
+                    <label for="name" class="form-label">Họ và tên</label>
+                    <input type="text" class="form-control" name="name" id="name" required>
+                </div>
+
                 <div class="mb-4">
                     <label for="phone_number" class="form-label">Số điện thoại</label>
                     <div class="input-group">

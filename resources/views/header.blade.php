@@ -66,12 +66,29 @@
                     </ul>
                 </li>
 
-                <!-- Dropdown Đăng nhập/Đăng ký (Đã sửa) -->
+               <!-- Dropdown Đăng nhập/Đăng ký và Thông tin tài khoản/đăng xuất -->
                 <li class="nav-item mx-2 dropdown">
                     <a class="nav-link fs-5 nav-link-hover-effect dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                         <i class="bi bi-person-circle me-1" style="font-size: 1.3rem;"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
+                        @auth
+                        <li>
+                            <a class="dropdown-item" href="{{ route('info') }}">
+                                <span class="fw-bold">Thông tin tài khoản</span>
+                                <small class="text-muted d-block">Quản lý tài khoản</small>
+                            </a>
+                        </li>
+                        <li>
+                            <form method="POST" action="{{ url('logout') }}">
+                                @csrf
+                                <button type="submit" class="dropdown-item">
+                                    <span class="fw-bold">Đăng xuất</span>
+                                    <small class="text-muted d-block">Đăng xuất tài khoản</small>
+                                </button>
+                            </form>
+                        </li>
+                        @else
                         <li>
                             <a class="dropdown-item" href="{{ url('user/login') }}">
                                 <span class="fw-bold">Đăng nhập</span>
@@ -84,8 +101,10 @@
                                 <small class="text-muted d-block">Tạo tài khoản mới</small>
                             </a>
                         </li>
+                        @endauth
                     </ul>
                 </li>
+
 
             </ul>
         </div>
