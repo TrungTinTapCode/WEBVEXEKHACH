@@ -12,6 +12,7 @@ class Account extends Authenticatable
     protected $table = 'account';
 
     protected $fillable = [
+        'name',
         'phone_number',
         'password',
     ];
