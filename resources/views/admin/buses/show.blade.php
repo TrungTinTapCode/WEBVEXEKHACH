@@ -34,7 +34,7 @@
                 <div class="d-flex flex-wrap gap-2">
                     @foreach($seatsInRow as $seat)
                     <div class="seat-item {{ $seat->seat_type }} {{ $seat->is_available ? 'available' : 'booked' }}"
-                         data-bs-toggle="tooltip" title="{{ $seat->seat_number }} - {{ ucfirst($seat->seat_type) }}">
+                        data-bs-toggle="tooltip" title="{{ $seat->seat_number }} - {{ ucfirst($seat->seat_type) }}">
                         <span>{{ $seat->seat_number }}</span>
                         <div class="seat-actions">
                             <button class="btn btn-sm btn-warning edit-seat" data-id="{{ $seat->seat_id }}">

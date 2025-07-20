@@ -63,7 +63,7 @@
                     <td>{{ $booking->created_at->format('d/m/Y H:i') }}</td>
                     <td>
                         <a href="{{ route('admin.booking.show', $booking->booking_id) }}" 
-                           class="btn btn-sm btn-primary" title="Xem chi tiết">
+                        class="btn btn-sm btn-primary" title="Xem chi tiết">
                             <i class="fas fa-eye"></i>
                         </a>
                     </td>

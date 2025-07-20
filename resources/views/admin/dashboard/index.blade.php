@@ -112,7 +112,7 @@
                 <div class="list-group">
                     @foreach($recentBookings as $booking)
                     <a href="{{ route('admin.booking.show', $booking->booking_id) }}"
-                       class="list-group-item list-group-item-action">
+                    class="list-group-item list-group-item-action">
                         <div class="d-flex w-100 justify-content-between">
                             <h6 class="mb-1">#{{ $booking->booking_code }}</h6>
                             <small>{{ $booking->created_at->diffForHumans() }}</small>

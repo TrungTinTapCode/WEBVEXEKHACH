@@ -37,7 +37,7 @@
                         <th>Trạng thái</th>
                         <td>
                             <form action="{{ route('admin.booking.update-status', $booking->booking_id) }}" 
-                                  method="POST" class="form-inline">
+                                method="POST" class="form-inline">
                                 @csrf
                                 <select name="status" class="form-control form-control-sm mr-2">
                                     @foreach(['pending', 'confirmed', 'cancelled', 'completed'] as $status)
