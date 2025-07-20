@@ -102,11 +102,6 @@
             <form method="POST" action="{{ route('register.user') }}">
                 @csrf
                 <div class="mb-4">
-                    <label for="full_name" class="form-label">Họ và tên</label>
-                    <input type="text" class="form-control" name="full_name" id="full_name" required>
-                </div>
-
-                <div class="mb-4">
                     <label for="phone_number" class="form-label">Số điện thoại</label>
                     <div class="input-group">
                         <select class="form-select" style="max-width: 200px;">

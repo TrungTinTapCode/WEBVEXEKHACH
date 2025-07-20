@@ -1,66 +1,18 @@
-@include('header')
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chi tiết chuyến xe - COSMO BUS</title>
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"> -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f8f9fa;
         }
-
-        .banner-section {
-            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-            padding: 60px 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .banner-section::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23ffffff" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-            animation: float 20s ease-in-out infinite;
-        }
-
-        @keyframes float {
-
-            0%,
-            100% {
-                transform: translateY(0px);
-            }
-
-            50% {
-                transform: translateY(-20px);
-            }
-        }
-
-        .flash-sale {
-            font-size: 2.5rem;
-            font-weight: bold;
-            margin-bottom: 10px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .flash-sale .highlight {
-            color: #ffc107;
-            font-size: 3rem;
-        }
-
         .trip-card {
             background: white;
             border-radius: 15px;
@@ -259,6 +211,7 @@
             background-color: #0056b3;
         }
 
+    /* Payment Methods and App Download */
         .payment-section {
             background: white;
             border-radius: 15px;
@@ -267,63 +220,34 @@
             margin-bottom: 30px;
         }
 
-        .payment-methods {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .payment-method {
-            border: 2px solid #ddd;
-            border-radius: 10px;
-            padding: 15px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .payment-method:hover {
-            border-color: #4285f4;
-            transform: translateY(-2px);
-        }
-
         .payment-method img {
-            width: 50px;
-            height: 30px;
+            width: 100%;
             object-fit: contain;
         }
 
         .app-download {
-            text-align: center;
+            padding: 20px 0;
         }
 
-        .app-download .qr-code {
-            width: 150px;
-            height: 150px;
-            margin-bottom: 20px;
+        .qr-code img.qr-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 12px;
             border: 2px solid #ddd;
-            border-radius: 10px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            color: #666;
         }
 
-        .app-download .store-buttons {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
+        .store-buttons .store-img {
+            width: auto;
+            height: 90px;
+            transition: transform 0.2s;
         }
 
-        .app-download .store-buttons img {
-            width: 140px;
-            height: 45px;
+        .store-buttons .store-img:hover {
+            transform: scale(1.05);
         }
 
         .social-section {
-            text-align: center;
+            text-align: start;
             margin: 40px 0;
         }
 
@@ -334,47 +258,41 @@
             margin-top: 20px;
         }
 
-        .social-links .social-icon {
+        .social-icon {
             width: 50px;
             height: 50px;
-            border-radius: 10px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
-            color: white;
+            font-size: 30px;
+            color: #fff;
             text-decoration: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
         }
 
-        .social-links .facebook {
+        .social-icon:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .facebook {
             background-color: #1877f2;
         }
 
-        .social-links .youtube {
+        .youtube {
             background-color: #ff0000;
         }
 
-        .social-links .tiktok {
-            background-color: #000;
+        .tiktok {
+            background-color: #000000;
         }
     </style>
 </head>
 
 <body>
-    <!-- Banner Section -->
-    <div class="banner-section">
-        <div class="container">
-            <div class="flash-sale">
-                <div style="color: #1976d2;">THỨ 3 - VÀ VUI THẢ GA</div>
-                <div>
-                    <span style="color: #ffc107; background: white; padding: 5px 15px; border-radius: 10px; margin-right: 10px;">Flash Sale</span>
-                    <span style="color: #ffc107; background: white; padding: 5px 15px; border-radius: 10px;">Giảm Đến</span>
-                    <span class="highlight">50%</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    @include('header')
     <div class="container my-4">
         <!-- Thông tin chuyến xe -->
         <div class="trip-card p-4">
@@ -399,7 +317,7 @@
         <div class="seat-selection">
             <div class="row mb-3">
                 <div class="col-md-6">
-                    <h5 class="text-success">ĐÓN TRẢ TẬN NƠI</h5>
+                    <h5 class="text-success">ĐÓN / TRẢ TẬN NƠI</h5>
                     <p class="text-muted">*Vé thuộc chuyến Cần Thơ - Đà Lạt (__/__/__)</p>
                 </div>
                 <div class="col-md-6 text-end">
@@ -504,40 +422,7 @@
                     <h6 class="mb-3 fw-bold">Phương thức thanh toán</h6>
                     <div class="payment-methods">
                         <div class="payment-method">
-                            <img src="https://via.placeholder.com/50x30/1a73e8/ffffff?text=VISA" alt="Visa">
-                        </div>
-                        <div class="payment-method">
-                            <img src="https://via.placeholder.com/50x30/eb001b/ffffff?text=MC" alt="MasterCard">
-                        </div>
-                        <div class="payment-method">
-                            <img src="https://via.placeholder.com/50x30/005aa0/ffffff?text=JCB" alt="JCB">
-                        </div>
-                        <div class="payment-method">
-                            <img src="https://via.placeholder.com/50x30/d60270/ffffff?text=Momo" alt="Momo">
-                        </div>
-                        <div class="payment-method">
-                            <img src="https://via.placeholder.com/50x30/0068ff/ffffff?text=ZaloPay" alt="ZaloPay">
-                        </div>
-                        <div class="payment-method">
-                            <img src="https://via.placeholder.com/50x30/ff4444/ffffff?text=Shopee" alt="ShopeePay">
-                        </div>
-                        <div class="payment-method">
-                            <img src="https://via.placeholder.com/50x30/ff6600/ffffff?text=SPay" alt="SPayLater">
-                        </div>
-                        <div class="payment-method">
-                            <img src="https://via.placeholder.com/50x30/1ba0e2/ffffff?text=VNPAY" alt="VNPAY">
-                        </div>
-                        <div class="payment-method">
-                            <img src="https://via.placeholder.com/50x30/ff0000/ffffff?text=Viettel" alt="Viettel">
-                        </div>
-                        <div class="payment-method">
-                            <img src="https://via.placeholder.com/50x30/00a651/ffffff?text=Napas" alt="Napas">
-                        </div>
-                        <div class="payment-method">
-                            <img src="https://via.placeholder.com/50x30/ff6600/ffffff?text=OnePay" alt="OnePay">
-                        </div>
-                        <div class="payment-method">
-                            <img src="https://via.placeholder.com/50x30/1976d2/ffffff?text=SmartPay" alt="SmartPay">
+                            <img src="{{ asset('img/Bank-logo/payment_all.png') }}" alt="All-logo">
                         </div>
                     </div>
                 </div>
@@ -546,78 +431,93 @@
                 <div class="payment-section">
                     <h6 class="mb-3 fw-bold">Tải ứng dụng COSMO BUS</h6>
                     <div class="app-download">
-                        <div class="qr-code">
-                            📱 QR Code
+                        <div class="row justify-content-start">
+                            <!-- QR Code -->
+                            <div class="col-12 col-md-5 text-center text-md-start mb-3 mb-md-0">
+                                <div class="qr-code">
+                                    <img src="{{ asset('img/Bank-logo/Cosmo-QR.jpg') }}" alt="QR Code" class="qr-img">
+                                </div>
+                            </div>
+
+                            <!-- Store Buttons -->
+                            <div class="col-12 col-md-7 text-center text-md-start">
+                                <div class="store-buttons d-flex flex-column align-items-center align-items-md-start gap-3">
+                                    <img src="{{ asset('img/Bank-logo/downlode-appstore.webp') }}" alt="Download on the App Store" class="store-img">
+                                    <img src="{{ asset('img/Bank-logo/downlode-googleplay.webp') }}" alt="Get it on Google Play" class="store-img">
+                                </div>
+                            </div>
                         </div>
-                        <div class="store-buttons">
-                            <img src="https://via.placeholder.com/140x45/000000/ffffff?text=App+Store" alt="App Store">
-                            <img src="https://via.placeholder.com/140x45/000000/ffffff?text=Google+Play" alt="Google Play">
+                    </div>
+
+
+                    <div class="social-section">
+                        <h6 class="fw-bold">Kết nối với COSMO BUS</h6>
+                        <div class="social-links justify-content-start">
+                            <a href="#" class="social-icon facebook">
+                                <i class="bi bi-facebook"></i>
+                            </a>
+                            <a href="#" class="social-icon youtube">
+                                <i class="bi bi-youtube"></i>
+                            </a>
+                            <a href="#" class="social-icon tiktok">
+                                <i class="bi bi-tiktok"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Social Links -->
-        <div class="social-section">
-            <h6 class="fw-bold">Kết nối với COSMO BUS</h6>
-            <div class="social-links">
-                <a href="#" class="social-icon facebook">f</a>
-                <a href="#" class="social-icon youtube">▶</a>
-                <a href="#" class="social-icon tiktok">♪</a>
-            </div>
-        </div>
-    </div>
+        <script>
+            const seatPrice = 299000;
 
-    @include('footer')
-
-    <script>
-        const seatPrice = 299000;
-
-        function toggleSeat(seatElement) {
-            if (seatElement.classList.contains('unavailable')) {
-                return;
-            }
-
-            if (seatElement.classList.contains('selected')) {
-                seatElement.classList.remove('selected');
-                seatElement.classList.add('available');
-            } else if (seatElement.classList.contains('available')) {
-                seatElement.classList.remove('available');
-                seatElement.classList.add('selected');
-            }
-            updateTotalPrice();
-        }
-
-        function updateTotalPrice() {
-            const selectedSeatsCount = document.querySelectorAll('.seat.selected').length;
-            const total = selectedSeatsCount * seatPrice;
-            document.getElementById('totalPrice').textContent = total.toLocaleString('vi-VN') + 'đ';
-        }
-
-        function continueBooking() {
-            const selectedSeatsCount = document.querySelectorAll('.seat.selected').length;
-            if (selectedSeatsCount === 0) {
-                alert('Vui lòng chọn ít nhất một ghế!');
-                return;
-            }
-            alert(`Bạn đã chọn ${selectedSeatsCount} ghế. Tổng tiền: ${(selectedSeatsCount * seatPrice).toLocaleString('vi-VN')}đ`);
-        }
-
-        // Initialize some seats as unavailable for demo
-        document.addEventListener('DOMContentLoaded', function() {
-            const seats = document.querySelectorAll('.seat');
-            // Make some random seats unavailable
-            const unavailableIndices = [2, 7, 12, 15, 18];
-            unavailableIndices.forEach(index => {
-                if (seats[index]) {
-                    seats[index].classList.remove('available');
-                    seats[index].classList.add('unavailable');
-                    seats[index].onclick = null;
+            function toggleSeat(seatElement) {
+                if (seatElement.classList.contains('unavailable')) {
+                    return;
                 }
-            });
-        });
-    </script>
-</body>
 
+                if (seatElement.classList.contains('selected')) {
+                    seatElement.classList.remove('selected');
+                    seatElement.classList.add('available');
+                } else if (seatElement.classList.contains('available')) {
+                    seatElement.classList.remove('available');
+                    seatElement.classList.add('selected');
+                }
+                updateTotalPrice();
+            }
+
+            function updateTotalPrice() {
+                const selectedSeatsCount = document.querySelectorAll('.seat.selected').length;
+                const total = selectedSeatsCount * seatPrice;
+                document.getElementById('totalPrice').textContent = total.toLocaleString('vi-VN') + 'đ';
+            }
+
+            function continueBooking() {
+                const selectedSeatsCount = document.querySelectorAll('.seat.selected').length;
+                if (selectedSeatsCount === 0) {
+                    alert('Vui lòng chọn ít nhất một ghế!');
+                    return;
+                }
+                alert(`Bạn đã chọn ${selectedSeatsCount} ghế. Tổng tiền: ${(selectedSeatsCount * seatPrice).toLocaleString('vi-VN')}đ`);
+            }
+
+            // Initialize some seats as unavailable for demo
+            document.addEventListener('DOMContentLoaded', function() {
+                const seats = document.querySelectorAll('.seat');
+                // Make some random seats unavailable
+                const unavailableIndices = [2, 7, 12, 15, 18];
+                unavailableIndices.forEach(index => {
+                    if (seats[index]) {
+                        seats[index].classList.remove('available');
+                        seats[index].classList.add('unavailable');
+                        seats[index].onclick = null;
+                    }
+                });
+            });
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
+    </div>
+   @include('footer')
+</body>
 </html>

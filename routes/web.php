@@ -83,17 +83,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/booking/{id}', [BookingController::class, 'show'])->name('booking.show');
 });
 
-
-
-
-
 Route::get('/ttmco2024', function () {
     return view('ttmco2024');
-});
+})->name('ttmco2024');
 
 Route::get('/ttmcovn2025', function () {
     return view('ttmcovn2025');
-});
+})->name('ttmcovn2025');
+
 
 
 

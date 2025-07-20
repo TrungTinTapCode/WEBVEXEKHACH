@@ -31,13 +31,13 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li>
-                            <a class="dropdown-item" href="ttmco2024">
+                            <a class="dropdown-item" href="{{ route('ttmco2024') }}">
                                 <span class="fw-bold">MISS COSMO 2024</span>
                                 <small class="text-muted d-block">Tata Juliastrid</small>
                             </a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="ttmcovn2025">
+                            <a class="dropdown-item" href="{{ route('ttmcovn2025') }}">
                                 <span class="fw-bold">HOA HẬU HOÀN VŨ VIỆT NAM 2025</span>
                                 <small class="text-muted d-block">Nguyễn Hoàng Phương Linh</small>
                             </a>
@@ -73,13 +73,13 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li>
-                            <a class="dropdown-item" href="user/login">
+                            <a class="dropdown-item" href="{{ url('user/login') }}">
                                 <span class="fw-bold">Đăng nhập</span>
                                 <small class="text-muted d-block">Truy cập tài khoản</small>
                             </a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="user/register">
+                            <a class="dropdown-item" href="{{ url('user/register') }}">
                                 <span class="fw-bold">Đăng ký</span>
                                 <small class="text-muted d-block">Tạo tài khoản mới</small>
                             </a>

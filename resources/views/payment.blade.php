@@ -36,6 +36,17 @@
             transition: 0.3s;
             font-size: 13px;
             font-weight: 500;
+            height: 60px;
+            /* Chiều cao cố định */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .bank-logo img {
+            max-height: 40px;
+            max-width: 100%;
+            object-fit: contain;
         }
 
         .bank-logo:hover {
@@ -47,6 +58,7 @@
             border: 2px solid #007bff;
             background: #cce5ff;
         }
+
 
         .payment-button {
             background: #28a745;
@@ -159,29 +171,49 @@
                     <div class="mb-4">
                         <h5 class="text-primary fw-bold">Thanh toán bằng thẻ nội địa</h5>
                         <div class="row g-2">
-                            @foreach(['vietcombank', 'agribank', 'vietinbank', 'bidv', 'acb', 'techcombank'] as $bank)
                             <div class="col-4 col-md-2">
-                                <div class="bank-logo" data-bank="{{ strtoupper($bank) }}">
-                                    <img src="{{ asset('images/banks/' . $bank . '.png') }}" alt="{{ $bank }}" class="img-fluid">
+                                <div class="bank-logo" data-bank="VIETCOMBANK">
+                                    <img src="{{ asset('img/Bank-logo/Vietcombank.jpg') }}" alt="vietcombank" class="img-fluid ">
                                 </div>
                             </div>
-                            @endforeach
+                            <div class="col-4 col-md-2">
+                                <div class="bank-logo" data-bank="AGRIBANK">
+                                    <img src="{{ asset('img/Bank-logo/agribank.png') }}" alt="agribank" class="img-fluid ">
+                                </div>
+                            </div>
+                            <div class="col-4 col-md-2">
+                                <div class="bank-logo" data-bank="VIETINBANK">
+                                    <img src="{{ asset('img/Bank-logo/vietinbank.png') }}" alt="vietinbank" class="img-fluid ">
+                                </div>
+                            </div>
+                            <div class="col-4 col-md-2">
+                                <div class="bank-logo" data-bank="BIDV">
+                                    <img src="{{ asset('img/Bank-logo/bidv.png') }}" alt="bidv" class="img-fluid ">
+                                </div>
+                            </div>
                         </div>
-                        <button class="payment-button mt-3">Thanh toán online <i class="bi bi-arrow-right-circle-fill ms-2"></i></button>
+                        <button class="payment-button mt-3">
+                            Thanh toán online <i class="bi bi-arrow-right-circle-fill ms-2"></i>
+                        </button>
                     </div>
 
                     <div>
                         <h5 class="text-primary fw-bold">Thanh toán bằng thẻ quốc tế</h5>
                         <div class="row g-2">
-                            @foreach(['visa', 'mastercard', 'amex', 'discover', 'paypal'] as $intl)
                             <div class="col-4 col-md-2">
-                                <div class="bank-logo" data-bank="{{ strtoupper($intl) }}">
-                                    <img src="{{ asset('images/banks/' . $intl . '.png') }}" alt="{{ $intl }}" class="img-fluid">
+                                <div class="bank-logo" data-bank="VISA">
+                                    <img src="{{ asset('img/Bank-logo/visa.png') }}" alt="visa" class="img-fluid ">
                                 </div>
                             </div>
-                            @endforeach
+                            <div class="col-4 col-md-2">
+                                <div class="bank-logo" data-bank="MASTERCARD">
+                                    <img src="{{ asset('img/Bank-logo/mastercard.png') }}" alt="mastercard" class="img-fluid">
+                                </div>
+                            </div>
                         </div>
-                        <button class="payment-button mt-3">Thanh toán online <i class="bi bi-arrow-right-circle-fill ms-2"></i></button>
+                        <button class="payment-button mt-3">
+                            Thanh toán online <i class="bi bi-arrow-right-circle-fill ms-2"></i>
+                        </button>
                     </div>
                 </div>
             </div>
