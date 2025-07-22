@@ -38,7 +38,7 @@
                         </li>
                         <li>
                             <a class="dropdown-item" href="{{ route('ttmcovn2025') }}">
-                                <span class="fw-bold">HOA HẬU HOÀN VŨ VIỆT NAM 2025</span>
+                                <span class="fw-bold">MISS COSMO VIETNAM 2025</span>
                                 <small class="text-muted d-block">Nguyễn Hoàng Phương Linh</small>
                             </a>
                         </li>
