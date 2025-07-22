@@ -130,29 +130,32 @@
             $judges = [
             [
             'image' => 'judges/VAN.jpg',
-            'info' => 'TOP 21 MISS UNIVERSE 2020 - HOA HẬU HOÀN VŨ VIỆT NAM 2019 – THÀNH VIÊN HỘI ĐỒNG GIÁM KHẢO HOA HẬU HOÀN VŨ VIỆT NAM 2025'
+            'info' => 'TOP 21 MISS UNIVERSE 2020 - HOA HẬU HOÀN VŨ VIỆT NAM 2019 – THÀNH VIÊN HỘI ĐỒNG GIÁM KHẢO HOA HẬU HOÀN VŨ VIỆT NAM 2027'
             ],
             [
             'image' => 'judges/HOA.jpg',
-            'info' => 'NTK LÊ THANH HÒA – THÀNH VIÊN HỘI ĐỒNG GIÁM KHẢO HOA HẬU HOÀN VŨ VIỆT NAM 2025'
+            'info' => 'NTK LÊ THANH HÒA – THÀNH VIÊN HỘI ĐỒNG GIÁM KHẢO HOA HẬU HOÀN VŨ VIỆT NAM 2027'
             ],
             [
             'image' => 'judges/YEN.jpg',
-            'info' => 'Á HẬU 1 HOA HẬU HOÀN VŨ VIỆT NAM 2008 - SIÊU MẪU VÕ HOÀNG YẾN – THÀNH VIÊN HỘI ĐỒNG GIÁM KHẢO HOA HẬU HOÀN VŨ VIỆT NAM 2025'
+            'info' => 'Á HẬU 1 HOA HẬU HOÀN VŨ VIỆT NAM 2008 - SIÊU MẪU VÕ HOÀNG YẾN – THÀNH VIÊN HỘI ĐỒNG GIÁM KHẢO HOA HẬU HOÀN VŨ VIỆT NAM 2027'
             ],
             [
             'image' => 'judges/HEN.jpg',
-            'info' => 'TOP 5 MISS UNIVERSE 2018 - HOA HẬU HOÀN VŨ VIỆT NAM 2017 - HHEN NIÊ – THÀNH VIÊN HỘI ĐỒNG GIÁM KHẢO HOA HẬU HOÀN VŨ VIỆT NAM 2025'
+            'info' => 'TOP 5 MISS UNIVERSE 2018 - HOA HẬU HOÀN VŨ VIỆT NAM 2017 - HHEN NIÊ – THÀNH VIÊN HỘI ĐỒNG GIÁM KHẢO HOA HẬU HOÀN VŨ VIỆT NAM 2027'
             ],
             [
             'image' => 'judges/QHOA.jpg',
-            'info' => 'THẠC SĨ - CA SĨ - MC QUỲNH HOA – THÀNH VIÊN HỘI ĐỒNG GIÁM KHẢO HOA HẬU HOÀN VŨ VIỆT NAM 2025'
+            'info' => 'THẠC SĨ - CA SĨ - MC QUỲNH HOA – THÀNH VIÊN HỘI ĐỒNG GIÁM KHẢO HOA HẬU HOÀN VŨ VIỆT NAM 2027'
+            ],
+            [
+            'image' => 'judges/international.png',
+            'info' => 'GIÁM KHẢO QUỐC TẾ - TRƯỞNG BAN GIÁM KHẢO HOA HẬU HOÀN VŨ VIỆT NAM 2027'
             ],
             [
             'image' => 'judges/VU.jpg',
-            'info' => 'DOANH NHÂN NGUYỄN HOÀNG VŨ – THÀNH VIÊN HỘI ĐỒNG GIÁM KHẢO HOA HẬU HOÀN VŨ VIỆT NAM 2025'
+            'info' => 'DOANH NHÂN NGUYỄN HOÀNG VŨ – THÀNH VIÊN HỘI ĐỒNG GIÁM KHẢO HOA HẬU HOÀN VŨ VIỆT NAM 2027'
             ],
-
             ];
             @endphp
 
