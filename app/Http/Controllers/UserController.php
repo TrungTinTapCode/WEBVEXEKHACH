@@ -72,4 +72,28 @@ class UserController extends Controller
 
         return redirect()->route('login.user')->with('success', 'Đăng ký thành công! Vui lòng đăng nhập.');
     }
+
+    // Cập nhật thông tin tài khoản
+    public function update(Request $request)
+    {
+        $request->validate([
+            'name'       => 'required|string|max:255',
+            'ngay_sinh'  => 'nullable|date',
+            'dia_chi'    => 'nullable|string|max:255',
+            'email'      => 'nullable|email|max:255',
+            'phone_number' => 'nullable|string|max:20',
+        ]);
+
+        /** @var \App\Models\Account $user */
+        $user = Auth::user();
+
+        $user->name        = $request->name;
+        $user->ngay_sinh   = $request->ngay_sinh;
+        $user->dia_chi     = $request->dia_chi;
+        $user->email       = $request->email;
+        $user->phone_number = $request->phone_number;
+        $user->save();
+
+        return back()->with('success', 'Thông tin đã được cập nhật!');
+    }
 }

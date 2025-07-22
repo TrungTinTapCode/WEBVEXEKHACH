@@ -52,6 +52,12 @@ Route::get('/info', function () {
     return view('user.info');
 })->middleware('auth')->name('info');
 
+//cập nhật thông tin - info
+Route::middleware(['auth'])->group(function () {
+    Route::post('/cap-nhat-tai-khoan', [UserController::class, 'update'])->name('account.update');
+});
+
+
 Route::post('/info', [UserController::class, 'store'])->name('info.store');
 
 //thanh toán

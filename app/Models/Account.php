@@ -11,10 +11,15 @@ class Account extends Authenticatable
 
     protected $table = 'account';
 
+    public $timestamps = false;
+
     protected $fillable = [
         'name',
         'phone_number',
         'password',
+        'email',
+        'dia_chi',
+        'ngay_sinh'
     ];
 
     protected $hidden = [
