@@ -9,9 +9,14 @@ use Illuminate\Support\Facades\Storage;
 
 class RouteController extends Controller
 {
+    /**
+     * Hiển thị danh sách các tuyến đường.
+     */
     public function index()
     {
-        $routes = Route::all();
+        // Lấy danh sách các tuyến đường
+        $routes = Route::orderBy('id', 'desc')->get();
+
         return view('admin.routes.index', compact('routes'));
     }
 
@@ -29,7 +34,7 @@ class RouteController extends Controller
         ]);
 
         $data = $request->all();
-        
+        $data['is_active'] = 1;
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('routes', 'public');
             $data['image'] = $imagePath;
@@ -64,7 +69,7 @@ class RouteController extends Controller
             $imagePath = $request->file('image')->store('routes', 'public');
             $data['image'] = $imagePath;
         }
-
+            $data['is_active'] = $request->has('is_active') ? 1 : 0; 
         $route->update($data);
 
         return redirect()->route('admin.routes.index')->with('success', 'Tuyến đường đã được cập nhật');
