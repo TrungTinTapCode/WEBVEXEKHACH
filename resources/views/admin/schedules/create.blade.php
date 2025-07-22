@@ -21,7 +21,7 @@
                     <label for="bus_id" class="form-label">Xe buýt</label>
                     <select name="bus_id" class="form-control" required>
                         @foreach($buses as $bus)
-                            <option value="{{ $bus->id }}">{{ $bus->name }} ({{ $bus->license_plate }})</option>
+                            <option value="{{ $bus->id }}">{{ $bus->bus_name }} ({{ $bus->license_plate }})</option>
                         @endforeach
                     </select>
                 </div>
