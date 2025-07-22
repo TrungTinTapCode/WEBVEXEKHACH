@@ -24,7 +24,7 @@
                     <th>Tên tuyến</th>
                     <th>Ảnh</th>
                     <th>Giá</th>
-                    <th>Điểm đi - Điểm đến</th>
+                    <th>Nơi đi - Nơi đến</th>
                     <th>Trạng thái</th>
                     <th>Hành động</th>
                 </tr>
