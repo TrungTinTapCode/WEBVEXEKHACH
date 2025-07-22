@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ListController;
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\BookingController;
@@ -60,9 +61,7 @@ Route::get('/payment', function () {
 })->name('payment');
 
 //list đặt xe
-Route::get('/danh sach chuyen', function () {
-    return view('list');
-})->name('list');
+Route::get('/danhsachchuyen', [ListController::class, 'index'])->name('list');
 
 //Trang admin
 Route::prefix('admin')->name('admin.')->group(function () {
