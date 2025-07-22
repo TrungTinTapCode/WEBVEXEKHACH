@@ -4,13 +4,16 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ListController;
+use App\Http\Controllers\DetailController;
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\BookingController;
 use App\Http\Controllers\Admin\RouteController;
 use App\Http\Controllers\Admin\BusController;
+use App\Http\Controllers\Admin\SeatController;
 use App\Http\Controllers\Admin\ScheduleController;
-
+use App\Http\Controllers\Admin\ReportController;
 
 
 // Trang chủ
@@ -38,10 +41,7 @@ Route::post('/logout', function () {
 })->name('logout');
 
 // trang đặt xe
-Route::get('/detail', function () {
-    return view('detail');
-})->name('detail');
-
+Route::get('/danhsachchuyen/{id}', [DetailController::class, 'show'])->name('detail');
 // trang ds đơn hàng
 Route::get('/history', function () {
     return view('user.history');
@@ -60,27 +60,32 @@ Route::get('/payment', function () {
 })->name('payment');
 
 //list đặt xe
-Route::get('/danh sach chuyen', function () {
-    return view('list');
-})->name('list');
+Route::get('/danhsachchuyen', [ListController::class, 'index'])->name('list');
 
 //Trang admin
 Route::prefix('admin')->name('admin.')->group(function () {
-
+    //Dashboard
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-
+    //Routes
     Route::resource('routes', RouteController::class);
     Route::post('routes/{route}/toggle-status', [RouteController::class, 'toggleStatus'])->name('routes.toggle-status');
-
+    //Buses
     Route::resource('buses', BusController::class);
     Route::post('buses/{bus}/toggle-status', [BusController::class, 'toggleStatus'])->name('buses.toggle-status');
-
+    //Seats lỗi đang sửa
+    Route::post('/seats', [SeatController::class, 'store'])->name('seats.store');
+    Route::get('/seats/{seat}/edit', [SeatController::class, 'edit'])->name('seats.edit');
+    Route::put('/seats/{seat}', [SeatController::class, 'update'])->name('seats.update');
+    Route::delete('/seats/{seat}', [SeatController::class, 'destroy'])->name('seats.destroy');
+    //Schedules
     Route::resource('schedules', ScheduleController::class);
     Route::post('schedules/{schedule}/toggle-status', [ScheduleController::class, 'toggleStatus'])->name('schedules.toggle-status');
-
+    //booking
     Route::get('/booking', [BookingController::class, 'index'])->name('booking.index');
-
     Route::get('/booking/{id}', [BookingController::class, 'show'])->name('booking.show');
+    //Reports
+    Route::get('/reports/revenue', [ReportController::class, 'revenue'])->name('reports.revenue');
+    Route::get('/reports/trips', [ReportController::class, 'trips'])->name('reports.trips');
 });
 
 Route::get('/ttmco2024', function () {

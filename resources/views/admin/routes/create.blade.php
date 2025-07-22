@@ -24,10 +24,10 @@
                     <input type="number" name="old_price" class="form-control">
                 </div>
 
-                <div class="mb-3">
+                <!-- <div class="mb-3">
                     <label for="bg_color" class="form-label">Màu nền (mã HEX, ví dụ: #07bff)</label>
                     <input type="text" name="bg_color" class="form-control">
-                </div>
+                </div> -->
 
                 <div class="mb-3">
                     <label for="image" class="form-label">Hình ảnh</label>

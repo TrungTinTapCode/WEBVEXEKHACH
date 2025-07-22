@@ -9,7 +9,7 @@ class PageController extends Controller
     {
         return view('ttmco2024');
     }
-     public function showTtmcovn2025()
+    public function showTtmcovn2025()
     {
         return view('ttmcovn2025');
     }

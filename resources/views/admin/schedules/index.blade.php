@@ -2,12 +2,13 @@
 
 @section('content')
 <div class="container">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h3 class="px-3 py-2" style="background-color: #07bff; border-radius: 5px;">Danh sách lịch trình</h3>
-        <a href="{{ route('admin.schedules.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Thêm lịch trình</a>
-    </div>
-
     <div class="card shadow">
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h3 class="px-3 py-2" style="background-color: #07bff; border-radius: 5px;">Danh sách lịch trình</h3>
+                <a href="{{ route('admin.schedules.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Thêm lịch trình</a>
+            </div>
+        </div>
         <div class="card-body" style="background-color: #fff;">
             <table class="table table-bordered">
                 <thead style="background-color: #07bff; color: #fff;">
