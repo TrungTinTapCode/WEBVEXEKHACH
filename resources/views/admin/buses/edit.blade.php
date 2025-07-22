@@ -7,6 +7,7 @@
             <h3>Chỉnh sửa thông tin xe buýt</h3>
         </div>
         <div class="card-body" style="background-color: #fff;">
+<<<<<<< Updated upstream
             <form action="{{ route('admin.buses.update', $bus->bus_id) }}" method="POST">
                 @csrf
                 @method('PUT')
@@ -23,6 +24,18 @@
                     @error('bus_type')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
+=======
+            <form action="{{ route('admin.buses.update', $bus) }}" method="POST">
+                @csrf
+                @method('PUT')
+                <div class="mb-3">
+                    <label for="bus_type" class="form-label">Tên xe</label>
+                    <input type="text" name="bus_type" class="form-control" value="{{ $bus->name }}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="total_seats" class="form-label">Số ghế</label>
+                    <input type="number" name="total_seats" class="form-control" value="{{ $bus->seats }}" required>
+>>>>>>> Stashed changes
                 </div>
                 <div class="mb-3">
                     <label for="total_seats" class="form-label">Tổng số ghế</label>
