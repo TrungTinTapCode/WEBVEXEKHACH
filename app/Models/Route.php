@@ -19,6 +19,8 @@ class Route extends Model
         'price',
         'old_price',
         'is_active',
+        'departure',
+        'destination',
     ];
 
     // Nếu cần định dạng kiểu dữ liệu cho cột (không bắt buộc)

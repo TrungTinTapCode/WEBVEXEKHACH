@@ -17,6 +17,7 @@
                         @endforeach
                     </select>
                 </div>
+
                 <div class="mb-3">
                     <label for="bus_id" class="form-label">Xe buýt</label>
                     <select name="bus_id" class="form-control" required>
@@ -25,10 +26,12 @@
                         @endforeach
                     </select>
                 </div>
+
                 <div class="mb-3">
                     <label for="departure_time" class="form-label">Giờ khởi hành</label>
                     <input type="datetime-local" name="departure_time" class="form-control" required>
                 </div>
+
                 <button type="submit" class="btn btn-primary">Lưu</button>
                 <a href="{{ route('admin.schedules.index') }}" class="btn btn-secondary">Hủy</a>
             </form>
