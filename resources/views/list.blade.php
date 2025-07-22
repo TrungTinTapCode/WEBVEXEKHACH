@@ -213,27 +213,27 @@
     <div class="card-custom">
         <div class="row g-2">
             <div class="col-auto">
-                <img src="{{ asset('img/bus1.webp') }}" class="trip-image" alt="Bus">
+                <img src="{{ asset('storage/' . $schedule->route->image) }}" class="trip-image" alt="Bus">
             </div>
             <div class="col">
                 <div class="d-flex justify-content-between align-items-start">
                     <div>
                         <a href="#" class="text-primary text-decoration-none small">
-                            Lưu ý Đón/Trả tại {{ $schedule->start_station }}
+                            {{ $schedule->route->title }}
                         </a>
-                        <div class="trip-title mt-1">{{ $schedule->bus->name }}</div>
-                        <div class="text-muted small">{{ $schedule->bus->type }}</div>
+                        <div class="trip-title mt-1">{{ $schedule->bus->bus_name }}</div>
+                        <div class="text-muted small">{{ $schedule->bus->bus_type }}</div>
                         <div class="d-flex align-items-center small mt-1">
-                            <i class="bi bi-clock me-1"></i> {{ $schedule->start_time }} - {{ $schedule->start_station }}
-                            <span class="ms-3">Còn {{ $schedule->available_seats }} chỗ trống</span>
+                            <i class="bi bi-clock me-1"></i> {{ $schedule->departure_time }} - {{ $schedule->route->title }}
+                            <span class="ms-3">Còn {{ $schedule->available_seats ?? '...' }} chỗ trống</span>
                         </div>
                         <div class="d-flex align-items-center small">
-                            <i class="bi bi-clock me-1"></i> {{ $schedule->end_time }} - {{ $schedule->end_station }}
-                            <a href="{{ route('detail', ['id' => $schedule->id]) }}" class="ms-3 trip-detail-link">Thông tin chi tiết</a>
+                            <i class="bi bi-clock me-1"></i> {{ $schedule->arrival_time }} - {{ $schedule->route->title }}
+                            <a href="{{ route('detail', ['id' => $schedule->schedule_id]) }}" class="ms-3 trip-detail-link">Thông tin chi tiết</a>
                         </div>
                     </div>
                     <div class="text-end">
-                        <div class="trip-note">Từ {{ number_format($schedule->price) }}đ</div>
+                        <div class="trip-note">Từ {{ number_format($schedule->route->price) }}đ</div>
                     </div>
                 </div>
                 <div class="trip-follow mt-2">Theo dõi hành trình xe</div>

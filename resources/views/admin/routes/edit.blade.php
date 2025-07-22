@@ -7,33 +7,39 @@
             <h3>Chỉnh sửa tuyến xe</h3>
         </div>
         <div class="card-body" style="background-color: #fff;">
-            <form action="{{ route('admin.routes.update', $route->id) }}" method="POST">
+            <form action="{{ route('admin.routes.update', $route->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
+
                 <div class="mb-3">
                     <label for="title" class="form-label">Tên tuyến</label>
-                    <input type="text" name="title" class="form-control" required>
+                    <input type="text" name="title" class="form-control" value="{{ old('title', $route->title) }}" required>
                 </div>
 
                 <div class="mb-3">
                     <label for="price" class="form-label">Giá</label>
-                    <input type="number" name="price" class="form-control" required>
-                </div>
-
-                <div class="mb-3">
-                    <label for="old_price" class="form-label">Giá cũ (nếu có)</label>
-                    <input type="number" name="old_price" class="form-control">
-                </div>
-
-                <div class="mb-3">
-                    <label for="bg_color" class="form-label">Màu nền (mã HEX, ví dụ: #07bff)</label>
-                    <input type="text" name="bg_color" class="form-control">
+                    <input type="number" name="price" class="form-control" value="{{ old('price', $route->price) }}" required>
                 </div>
 
                 <div class="mb-3">
                     <label for="image" class="form-label">Hình ảnh</label>
                     <input type="file" name="image" class="form-control">
+                    @if($route->image)
+                        <div class="mt-2">
+                            <img src="{{ asset('storage/' . $route->image) }}" alt="{{ $route->title }}" width="150">
+                        </div>
+                    @endif
                 </div>
+
+                <!-- Checkbox is_active -->
+                <div class="mb-3 form-check">
+                <!-- Hidden để đảm bảo luôn gửi giá trị nếu checkbox không check -->
+                    <input type="hidden" name="is_active" value="0">
+                    <input type="checkbox" class="form-check-input" name="is_active" id="is_active" value="1"
+                    {{ old('is_active', $route->is_active) ? 'checked' : '' }}>
+                    <label class="form-check-label" for="is_active">Kích hoạt tuyến</label>
+                </div>
+
                 <button type="submit" class="btn btn-primary">Cập nhật</button>
                 <a href="{{ route('admin.routes.index') }}" class="btn btn-secondary">Hủy</a>
             </form>
