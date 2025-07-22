@@ -19,11 +19,12 @@ class UserController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'phone_number' => 'required|numeric',
+            'phone_number' => ['required', 'numeric', 'regex:/^0\d{9}$/'],
             'password'     => 'required',
         ], [
             'phone_number.required' => 'Vui lòng nhập số điện thoại.',
             'phone_number.numeric'  => 'Số điện thoại không hợp lệ.',
+            'phone_number.regex'    => 'Số điện thoại phải gồm 10 chữ số và bắt đầu bằng số 0.',
             'password.required'     => 'Vui lòng nhập mật khẩu.',
         ]);
 
@@ -50,7 +51,7 @@ class UserController extends Controller
     {
         $request->validate([
             'name'         => 'required|string|max:100',
-            'phone_number' => 'required|numeric|unique:account,phone_number',
+            'phone_number' => ['required', 'numeric', 'regex:/^0\d{9}$/', 'unique:account,phone_number'],
             'password'     => 'required|min:6|confirmed',
         ], [
             'name.required'         => 'Vui lòng nhập họ và tên.',
@@ -58,6 +59,7 @@ class UserController extends Controller
             'name.max'              => 'Họ và tên không được quá 100 ký tự.',
             'phone_number.required' => 'Vui lòng nhập số điện thoại.',
             'phone_number.numeric'  => 'Số điện thoại không hợp lệ.',
+            'phone_number.regex'    => 'Số điện thoại phải gồm 10 chữ số',
             'phone_number.unique'   => 'Số điện thoại đã được sử dụng.',
             'password.required'     => 'Vui lòng nhập mật khẩu.',
             'password.min'          => 'Mật khẩu phải có ít nhất 6 ký tự.',

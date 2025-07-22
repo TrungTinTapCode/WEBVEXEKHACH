@@ -10,32 +10,41 @@ use Illuminate\Http\Request;
 
 class ScheduleController extends Controller
 {
+    /**
+     * Hiển thị danh sách lịch trình.
+     */
     public function index()
     {
-        $schedules = Schedule::with(['route', 'bus'])->latest()->paginate(10);
+        $schedules = Schedule::with(['route', 'bus'])->orderBy('departure_time', 'desc')->get();
+
         return view('admin.schedules.index', compact('schedules'));
     }
 
     public function create()
-    {
-        $routes = Route::all();
-        $buses = Bus::all();
-        return view('admin.schedules.create', compact('routes', 'buses'));
-    }
+{
+    $routes = Route::all();
+    $buses = Bus::all();
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'route_id' => 'required|exists:routes,id',
-            'bus_id' => 'required|exists:buses,bus_id',
-            'departure_time' => 'required|date|after:now',
-            'arrival_time' => 'required|date|after:departure_time',
-        ]);
+    return view('admin.schedules.create', compact('routes', 'buses'));
+}
 
-        Schedule::create($request->all());
+public function store(Request $request)
+{
+    $request->validate([
+        'route_id' => 'required|exists:routes,id',
+        'bus_id' => 'required|exists:buses,id',
+        'departure_time' => 'required|date',
+    ]);
 
-        return redirect()->route('admin.schedules.index')->with('success', 'Lịch trình đã được tạo');
-    }
+    Schedule::create([
+        'route_id' => $request->route_id,
+        'bus_id' => $request->bus_id,
+        'departure_time' => $request->departure_time,
+        'status' => 'active', // mặc định trạng thái
+    ]);
+
+    return redirect()->route('admin.schedules.index')->with('success', 'Lịch trình đã được thêm thành công.');
+}
 
     public function edit(Schedule $schedule)
     {

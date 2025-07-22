@@ -24,6 +24,7 @@
                     <th>Tên tuyến</th>
                     <th>Ảnh</th>
                     <th>Giá</th>
+                    <th>Điểm đi - Điểm đến</th>
                     <th>Trạng thái</th>
                     <th>Hành động</th>
                 </tr>
@@ -39,6 +40,7 @@
                         @endif
                     </td>
                     <td>{{ number_format($route->price) }} VND</td>
+                    <td>{{ $route -> departure }} → {{ $route -> destination }}</td>
                     <td>
                         <span class="badge {{ $route->is_active ? 'bg-success' : 'bg-danger' }}">
                             {{ $route->is_active ? 'Kích hoạt' : 'Ngừng hoạt động' }}
