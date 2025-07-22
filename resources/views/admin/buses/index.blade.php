@@ -14,6 +14,7 @@
                 <thead style="background-color: #07bff; color: #fff;">
                     <tr>
                         <th>#</th>
+                        <th>Tên nhà xe</th>
                         <th>Biển số xe</th>
                         <th>Loại xe</th>
                         <th>Tổng số ghế</th>
@@ -24,7 +25,9 @@
                 <tbody>
                     @foreach ($buses as $bus)
                     <tr>
+                        
                         <td>{{ $loop->iteration }}</td>
+                        <td>{{ $bus->bus_name }}</td>
                         <td>{{ $bus->license_plate }}</td>
                         <td>{{ $bus->bus_type }}</td>
                         <td>{{ $bus->total_seats }}</td>

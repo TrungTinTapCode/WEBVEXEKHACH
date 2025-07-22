@@ -9,7 +9,14 @@
         <div class="card-body" style="background-color: #fff;">
         <form action="{{ route('admin.buses.store') }}" method="POST">
             @csrf
-
+            <div class="mb-3">
+                <label for="bus_name" class="form-label">Tên nhà xe</label>
+                <input type="text" name="bus_name" class="form-control" required maxlength="50">
+                @error('bus_name')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+            
             <div class="mb-3">
                 <label for="license_plate" class="form-label">Biển số xe</label>
                 <input type="text" name="license_plate" class="form-control" required maxlength="20">
@@ -19,7 +26,7 @@
             </div>
 
             <div class="mb-3">
-                <label for="bus_type" class="form-label">Tên nhà xe/loại xe</label>
+                <label for="bus_type" class="form-label">Loại xe</label>
                 <input type="text" name="bus_type" class="form-control" required maxlength="50">
                 @error('bus_type')
                     <div class="text-danger">{{ $message }}</div>

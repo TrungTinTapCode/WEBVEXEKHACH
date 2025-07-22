@@ -11,6 +11,13 @@
                 @csrf
 
                 @method('PUT')
+                <div class="mb-3">
+                    <label for="bus_name" class="form-label">Loại xe</label>
+                    <input type="text" name="bus_name" class="form-control" value="{{ $bus->bus_name }}" required maxlength="50">
+                    @error('bus_name')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
 
                 <div class="mb-3">
                     <label for="license_plate" class="form-label">Biển số xe</label>

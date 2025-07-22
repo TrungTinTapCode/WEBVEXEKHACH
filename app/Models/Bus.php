@@ -18,7 +18,7 @@ class Bus extends Model
         'bus_type',
         'total_seats',
         'amenities',
-        'is_active'
+        'is_active' 
     ];
 
     protected $casts = [
