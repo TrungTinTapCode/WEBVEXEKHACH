@@ -19,7 +19,7 @@
             </div>
 
             <div class="mb-3">
-                <label for="bus_type" class="form-label">Loại xe</label>
+                <label for="bus_type" class="form-label">Tên nhà xe/loại xe</label>
                 <input type="text" name="bus_type" class="form-control" required maxlength="50">
                 @error('bus_type')
                     <div class="text-danger">{{ $message }}</div>
