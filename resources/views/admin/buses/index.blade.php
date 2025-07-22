@@ -30,6 +30,7 @@
                         <td>{{ $bus->total_seats }}</td>
                         <td>{{ $bus->amenities ?? 'Không có' }}</td>
                         <td>
+                            <!-- Show đang lỗi -->
                             <!--<a href="{{ route('admin.buses.show', $bus->bus_id) }}" class="btn btn-info">Xem</a>-->
                             <a href="{{ route('admin.buses.edit', $bus->bus_id) }}" class="btn btn-warning">Sửa</a>
                             <form action="{{ route('admin.buses.destroy', $bus->bus_id) }}" method="POST" class="d-inline">
