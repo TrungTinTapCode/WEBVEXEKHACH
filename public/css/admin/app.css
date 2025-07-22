@@ -1,6 +1,6 @@
 :root {
             --primary-color: #092b51;
-            --primary-hover: #092b51;
+            --primary-hover: #07203c;
             --light-color: #ffffff;
         }
 
@@ -81,5 +81,16 @@
 
         .badge-primary {
             background-color: var(--primary-color);
+        }
+        ul.dropdown-menu{
+            background-color: var(--primary-color);
+            border: none;
+        }
+        .dropdown-item{
+            background-color: var(--primary-color);
+        }
+        .dropdown-item:hover {
+            background-color: var(--primary-hover);
+            color: var(--light-color);
         }
 

@@ -12,7 +12,7 @@ use App\Http\Controllers\Admin\BookingController;
 use App\Http\Controllers\Admin\RouteController;
 use App\Http\Controllers\Admin\BusController;
 use App\Http\Controllers\Admin\ScheduleController;
-
+use App\Http\Controllers\Admin\ReportController;
 
 
 // Trang chủ
@@ -63,21 +63,23 @@ Route::get('/danhsachchuyen', [ListController::class, 'index'])->name('list');
 
 //Trang admin
 Route::prefix('admin')->name('admin.')->group(function () {
-
+    //Dashboard
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-
+    //Routes
     Route::resource('routes', RouteController::class);
     Route::post('routes/{route}/toggle-status', [RouteController::class, 'toggleStatus'])->name('routes.toggle-status');
-
+    //Buses
     Route::resource('buses', BusController::class);
     Route::post('buses/{bus}/toggle-status', [BusController::class, 'toggleStatus'])->name('buses.toggle-status');
-
+    //Schedules
     Route::resource('schedules', ScheduleController::class);
     Route::post('schedules/{schedule}/toggle-status', [ScheduleController::class, 'toggleStatus'])->name('schedules.toggle-status');
-
+    //booking
     Route::get('/booking', [BookingController::class, 'index'])->name('booking.index');
-
     Route::get('/booking/{id}', [BookingController::class, 'show'])->name('booking.show');
+    //Reports
+    Route::get('/reports/revenue', [ReportController::class, 'revenue'])->name('reports.revenue');
+    Route::get('/reports/trips', [ReportController::class, 'trips'])->name('reports.trips');
 });
 
 Route::get('/ttmco2024', function () {

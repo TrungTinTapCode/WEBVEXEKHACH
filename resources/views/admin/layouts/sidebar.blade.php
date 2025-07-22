@@ -38,22 +38,16 @@
                 </a>
             </li>
 
-            <li class="nav-item">
-                <a href="#" class="nav-link {{ request()->routeIs('admin.customers.*') ? 'active' : '' }}">
-                    <i class="fas fa-users"></i> Khách hàng
-                </a>
-            </li>
-
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                     <i class="fas fa-chart-bar"></i> Báo cáo
                 </a>
-                <ul class="dropdown-menu bg-primary">
+                <ul class="dropdown-menu">
                     <li>
-                        <a class="dropdown-item text-white" href="#">Doanh thu</a>
+                        <a class="dropdown-item text-white" href="{{ route('admin.reports.revenue') }}">Doanh thu</a>
                     </li>
                     <li>
-                        <a class="dropdown-item text-white" href="#">Chuyến đi</a>
+                        <a class="dropdown-item text-white" href="{{ route('admin.reports.trips') }}">Chuyến đi</a>
                     </li>
                 </ul>
             </li>
