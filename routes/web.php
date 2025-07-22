@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ListController;
+use App\Http\Controllers\DetailController;
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\BookingController;
@@ -39,10 +40,7 @@ Route::post('/logout', function () {
 })->name('logout');
 
 // trang đặt xe
-Route::get('/detail', function () {
-    return view('detail');
-})->name('detail');
-
+Route::get('/danhsachchuyen/{id}', [DetailController::class, 'show'])->name('detail');
 // trang ds đơn hàng
 Route::get('/history', function () {
     return view('user.history');
