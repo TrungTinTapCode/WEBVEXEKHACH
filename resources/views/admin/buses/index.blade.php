@@ -14,9 +14,10 @@
                 <thead style="background-color: #07bff; color: #fff;">
                     <tr>
                         <th>#</th>
-                        <th>Tên xe</th>
-                        <th>Số ghế</th>
-                        <th>Biển số</th>
+                        <th>Biển số xe</th>
+                        <th>Loại xe</th>
+                        <th>Tổng số ghế</th>
+                        <th>Tiện nghi</th>
                         <th>Hành động</th>
                     </tr>
                 </thead>
@@ -24,13 +25,14 @@
                     @foreach ($buses as $bus)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $bus->name }}</td>
-                        <td>{{ $bus->seats }}</td>
                         <td>{{ $bus->license_plate }}</td>
+                        <td>{{ $bus->bus_type }}</td>
+                        <td>{{ $bus->total_seats }}</td>
+                        <td>{{ $bus->amenities ?? 'Không có' }}</td>
                         <td>
-                            <a href="{{ route('admin.buses.show', $bus->id) }}" class="btn btn-sm text-white" style="background-color: #07bff;">Xem</a>
-                            <a href="{{ route('admin.buses.edit', $bus->id) }}" class="btn btn-sm btn-warning">Sửa</a>
-                            <form action="{{ route('admin.buses.destroy', $bus->id) }}" method="POST" class="d-inline">
+                            <!--<a href="{{ route('admin.buses.show', $bus->bus_id) }}" class="btn btn-info">Xem</a>-->
+                            <a href="{{ route('admin.buses.edit', $bus->bus_id) }}" class="btn btn-warning">Sửa</a>
+                            <form action="{{ route('admin.buses.destroy', $bus->bus_id) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-sm btn-danger" onclick="return confirm('Xác nhận xóa?')">Xóa</button>

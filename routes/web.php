@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\BookingController;
 use App\Http\Controllers\Admin\RouteController;
 use App\Http\Controllers\Admin\BusController;
+use App\Http\Controllers\Admin\SeatController;
 use App\Http\Controllers\Admin\ScheduleController;
 use App\Http\Controllers\Admin\ReportController;
 
@@ -71,6 +72,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
     //Buses
     Route::resource('buses', BusController::class);
     Route::post('buses/{bus}/toggle-status', [BusController::class, 'toggleStatus'])->name('buses.toggle-status');
+    //Seats lỗi đang sửa
+    Route::post('/seats', [SeatController::class, 'store'])->name('seats.store');
+    Route::get('/seats/{seat}/edit', [SeatController::class, 'edit'])->name('seats.edit');
+    Route::put('/seats/{seat}', [SeatController::class, 'update'])->name('seats.update');
+    Route::delete('/seats/{seat}', [SeatController::class, 'destroy'])->name('seats.destroy');
     //Schedules
     Route::resource('schedules', ScheduleController::class);
     Route::post('schedules/{schedule}/toggle-status', [ScheduleController::class, 'toggleStatus'])->name('schedules.toggle-status');
