@@ -9,7 +9,7 @@ class ListController extends Controller
     public function index(Request $request)
     {
         // Lấy danh sách chuyến xe, có thể lọc theo nơi đi, nơi đến, ngày đi...
-        $query = Schedule::with(['bus']);
+        $query = Schedule::with(['bus']); 
 
         // Nếu có filter từ form, thêm điều kiện vào query
         if ($request->departure) {
