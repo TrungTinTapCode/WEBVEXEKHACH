@@ -13,21 +13,30 @@
             <table class="table table-bordered">
                 <thead style="background-color: #07bff; color: #fff;">
                     <tr>
-                        <th>#</th>
-                        <th>Tuyến</th>
-                        <th>Xe buýt</th>
-                        <th>Giờ khởi hành</th>
-                        <th>Hành động</th>
-                    </tr>
+                    <th>ID</th>
+                    <th>Tuyến</th>
+                    <th>Xe</th>
+                    <th>Giờ đi dự kiến</th>
+                    <th>Giờ đến dự kiến</th>
+                    <th>Ghi chú</th>
+                    <th>Trạng thái</th>
+                </tr>
                 </thead>
                 <tbody>
-                    @foreach ($schedules as $schedule)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $schedule->route->start_point }} → {{ $schedule->route->end_point }}</td>
-                            <td>{{ $schedule->bus->name }} ({{ $schedule->bus->license_plate }})</td>
-                            <td>{{ \Carbon\Carbon::parse($schedule->departure_time)->format('d/m/Y H:i') }}</td>
-                            <td>
+                    @foreach($schedules as $schedule)
+                <tr>
+                    <td>{{ $schedule->schedule_id }}</td>
+                    <td>{{ $schedule->route->title ?? 'N/A' }}</td>
+                    <td>{{ $schedule->bus->name ?? 'Chưa gán xe' }}</td>
+                    <td>{{ $schedule->departure_time ? $schedule->departure_time->format('H:i d/m/Y') : '-' }}</td>
+                    <td>{{ $schedule->arrival_time ? $schedule->arrival_time->format('H:i d/m/Y') : '-' }}</td>
+                    <td>{{ $schedule->notes ?? '-' }}</td>
+                    <td>
+                        <span class="badge {{ $schedule->status === 'active' ? 'bg-success' : 'bg-secondary' }}">
+                            {{ ucfirst($schedule->status) }}
+                        </span>
+                    </td>
+                    <td>
                                 <a href="{{ route('admin.schedules.edit', $schedule->id) }}" class="btn btn-sm btn-warning">Sửa</a>
                                 <form action="{{ route('admin.schedules.destroy', $schedule->id) }}" method="POST" class="d-inline">
                                     @csrf
@@ -35,8 +44,8 @@
                                     <button class="btn btn-sm btn-danger" onclick="return confirm('Bạn chắc chắn muốn xóa?')">Xóa</button>
                                 </form>
                             </td>
-                        </tr>
-                    @endforeach
+                </tr>
+                @endforeach
                 </tbody>
             </table>
 

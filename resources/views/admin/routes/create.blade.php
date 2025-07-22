@@ -20,9 +20,15 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="old_price" class="form-label">Giá cũ (nếu có)</label>
-                    <input type="number" name="old_price" class="form-control">
+                    <label for="departure" class="form-label">Nơi đi</label>
+                    <input type="text" name="departure" id="departure" class="form-control" value="{{ old('departure', $route->departure ?? '') }}">
                 </div>
+
+                <div class="mb-3">
+                <label for="destination" class="form-label">Nơi đến</label>
+                <input type="text" name="destination" id="destination" class="form-control" value="{{ old('destination', $route->destination ?? '') }}">
+                </div>
+
 
                 <!-- <div class="mb-3">
                     <label for="bg_color" class="form-label">Màu nền (mã HEX, ví dụ: #07bff)</label>

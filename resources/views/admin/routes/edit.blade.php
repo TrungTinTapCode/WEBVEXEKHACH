@@ -22,6 +22,16 @@
                 </div>
 
                 <div class="mb-3">
+                    <label for="departure" class="form-label">Nơi đi</label>
+                    <input type="text" name="departure" id="departure" class="form-control" value="{{ old('departure', $route->departure ?? '') }}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="destination" class="form-label">Nơi đến</label>
+                    <input type="text" name="destination" id="destination" class="form-control" value="{{ old('destination', $route->destination ?? '') }}">
+                </div>
+
+                <div class="mb-3">
                     <label for="image" class="form-label">Hình ảnh</label>
                     <input type="file" name="image" class="form-control">
                     @if($route->image)
