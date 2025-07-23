@@ -144,7 +144,7 @@
                 </div>
                 <div class="col-md-9">
                     <div class="testimonial-content mb-4">
-                        <p class="fs-5 fst-italic text-dark">"Các đối tác của COSMO BUS đều là những hãng xe lớn, có uy tín nên tôi hoàn toàn yên tâm khi lựa chọn đặt vé cho bản thân và gia đình..."</p>
+                        <p class="fs-5 fst-italic text-dark">"Các đối tác của COSMO BUS đều là những hãng xe lớn, có uy tín nên tôi hoàn toàn yên tâm khi lựa chọn đặt vé cho các chuyến công tác tại Việt Nam..."</p>
                     </div>
                     <div class="testimonial-author">
                         <div class="border-top pt-3">
@@ -168,17 +168,81 @@
 </div>
 
 
-
-
+<div class="tintuc">
+    <section class="news-section">
+    <h2 class="section-title">Tin tức</h2>
+    <div class="news-container">
+        <div class="news-item">
+            <img src="img/chuy.jpg" alt="News Image 1">
+            <div class="news-content">
+                <h3>Một số thủ đoạn giả danh COSMO BUS, cẩn trọng lưu ý khi chia sẻ thông tin cá nhân</h3>
+                <!-- <p>Mô tả ngắn về tin tức số 1.</p> -->
+            </div>
+        </div>
+        <div class="news-item">
+            <img src="img/cachmang.jpg" alt="News Image 2">
+            <div class="news-content">
+                <h3>[Phóng sự HTV9] COSMO BUS và công cuộc cách mạng hóa ngành vận tải hành khách</h3>
+                <!-- <p>Mô tả ngắn về tin tức số 2.</p> -->
+            </div>
+        </div>
+        <div class="news-item">
+            <img src="img/congnhan.jpg" alt="News Image 3">
+            <div class="news-content">
+                <h3>Bộ Thông tin - Truyền thông công nhận COSMOBUS là Nền tảng phục vụ người dân 2025</h3>
+                <!-- <p>Mô tả ngắn về tin tức số 3.</p> -->
+            </div>
+        </div>
+        <div class="news-item">
+            <img src="img/phongsu.jpg" alt="News Image 4">
+            <div class="news-content">
+                <h3>[Phóng sự VTV9] Đặt dịch vụ xe khách nhanh chóng, tiện lợi, nhiều ưu đãi tại COSMO BUS</h3>
+                <!-- <p>Mô tả ngắn về tin tức số 4. Đây là một tin tức bổ sung để có đủ 4 ảnh.</p> -->
+            </div>
+        </div>
     </div>
+</section>
 </div>
 
 
 
-
-
-
-
+<div class="cosmobus">
+    <section class="new-features-section">
+    <h2 class="new-features-title">COSMO BUS có gì mới?</h2>
+    <div class="new-features-container scrollable">
+        <div class="feature-item">
+            <img src="img/nhanhchong.png" alt="Vexere Affiliate">
+            <div class="feature-content">
+                <h3>Đặt vé xe nhanh chóng - tiện lợi cùng với COSMO BUS</h3>
+            </div>
+        </div>
+        <div class="feature-item">
+            <img src="img/baohiem.png" alt="Đặt vé tàu hỏa">
+            <div class="feature-content">
+                <h3>Bồi thường đến 1.000.000 VNĐ với bảo hiểm trễ, huỷ chuyến xe tại COSMO BUS </h3>
+            </div>
+        </div>
+        <div class="feature-item">
+            <img src="img/uudai.png" alt="Bảo hiểm chuyến đi">
+            <div class="feature-content">
+                <h3>Nhận ngay 1 vé xem chung kết HOA HẬU HOÀN VŨ VIỆT NAM 2025 - Khi đã đặt 10 vé xe tại COSMO BUS</h3>
+            </div>
+        </div>
+        <div class="feature-item">
+            <img src="img/chuyendi.png" alt="Tính năng mới 4">
+            <div class="feature-content">
+                <h3>"Bảo hiểm chuyến đi" - Chính thức ra mắt tại COSMO BUS</h3>
+            </div>
+        </div>
+        <!-- <div class="feature-item">
+            <img src="https://via.placeholder.com/300x150?text=Feature+5" alt="Tính năng mới 5">
+            <div class="feature-content">
+                <h3>Tiêu đề tính năng mới số 5</h3>
+            </div>
+        </div> -->
+        </div>
+</section>
+</div>
 
 
     @include('footer')

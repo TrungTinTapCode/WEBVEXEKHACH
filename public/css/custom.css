@@ -358,3 +358,201 @@ iframe {
         height: 250px;
     }
 }
+
+
+
+.news-section {
+    padding: 20px;
+    background-color: #a6d8ff00;
+    font-family: Arial, sans-serif;
+}
+
+.section-title {
+    text-align: center; /* Đã có, giữ nguyên */
+    margin-bottom: 20px; /* Đã có, giữ nguyên */
+    font-size: 2.5em; /* Tăng kích thước chữ từ 2em lên 2.5em */
+    font-weight: bold; /* Thêm thuộc tính để chữ đậm hơn */
+    color: #333; /* Đã có, giữ nguyên */
+    /* padding-left: 10px; */ /* Tôi đã bỏ chú thích dòng này nếu bạn muốn căn giữa hoàn toàn */
+}
+
+.news-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* 3 cột trên màn hình lớn, tự điều chỉnh */
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.news-item {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease; /* Hiệu ứng hover */
+}
+
+.news-item:hover {
+    transform: translateY(-5px); /* Hiệu ứng nâng lên khi di chuột qua */
+}
+
+.news-item img {
+    width: 100%;
+    height: 180px; /* Chiều cao cố định cho ảnh */
+    object-fit: cover; /* Đảm bảo ảnh vừa khung mà không bị méo */
+}
+
+.news-item .news-content {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Đảm bảo nội dung chiếm hết không gian còn lại */
+}
+
+.news-item h3 {
+    font-size: 1.1em;
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #333;
+    line-height: 1.4;
+}
+
+.news-item p {
+    font-size: 0.9em;
+    color: #666;
+    line-height: 1.5;
+    flex-grow: 1; /* Đảm bảo đoạn văn bản chiếm hết không gian còn lại */
+}
+
+/* Responsive adjustments */
+@media (min-width: 768px) {
+    .news-container {
+        grid-template-columns: repeat(3, 1fr); /* 3 cột trên màn hình lớn hơn */
+    }
+}
+
+@media (min-width: 1024px) {
+    .news-container {
+        grid-template-columns: repeat(4, 1fr); /* 4 cột trên màn hình rất lớn */
+    }
+}
+
+/* Thêm hiệu ứng thanh cuộn ngang nếu số lượng tin tức vượt quá chiều rộng */
+.news-container.scrollable {
+    overflow-x: auto;
+    white-space: nowrap; /* Ngăn các item xuống dòng */
+    padding-bottom: 10px; /* Khoảng trống cho thanh cuộn */
+}
+
+.news-container.scrollable .news-item {
+    display: inline-block; /* Hiển thị các item trên một dòng */
+    width: 300px; /* Chiều rộng cố định cho mỗi item khi cuộn */
+    margin-right: 20px; /* Khoảng cách giữa các item */
+    vertical-align: top; /* Căn chỉnh các item */
+    white-space: normal; /* Cho phép nội dung bên trong xuống dòng */
+}
+
+.tintuc{
+    margin-bottom: 100px;
+    margin-top: 70PX;
+}
+
+
+
+
+
+/* CSS CHO PHẦN "VEXERE CÓ GÌ MỚI?" */
+.new-features-section {
+    padding: 20px;
+    background-color: #ffffff; /* Nền trắng */
+    font-family: Arial, sans-serif;
+}
+
+.new-features-title {
+   text-align: center; /* Đã có, giữ nguyên */
+    margin-bottom: 20px; /* Đã có, giữ nguyên */
+    font-size: 2.5em; /* Tăng kích thước chữ từ 2em lên 2.5em */
+    font-weight: bold; /* Thêm thuộc tính để chữ đậm hơn */
+    color: #333; /* Đã có, giữ nguyên */
+}
+
+.new-features-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    overflow-x: unset;
+    padding-bottom: 0;
+}
+
+/* Loại bỏ các tùy chỉnh thanh cuộn Webkit và Firefox vì không còn cuộn ngang */
+.new-features-container::-webkit-scrollbar {
+    display: none;
+}
+.new-features-container::-webkit-scrollbar-track {
+    display: none;
+}
+.new-features-container::-webkit-scrollbar-thumb {
+    display: none;
+}
+.new-features-container::-webkit-scrollbar-thumb:hover {
+    display: none;
+}
+.new-features-container {
+    scrollbar-width: none; /* Firefox */
+}
+
+.feature-item {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease;
+    width: auto;
+    margin-right: 0;
+}
+
+.feature-item:hover {
+    transform: translateY(-5px);
+}
+
+.feature-item img {
+    width: 100%;
+    height: auto; /* ĐÃ CHỈNH SỬA: Đặt chiều cao tự động để hiển thị toàn bộ ảnh */
+    /* object-fit: cover; */ /* ĐÃ BỎ: Loại bỏ object-fit cover để ảnh không bị cắt */
+    display: block; /* Đảm bảo ảnh là block element để loại bỏ khoảng trắng dư thừa */
+}
+
+.feature-item .feature-content {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.feature-item h3 {
+    font-size: 1.1em;
+    margin-top: 0;
+    margin-bottom: 0;
+    color: #333;
+    line-height: 1.4;
+    text-align: left;
+}
+
+/* Responsive adjustments for New Features Section */
+@media (min-width: 768px) {
+    .new-features-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .new-features-container {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
