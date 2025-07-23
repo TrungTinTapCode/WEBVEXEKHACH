@@ -455,8 +455,8 @@ iframe {
 }
 
 .tintuc{
-    margin-bottom: 100px;
-    margin-top: 70PX;
+    margin-bottom: 50px;
+    margin-top: 50PX;
 }
 
 
@@ -555,4 +555,68 @@ iframe {
     .new-features-container {
         grid-template-columns: repeat(4, 1fr);
     }
+}
+
+.cosmobus{
+    margin-bottom: 50px;
+    margin-top: 50px;
+}
+
+
+
+/* Có thể có các CSS khác của bạn ở đây */
+
+/* === CSS cho phần "VỀ MISS COSMO" và Banner (Chỉnh sửa để loại bỏ khoảng trắng bên trong) === */
+.mpc-section-wrapper {
+    width: 100%; /* Sửa từ 100vw → 100% */
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    overflow: hidden;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+
+
+.mpc-text-content {
+    background-color: #0d2858; /* Nền xanh đậm cho riêng phần văn bản */
+    color: #fff;
+    text-align: center;
+    padding: 30px 20px; /* Padding trên dưới 30px, trái phải 20px (hoặc 30px nếu bạn muốn rộng hơn) */
+    /* Quan trọng: loại bỏ bất kỳ width: 100% hoặc margin-left/right: auto nếu có */
+    box-sizing: border-box; /* Đảm bảo padding không làm tăng chiều rộng của phần tử */
+}
+
+.mpc-text-content h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #ffd700;
+}
+
+.mpc-text-content p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.mpc-banner-image {
+    width: 100%; /* Đảm bảo banner chiếm toàn bộ chiều rộng của .mpc-section-wrapper */
+    line-height: 0; /* Giúp loại bỏ khoảng trắng dưới ảnh */
+    margin: 0; /* Đảm bảo không có margin mặc định */
+    padding: 0; /* Đảm bảo không có padding mặc định */
+}
+
+.mpc-banner-image img {
+    width: 100%; /* Hình ảnh chiếm toàn bộ chiều rộng của .mpc-banner-image */
+    height: auto; /* Chiều cao tự động để giữ tỷ lệ */
+    display: block; /* Loại bỏ khoảng trống dưới hình ảnh */
+}
+/* === Kết thúc CSS cho phần "VỀ MISS COSMO" và Banner === */
+
+
+.moon{
+    margin-left: 120px;
+    margin-right: 120px;
+    text-align: left;
 }
