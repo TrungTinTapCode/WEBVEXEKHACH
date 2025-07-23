@@ -27,7 +27,7 @@
                 <tr>
                     <td>{{ $schedule->schedule_id }}</td>
                     <td>{{ $schedule->route->title ?? 'N/A' }}</td>
-                    <td>{{ $schedule->bus->name ?? 'Chưa gán xe' }}</td>
+                    <td>{{ $schedule->bus->bus_name ?? 'Chưa gán xe' }}</td>
                     <td>{{ $schedule->departure_time ? $schedule->departure_time->format('H:i d/m/Y') : '-' }}</td>
                     <td>{{ $schedule->arrival_time ? $schedule->arrival_time->format('H:i d/m/Y') : '-' }}</td>
                     <td>{{ $schedule->notes ?? '-' }}</td>

@@ -72,9 +72,10 @@ class RouteController extends Controller
             'price'     => 'required|numeric',
             'image'     => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
+        
+        $data = $request->only(['title', 'departure', 'destination', 'price']);
+        $data['is_active'] = $request->input('is_active', 0);
 
-        $data = $request->only(['title', 'start_point', 'end_point', 'price']);
-        $data['is_active'] = $request->has('is_active') ? 1 : 0;
 
         if ($request->hasFile('image')) {
             // Xoá ảnh cũ nếu có
