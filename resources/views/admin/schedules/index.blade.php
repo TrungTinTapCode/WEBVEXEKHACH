@@ -27,7 +27,7 @@
                 <tr>
                     <td>{{ $schedule->schedule_id }}</td>
                     <td>{{ $schedule->route->title ?? 'N/A' }}</td>
-                    <td>{{ $schedule->bus->name ?? 'Chưa gán xe' }}</td>
+                    <td>{{ $schedule->bus->bus_name ?? 'Chưa gán xe' }}</td>
                     <td>{{ $schedule->departure_time ? $schedule->departure_time->format('H:i d/m/Y') : '-' }}</td>
                     <td>{{ $schedule->arrival_time ? $schedule->arrival_time->format('H:i d/m/Y') : '-' }}</td>
                     <td>{{ $schedule->notes ?? '-' }}</td>
@@ -37,8 +37,8 @@
                         </span>
                     </td>
                     <td>
-                                <a href="{{ route('admin.schedules.edit', $schedule->id) }}" class="btn btn-sm btn-warning">Sửa</a>
-                                <form action="{{ route('admin.schedules.destroy', $schedule->id) }}" method="POST" class="d-inline">
+                                <a href="{{ route('admin.schedules.edit', $schedule->schedule_id) }}" class="btn btn-sm btn-warning">Sửa</a>
+                                <form action="{{ route('admin.schedules.destroy', $schedule->schedule_id) }}" method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-sm btn-danger" onclick="return confirm('Bạn chắc chắn muốn xóa?')">Xóa</button>

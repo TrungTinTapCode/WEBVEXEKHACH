@@ -37,8 +37,8 @@
                     <td>{{ $booking->booking_code }}</td>
                     <td>{{ $booking->customer->full_name }}</td>
                     <td>
-                        {{ $booking->schedule->route->departure_point }} → 
-                        {{ $booking->schedule->route->arrival_point }}
+                        {{ $booking->schedule->route->departure }} → 
+                        {{ $booking->schedule->route->destination }}<br>
                         <br>
                         <small>{{ $booking->schedule->departure_time->format('d/m/Y H:i') }}</small>
                     </td>

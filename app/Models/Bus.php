@@ -10,6 +10,7 @@ class Bus extends Model
     use HasFactory;
 
     protected $primaryKey = 'bus_id';
+    protected $keyType = 'string';
     public $incrementing = true;
 
     protected $fillable = [

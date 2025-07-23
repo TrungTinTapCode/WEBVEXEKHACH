@@ -54,11 +54,6 @@
                             <input type="text" class="form-control" data-datepicker data-placeholder="Chọn ngày đi">
                         </div>
 
-                        <div class="input-group input-group-sm flex-grow-1 me-2 my-0">
-                            <span class="input-group-text"><i class="bi bi-calendar-date"></i></span>
-                            <input type="text" class="form-control" data-datepicker data-placeholder="Chọn ngày đến">
-                        </div>
-
                         <button type="submit" class="btn btn-warning btn-sm flex-shrink-0 my-0">Tìm kiếm</button>
                     </form>
                 </div>

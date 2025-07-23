@@ -7,7 +7,7 @@
             <h3>Chỉnh sửa lịch trình</h3>
         </div>
         <div class="card-body" style="background-color: #fff;">
-            <form action="{{ route('admin.schedules.update', $schedule->id) }}" method="POST">
+            <form action="{{ route('admin.schedules.update', $schedule->schedule_id) }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="mb-3">
@@ -15,7 +15,7 @@
                     <select name="route_id" class="form-control" required>
                         @foreach($routes as $route)
                             <option value="{{ $route->id }}" {{ $route->id == $schedule->route_id ? 'selected' : '' }}>
-                                {{ $route->start_point }} → {{ $route->end_point }}
+                                {{ $route->departure }} → {{ $route->destination }}
                             </option>
                         @endforeach
                     </select>
@@ -24,8 +24,8 @@
                     <label for="bus_id" class="form-label">Xe buýt</label>
                     <select name="bus_id" class="form-control" required>
                         @foreach($buses as $bus)
-                            <option value="{{ $bus->id }}" {{ $bus->id == $schedule->bus_id ? 'selected' : '' }}>
-                                {{ $bus->name }} ({{ $bus->license_plate }})
+                            <option value="{{ $bus->bus_id }}" {{ $bus->id == $schedule->bus_id ? 'selected' : '' }}>
+                                {{ $bus->bus_name }} ({{ $bus->license_plate }})
                             </option>
                         @endforeach
                     </select>
@@ -34,6 +34,11 @@
                     <label for="departure_time" class="form-label">Giờ khởi hành</label>
                     <input type="datetime-local" name="departure_time" class="form-control"
                         value="{{ \Carbon\Carbon::parse($schedule->departure_time)->format('Y-m-d\TH:i') }}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="arrival_time" class="form-label">Giờ đến</label>
+                    <input type="datetime-local" name="arrival_time" class="form-control"
+                        value="{{ \Carbon\Carbon::parse($schedule->arrival_time)->format('Y-m-d\TH:i') }}" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Cập nhật</button>
                 <a href="{{ route('admin.schedules.index') }}" class="btn btn-secondary">Hủy</a>

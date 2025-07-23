@@ -16,36 +16,45 @@ class ScheduleController extends Controller
     public function index()
     {
         $schedules = Schedule::with(['route', 'bus'])->orderBy('departure_time', 'desc')->get();
-
         return view('admin.schedules.index', compact('schedules'));
     }
 
+    /**
+     * Hiển thị form tạo mới lịch trình.
+     */
     public function create()
-{
-    $routes = Route::all();
-    $buses = Bus::all();
+    {
+        $routes = Route::all(); // Lấy danh sách tuyến
+        $buses = Bus::all();    // Lấy danh sách xe buýt
+        return view('admin.schedules.create', compact('routes', 'buses'));
+    }
 
-    return view('admin.schedules.create', compact('routes', 'buses'));
-}
+    /**
+     * Lưu lịch trình mới vào database.
+     */
+    public function store(Request $request)
+    {
+        $request->validate([
+            'route_id' => 'required|exists:routes,id',
+            'bus_id' => 'required|exists:buses,bus_id',
+            'departure_time' => 'required|date',
+            'arrival_time' => 'required|date',
+        ]);
 
-public function store(Request $request)
-{
-    $request->validate([
-        'route_id' => 'required|exists:routes,id',
-        'bus_id' => 'required|exists:buses,id',
-        'departure_time' => 'required|date',
-    ]);
+        Schedule::create([
+            'route_id' => $request->route_id,
+            'bus_id' => $request->bus_id,
+            'departure_time' => $request->departure_time,
+            'arrival_time' => $request->arrival_time,
+            'status' => 'scheduled', // trạng thái mặc định
+        ]);
 
-    Schedule::create([
-        'route_id' => $request->route_id,
-        'bus_id' => $request->bus_id,
-        'departure_time' => $request->departure_time,
-        'status' => 'active', // mặc định trạng thái
-    ]);
+        return redirect()->route('admin.schedules.index')->with('success', 'Lịch trình đã được thêm thành công.');
+    }
 
-    return redirect()->route('admin.schedules.index')->with('success', 'Lịch trình đã được thêm thành công.');
-}
-
+    /**
+     * Hiển thị form chỉnh sửa lịch trình.
+     */
     public function edit(Schedule $schedule)
     {
         $routes = Route::all();
@@ -53,13 +62,16 @@ public function store(Request $request)
         return view('admin.schedules.edit', compact('schedule', 'routes', 'buses'));
     }
 
+    /**
+     * Cập nhật thông tin lịch trình.
+     */
     public function update(Request $request, Schedule $schedule)
     {
         $request->validate([
             'route_id' => 'required|exists:routes,id',
             'bus_id' => 'required|exists:buses,bus_id',
             'departure_time' => 'required|date',
-            'arrival_time' => 'required|date|after:departure_time',
+            'arrival_time' => 'required|date',
         ]);
 
         $schedule->update($request->all());
@@ -67,16 +79,22 @@ public function store(Request $request)
         return redirect()->route('admin.schedules.index')->with('success', 'Lịch trình đã được cập nhật');
     }
 
+    /**
+     * Xoá lịch trình.
+     */
     public function destroy(Schedule $schedule)
     {
         $schedule->delete();
         return redirect()->route('admin.schedules.index')->with('success', 'Lịch trình đã được xóa');
     }
 
+    /**
+     * Cập nhật trạng thái lịch trình.
+     */
     public function updateStatus(Schedule $schedule, $status)
     {
         $validStatuses = ['scheduled', 'departed', 'arrived', 'cancelled'];
-        
+
         if (!in_array($status, $validStatuses)) {
             return back()->with('error', 'Trạng thái không hợp lệ');
         }

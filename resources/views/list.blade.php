@@ -170,11 +170,6 @@
                             <input type="text" class="form-control" data-datepicker data-placeholder="Chọn ngày đi">
                         </div>
 
-                        <div class="input-group input-group-sm flex-grow-1 me-2 my-0">
-                            <span class="input-group-text"><i class="bi bi-calendar-date"></i></span>
-                            <input type="text" class="form-control" data-datepicker data-placeholder="Chọn ngày đến">
-                        </div>
-
                         <button type="submit" class="btn btn-warning btn-sm flex-shrink-0 my-0">Tìm kiếm</button>
                     </form>
                 </div>
@@ -206,10 +201,12 @@
 
             <!-- Results Column -->
             <div class="col-md-9">
-                <h5>Kết quả: <strong>343 chuyến</strong></h5>
+                <h5>Kết quả: <strong>{{ $schedules->filter(fn($s) => $s->route->is_active)->count() }} chuyến</strong></h5>
+
 
                 <!-- Trip Item -->
                 @foreach($schedules as $schedule)
+                @if($schedule->route->is_active)
     <div class="card-custom">
         <div class="row g-2">
             <div class="col-auto">
@@ -218,17 +215,17 @@
             <div class="col">
                 <div class="d-flex justify-content-between align-items-start">
                     <div>
-                        <a href="#" class="text-primary text-decoration-none small">
+                        <div class="trip-title mt-1">
                             {{ $schedule->route->title }}
-                        </a>
+                        </div>
                         <div class="trip-title mt-1">{{ $schedule->bus->bus_name }}</div>
                         <div class="text-muted small">{{ $schedule->bus->bus_type }}</div>
                         <div class="d-flex align-items-center small mt-1">
-                            <i class="bi bi-clock me-1"></i> {{ $schedule->departure_time }} - {{ $schedule->route->title }}
+                            <i class="bi bi-clock me-1"></i> {{ $schedule->departure_time }} - {{ $schedule->route->departure }}
                             <span class="ms-3">Còn {{ $schedule->available_seats ?? '...' }} chỗ trống</span>
-                        </div>
+                        </div> <br>
                         <div class="d-flex align-items-center small">
-                            <i class="bi bi-clock me-1"></i> {{ $schedule->arrival_time }} - {{ $schedule->route->title }}
+                            <i class="bi bi-clock me-1"></i> {{ $schedule->arrival_time }} - {{ $schedule->route->destination }}
                             <a href="{{ route('detail', ['id' => $schedule->schedule_id]) }}" class="ms-3 trip-detail-link">Thông tin chi tiết</a>
                         </div>
                     </div>
@@ -236,11 +233,11 @@
                         <div class="trip-note">Từ {{ number_format($schedule->route->price) }}đ</div>
                     </div>
                 </div>
-                <div class="trip-follow mt-2">Theo dõi hành trình xe</div>
                 <div class="fw-semibold text-end mt-1">Không cần thanh toán trước</div>
             </div>
         </div>
     </div>
+    @endif
 @endforeach
                 <!-- Duplicate the above .card-custom to add more results -->
             </div>
