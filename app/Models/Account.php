@@ -19,7 +19,8 @@ class Account extends Authenticatable
         'password',
         'email',
         'dia_chi',
-        'ngay_sinh'
+        'ngay_sinh',
+        'gender'
     ];
 
     protected $hidden = [

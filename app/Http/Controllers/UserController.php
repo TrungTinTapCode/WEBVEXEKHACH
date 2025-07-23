@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Account;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class UserController extends Controller
 {
@@ -76,26 +77,64 @@ class UserController extends Controller
     }
 
     // Cập nhật thông tin tài khoản
+    // public function update(Request $request)
+    // {
+    //     $request->validate([
+    //         'name'         => 'required|string|max:255',
+    //         'ngay_sinh'    => 'nullable|date',
+    //         'dia_chi'      => 'nullable|string|max:255',
+    //         'email'        => 'nullable|email|max:255',
+    //         'phone_number' => 'nullable|string|max:20',
+    //         'gender'       => 'nullable|string|max:10',
+    //     ]);
+
+    //     /** @var \App\Models\Account $user */
+    //     $user = Auth::user();
+    //     $user->refresh(); // Cập nhật lại bản ghi từ database
+
+    //     $user->name         = $request->name;
+    //     $user->ngay_sinh    = \Carbon\Carbon::createFromFormat('d-m-Y', $request->ngay_sinh)->format('Y-m-d');
+    //     $user->dia_chi      = $request->dia_chi;
+    //     $user->email        = $request->email;
+    //     $user->phone_number = $request->phone_number;
+    //     $user->gender       = $request->gender;
+    //     $user->save();
+
+    //     return back()->with('success', 'Thông tin đã được cập nhật!');
+    // }
+    // Cập nhật thông tin tài khoản
     public function update(Request $request)
     {
         $request->validate([
-            'name'       => 'required|string|max:255',
-            'ngay_sinh'  => 'nullable|date',
-            'dia_chi'    => 'nullable|string|max:255',
-            'email'      => 'nullable|email|max:255',
+            'name'         => 'required|string|max:255',
+            'ngay_sinh'    => 'nullable|date',
+            'street'       => 'nullable|string|max:255',
+            'dia_chi'      => 'nullable|string|max:255',
+            'email'        => 'nullable|email|max:255',
             'phone_number' => 'nullable|string|max:20',
+            'gender'       => 'nullable|string|max:10',
         ]);
 
         /** @var \App\Models\Account $user */
         $user = Auth::user();
+        $user->refresh(); // Cập nhật lại bản ghi từ database
 
-        $user->name        = $request->name;
-        $user->ngay_sinh   = $request->ngay_sinh;
-        $user->dia_chi     = $request->dia_chi;
-        $user->email       = $request->email;
+        $user->name         = $request->name;
+
+        if ($request->filled('ngay_sinh')) {
+            $user->ngay_sinh = Carbon::createFromFormat('d-m-Y', $request->ngay_sinh)->format('Y-m-d');
+        }
+
+        // Ghép địa chỉ đầy đủ
+        $fullAddress = trim($request->street) . ', ' . trim($request->dia_chi);
+        $user->dia_chi = $fullAddress;
+
+        $user->email        = $request->email;
         $user->phone_number = $request->phone_number;
+        $user->gender       = $request->gender;
         $user->save();
 
         return back()->with('success', 'Thông tin đã được cập nhật!');
     }
+
 }
