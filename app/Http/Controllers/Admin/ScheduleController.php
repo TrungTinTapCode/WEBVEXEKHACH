@@ -38,12 +38,14 @@ class ScheduleController extends Controller
             'route_id' => 'required|exists:routes,id',
             'bus_id' => 'required|exists:buses,bus_id',
             'departure_time' => 'required|date',
+            'arrival_time' => 'required|date',
         ]);
 
         Schedule::create([
             'route_id' => $request->route_id,
             'bus_id' => $request->bus_id,
             'departure_time' => $request->departure_time,
+            'arrival_time' => $request->arrival_time,
             'status' => 'scheduled', // trạng thái mặc định
         ]);
 
@@ -69,7 +71,7 @@ class ScheduleController extends Controller
             'route_id' => 'required|exists:routes,id',
             'bus_id' => 'required|exists:buses,bus_id',
             'departure_time' => 'required|date',
-            'arrival_time' => $request->arrival_time,
+            'arrival_time' => 'required|date',
         ]);
 
         $schedule->update($request->all());

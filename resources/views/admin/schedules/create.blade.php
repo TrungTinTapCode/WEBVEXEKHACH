@@ -34,10 +34,10 @@
                     <input type="datetime-local" name="departure_time" class="form-control" required>
                 </div>
                 <div class="mb-3">
-                    <label for="arrival_time" class="form-label">Giờ khởi hành</label>
+                    <label for="arrival_time" class="form-label">Giờ đến</label>
                     <input type="datetime-local" name="arrival_time" class="form-control" required>
                 </div>
-
+                
                 <button type="submit" class="btn btn-primary">Lưu</button>
                 <a href="{{ route('admin.schedules.index') }}" class="btn btn-secondary">Hủy</a>
             </form>

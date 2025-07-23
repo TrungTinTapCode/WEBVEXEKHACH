@@ -56,9 +56,9 @@
                         <form id="delete-form-{{ $route->id }}" action="{{ route('admin.routes.destroy', $route->id) }}" method="POST" class="d-none">
                             @csrf @method('DELETE')
                         </form>
-                        <a href="{{ route('admin.routes.toggle-status', $route->id) }}" class="btn btn-sm {{ $route->is_active ? 'btn-secondary' : 'btn-success' }}">
+                        <!-- <a href="{{ route('admin.routes.toggle-status', $route->id) }}" class="btn btn-sm {{ $route->is_active ? 'btn-secondary' : 'btn-success' }}">
                             <i class="fas {{ $route->is_active ? 'fa-times' : 'fa-check' }}"></i>
-                        </a>
+                        </a> -->
                     </td>
                 </tr>
                 @endforeach

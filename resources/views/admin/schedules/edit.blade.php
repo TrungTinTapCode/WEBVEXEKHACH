@@ -7,7 +7,7 @@
             <h3>Chỉnh sửa lịch trình</h3>
         </div>
         <div class="card-body" style="background-color: #fff;">
-            <form action="{{ route('admin.schedules.update', $schedule->id) }}" method="POST">
+            <form action="{{ route('admin.schedules.update', $schedule->schedule_id) }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="mb-3">
