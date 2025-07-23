@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
     <style>
+        
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f8f9fa;
@@ -77,6 +78,10 @@
             position: relative;
             background-color: #fff;
             transition: all 0.3s ease;
+            display: flex; /* Thêm để căn giữa số ghế */
+            justify-content: center; /* Thêm để căn giữa số ghế */
+            align-items: center; /* Thêm để căn giữa số ghế */
+            font-weight: bold; /* Thêm để số ghế nổi bật */
         }
 
         .seat.unavailable {
@@ -91,6 +96,7 @@
 
         .seat.available {
             border: 2px solid #d633ff;
+            background-color: #fff; /* Đảm bảo màu nền là trắng cho ghế có sẵn */
         }
 
         .seat.selected {
@@ -99,7 +105,7 @@
         }
 
         .seat.selected::after {
-            content: '✓';
+            /* content: '✓'; -- Bỏ content này để hiện số ghế */
             position: absolute;
             top: 50%;
             left: 50%;
@@ -108,6 +114,15 @@
             font-weight: bold;
             font-size: 18px;
         }
+
+        /* Thêm style cho ghế đã đặt */
+        .seat.booked {
+            background-color: #ffc107; /* Màu vàng cho ghế đã đặt */
+            border-color: #ffc107;
+            cursor: not-allowed;
+            color: #fff;
+        }
+
 
         .bus-layout {
             display: flex;
@@ -288,37 +303,83 @@
         .tiktok {
             background-color: #000000;
         }
+        .seat-map {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* 4 cột ghế, bạn có thể điều chỉnh */
+            gap: 10px;
+            padding: 20px;
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .seat {
+            width: 50px; /* Kích thước ghế */
+            height: 50px;
+            background-color: #ccc;
+            border: 1px solid #aaa;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .seat.available {
+            background-color: #d4edda; /* Màu xanh lá cây nhạt */
+            border-color: #28a745;
+            cursor: pointer;
+        }
+
+        .seat.booked {
+            background-color: #f8d7da; /* Màu đỏ nhạt */
+            border-color: #dc3545;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .seat.selected {
+            background-color: #007bff; /* Màu xanh dương */
+            color: white;
+            border-color: #0056b3;
+        }
+        .seat.unavailable { /* Cho ghế không khả dụng (ví dụ: không tồn tại thực) */
+            background-color: #e2e6ea;
+            border-color: #c6c6c6;
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
     </style>
 </head>
 
 <body>
     @include('header')
     <div class="container my-4">
-        <!-- Thông tin chuyến xe -->
         <div class="trip-card p-4">
             <div class="row align-items-center">
                 <div class="col-md-3">
-                    <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=300&h=200&fit=crop" alt="Xe Limousine" class="trip-image">
+                    <img src="{{ asset('storage/' . $schedule->route->image) }}" alt="Ảnh tuyến" class="trip-image">
                 </div>
                 <div class="col-md-6">
-                    <h5 class="mb-3">Cẩm Nhung Luxury</h5>
-                    <p class="text-muted mb-2">Limousine 22 Phòng</p>
-                    <p class="mb-2">🕐 23:30 • Bến xe trung tâm Cần Thơ</p>
-                    <p class="mb-2">🕕 06:00 • Bến xe liên tỉnh Đà Lạt</p>
-                    <p class="text-muted">Còn __ chỗ trống</p>
+                    <h5 class="mb-3">{{ $schedule->bus->bus_name }}</h5>
+                    <p class="text-muted mb-2">{{ $schedule->bus->bus_type }}</p>
+                    <p class="mb-2">🕐 {{ \Carbon\Carbon::parse($schedule->departure_time)->format('H:i d/m/Y') }} • {{ $schedule->route->departure }}</p>
+                    <p class="mb-2">🕕 {{ \Carbon\Carbon::parse($schedule->arrival_time)->format('H:i d/m/Y') }} • {{ $schedule->route->destination }}</p>
+                    <p class="text-muted">Còn {{ $availableSeats }} chỗ trống</p>
                 </div>
                 <div class="col-md-3 text-end">
-                    <div class="price-tag">Từ 299.000đ</div>
+                    <div class="price-tag">Từ {{ number_format($schedule->route->price) }}đ</div>
                 </div>
             </div>
         </div>
 
-        <!-- chon cho ngoi -->
         <div class="seat-selection">
             <div class="row mb-3">
                 <div class="col-md-6">
                     <h5 class="text-success">ĐÓN / TRẢ TẬN NƠI</h5>
-                    <p class="text-muted">*Vé thuộc chuyến Cần Thơ - Đà Lạt (__/__/__)</p>
+                    <p class="text-muted">*Vé thuộc chuyến {{ $schedule->route->departure }} - {{ $schedule->route->destination }} ({{ \Carbon\Carbon::parse($schedule->departure_time)->format('d/m/Y') }})</p>
                 </div>
                 <div class="col-md-6 text-end">
                     <p class="fw-bold">KHÔNG CẦN THANH TOÁN TRƯỚC</p>
@@ -326,7 +387,6 @@
             </div>
 
             <div class="legend-container">
-                <!-- chu thich -->
                 <div class="legend-section">
                     <div class="legend-item">
                         <div class="legend-box" style="background-color: #ccc; border: 2px solid #999;"></div>
@@ -344,78 +404,88 @@
                         <div class="legend-box" style="border: 2px solid #32cd32; background: #32cd32;"></div>
                         <span>Ghế đang chọn</span>
                     </div>
+                    <div class="legend-item">
+                        <div class="legend-box" style="background-color: #ffc107; border: 2px solid #ffc107;"></div>
+                        <span>Ghế đã đặt</span>
+                    </div>
                 </div>
 
-                <!-- Bus layout -->
                 <div class="bus-layout">
-                    <!-- Tầng Dưới -->
                     <div class="floor-section">
                         <div class="floor-title">Tầng Dưới</div>
                         <div class="driver-section">
                             <div class="steering-wheel"></div>
                         </div>
                         <div class="seat-column">
-                            <div class="seat-row">
-                                <div class="seat available" onclick="toggleSeat(this)"></div>
-                                <div class="seat available" onclick="toggleSeat(this)"></div>
-                            </div>
-                            <div class="seat-row">
-                                <div class="seat available" onclick="toggleSeat(this)"></div>
-                                <div class="seat available" onclick="toggleSeat(this)"></div>
-                            </div>
-                            <div class="seat-row">
-                                <div class="seat available" onclick="toggleSeat(this)"></div>
-                                <div class="seat available" onclick="toggleSeat(this)"></div>
-                            </div>
-                            <div class="seat-row">
-                                <div class="seat available" onclick="toggleSeat(this)"></div>
-                                <div class="seat available" onclick="toggleSeat(this)"></div>
-                            </div>
-                            <div class="seat-row">
-                                <div class="seat available" onclick="toggleSeat(this)"></div>
-                                <div class="seat available" onclick="toggleSeat(this)"></div>
-                            </div>
+                            @php
+                                $lowerDeckSeats = $seats->filter(function($seat) {
+                                    // Giả định seat_number có thể cho biết tầng. Ví dụ: A1, A2, B1, B2...
+                                    // Hoặc bạn có thể thêm cột 'deck' vào bảng seats
+                                    // Hiện tại, mình sẽ chia đại khái làm 2 phần
+                                    return (int)filter_var($seat->seat_number, FILTER_SANITIZE_NUMBER_INT) <= ($schedule->bus->total_seats / 2);
+                                })->sortBy('seat_number'); // Sắp xếp ghế theo số ghế
+                                $lowerDeckSeatPairs = $lowerDeckSeats->chunk(2);
+                            @endphp
+
+                            @foreach ($lowerDeckSeatPairs as $pair)
+                                <div class="seat-row">
+                                    @foreach ($pair as $seat)
+                                        <div class="seat
+                                            @if (!$seat->is_available) unavailable
+                                            @elseif ($seat->is_booked) booked
+                                            @else available @endif"
+                                            data-seat-id="{{ $seat->seat_id }}"
+                                            data-price="{{ $schedule->route->price }}"
+                                            onclick="toggleSeat(this)">
+                                            {{ $seat->seat_number }}
+                                        </div>
+                                    @endforeach
+                                </div>
+                            @endforeach
                         </div>
                     </div>
 
-                    <!-- Tầng Trên -->
                     <div class="floor-section">
                         <div class="floor-title">Tầng Trên</div>
-
                         <div class="seat-column">
-                            <div class="seat-row">
-                                <div class="seat available" onclick="toggleSeat(this)"></div>
-                                <div class="seat available" onclick="toggleSeat(this)"></div>
-                            </div>
-                            <div class="seat-row">
-                                <div class="seat available" onclick="toggleSeat(this)"></div>
-                                <div class="seat available" onclick="toggleSeat(this)"></div>
-                            </div>
-                            <div class="seat-row">
-                                <div class="seat available" onclick="toggleSeat(this)"></div>
-                                <div class="seat available" onclick="toggleSeat(this)"></div>
-                            </div>
-                            <div class="seat-row">
-                                <div class="seat available" onclick="toggleSeat(this)"></div>
-                                <div class="seat available" onclick="toggleSeat(this)"></div>
-                            </div>
-                            <div class="seat-row">
-                                <div class="seat available" onclick="toggleSeat(this)"></div>
-                                <div class="seat available" onclick="toggleSeat(this)"></div>
-                            </div>
+                            @php
+                                $upperDeckSeats = $seats->filter(function($seat) {
+                                    return (int)filter_var($seat->seat_number, FILTER_SANITIZE_NUMBER_INT) > ($schedule->bus->total_seats / 2);
+                                })->sortBy('seat_number'); // Sắp xếp ghế theo số ghế
+                                $upperDeckSeatPairs = $upperDeckSeats->chunk(2);
+                            @endphp
+
+                            @foreach ($upperDeckSeatPairs as $pair)
+                                <div class="seat-row">
+                                    @foreach ($pair as $seat)
+                                        <div class="seat
+                                            @if (!$seat->is_available) unavailable
+                                            @elseif ($seat->is_booked) booked
+                                            @else available @endif"
+                                            data-seat-id="{{ $seat->seat_id }}"
+                                            data-price="{{ $schedule->route->price }}"
+                                            onclick="toggleSeat(this)">
+                                            {{ $seat->seat_number }}
+                                        </div>
+                                    @endforeach
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Bottom bar -->
             <div class="bottom-bar">
                 <span class="total-text">Tổng cộng: <span id="totalPrice">0đ</span></span>
-                <a href="{{ route('payment') }}" class="continue-btn" style="text-decoration: none;">Tiếp tục</a>
+                <form id="bookingForm" action="{{ route('book.seats') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="schedule_id" value="{{ $schedule->schedule_id }}">
+                    <input type="hidden" name="selected_seat_ids" id="selectedSeatIds">
+                    <button type="submit" class="continue-btn" onclick="return validateAndSubmitForm()">Tiếp tục</button>
+                </form>
             </div>
         </div>
 
-        <!-- Payment Methods and App Download -->
         <div class="row">
             <div class="col-md-6">
                 <div class="payment-section">
@@ -432,14 +502,12 @@
                     <h6 class="mb-3 fw-bold">Tải ứng dụng COSMO BUS</h6>
                     <div class="app-download">
                         <div class="row justify-content-start">
-                            <!-- QR Code -->
                             <div class="col-12 col-md-5 text-center text-md-start mb-3 mb-md-0">
                                 <div class="qr-code">
                                     <img src="{{ asset('img/Bank-logo/Cosmo-QR.jpg') }}" alt="QR Code" class="qr-img">
                                 </div>
                             </div>
 
-                            <!-- Store Buttons -->
                             <div class="col-12 col-md-7 text-center text-md-start">
                                 <div class="store-buttons d-flex flex-column align-items-center align-items-md-start gap-3">
                                     <img src="{{ asset('img/Bank-logo/downlode-appstore.webp') }}" alt="Download on the App Store" class="store-img">
@@ -458,7 +526,6 @@
                             </a>
                             <a href="#" class="social-icon youtube">
                                 <i class="bi bi-youtube"></i>
-                            </a>
                             <a href="#" class="social-icon tiktok">
                                 <i class="bi bi-tiktok"></i>
                             </a>
@@ -469,55 +536,53 @@
         </div>
 
         <script>
-            const seatPrice = 299000;
+            // Lấy giá vé từ PHP
+            const seatPrice = {{ $schedule->route->price }};
+            let selectedSeats = [];
 
             function toggleSeat(seatElement) {
-                if (seatElement.classList.contains('unavailable')) {
+                // Không cho phép chọn ghế không bán hoặc đã đặt
+                if (seatElement.classList.contains('unavailable') || seatElement.classList.contains('booked')) {
                     return;
                 }
+
+                const seatId = seatElement.dataset.seatId;
 
                 if (seatElement.classList.contains('selected')) {
                     seatElement.classList.remove('selected');
                     seatElement.classList.add('available');
+                    selectedSeats = selectedSeats.filter(id => id !== seatId); // Xóa khỏi danh sách
                 } else if (seatElement.classList.contains('available')) {
                     seatElement.classList.remove('available');
                     seatElement.classList.add('selected');
+                    selectedSeats.push(seatId); // Thêm vào danh sách
                 }
                 updateTotalPrice();
             }
 
             function updateTotalPrice() {
-                const selectedSeatsCount = document.querySelectorAll('.seat.selected').length;
-                const total = selectedSeatsCount * seatPrice;
+                const total = selectedSeats.length * seatPrice;
                 document.getElementById('totalPrice').textContent = total.toLocaleString('vi-VN') + 'đ';
             }
 
-            function continueBooking() {
-                const selectedSeatsCount = document.querySelectorAll('.seat.selected').length;
-                if (selectedSeatsCount === 0) {
-                    alert('Vui lòng chọn ít nhất một ghế!');
-                    return;
+            function validateAndSubmitForm() {
+                if (selectedSeats.length === 0) {
+                    alert('Vui lòng chọn ít nhất một ghế để tiếp tục đặt vé!');
+                    return false; // Ngăn chặn form submit
                 }
-                alert(`Bạn đã chọn ${selectedSeatsCount} ghế. Tổng tiền: ${(selectedSeatsCount * seatPrice).toLocaleString('vi-VN')}đ`);
+                // Gán danh sách ID ghế đã chọn vào input hidden
+                document.getElementById('selectedSeatIds').value = JSON.stringify(selectedSeats);
+                return true; // Cho phép form submit
             }
 
-            // Initialize some seats as unavailable for demo
+            // Gọi hàm này khi trang được tải để cập nhật tổng tiền ban đầu (nếu có ghế đã chọn sẵn, mặc dù ở đây không có)
             document.addEventListener('DOMContentLoaded', function() {
-                const seats = document.querySelectorAll('.seat');
-                // Make some random seats unavailable
-                const unavailableIndices = [2, 7, 12, 15, 18];
-                unavailableIndices.forEach(index => {
-                    if (seats[index]) {
-                        seats[index].classList.remove('available');
-                        seats[index].classList.add('unavailable');
-                        seats[index].onclick = null;
-                    }
-                });
+                updateTotalPrice(); // Đảm bảo tổng tiền hiển thị 0đ khi tải trang
             });
         </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
     </div>
-@include('footer')
+    @include('footer')
 </body>
 </html>

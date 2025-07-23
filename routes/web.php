@@ -21,8 +21,6 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/search/{type}', ['as' => 'search.transport', 'uses' => 'SearchController@transport'])->name('search.transport');
 Route::get('/search-result', ['as' => 'search.result', 'uses' => 'SearchController@result'])->name('search.result');
-Route::get('/', [HomeController::class, 'index']);
-Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -40,8 +38,6 @@ Route::post('/logout', function () {
     return redirect('/')->with('success', 'Bạn đã đăng xuất thành công!');
 })->name('logout');
 
-// trang đặt xe
-Route::get('/danhsachchuyen/{id}', [DetailController::class, 'show'])->name('detail');
 // trang ds đơn hàng
 Route::get('/history', function () {
     return view('user.history');
@@ -60,14 +56,18 @@ Route::middleware(['auth'])->group(function () {
 
 Route::post('/info', [UserController::class, 'store'])->name('info.store');
 
-//thanh toán
-Route::get('/payment', function () {
-    return view('payment');
-})->name('payment');
+// //thanh toán
+// Route::get('/payment', function () {
+//     return view('payment');
+// })->name('payment');
 
 //list đặt xe
 Route::get('/danhsachchuyen', [ListController::class, 'index'])->name('list');
-
+//chi tiết 
+Route::get('/danhsachchuyen/{id}', [DetailController::class, 'show'])->name('detail');
+//đặt xe
+Route::get('/payment/{booking_code}', [BookingController::class, 'showPaymentForm'])->name('payment');
+Route::post('/book-seats', [\App\Http\Controllers\BookingController::class, 'store'])->name('book.seats');
 //Trang admin
 Route::prefix('admin')->name('admin.')->group(function () {
     //Dashboard

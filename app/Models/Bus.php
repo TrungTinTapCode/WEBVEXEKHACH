@@ -10,7 +10,6 @@ class Bus extends Model
     use HasFactory;
 
     protected $primaryKey = 'bus_id';
-    protected $keyType = 'string';
     public $incrementing = true;
 
     protected $fillable = [
@@ -28,7 +27,7 @@ class Bus extends Model
 
     public function seats()
     {
-        return $this->hasMany(Seat::class, 'bus_id');
+        return $this->hasMany(Seat::class, 'bus_id', 'bus_id');
     }
 
     public function schedules()
