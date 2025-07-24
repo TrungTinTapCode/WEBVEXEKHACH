@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -520,7 +520,7 @@
                 </div>
 
                 <div class="col-md-12">
-                    <label>Địa chỉ hiện tai</label>
+                    <label>Địa chỉ hiện tại</label>
                     <input type="text" class="form-control" value="{{ Auth::user()->dia_chi }}" disabled>
                 </div>
             </div>
@@ -669,5 +669,3 @@
 </body>
 
 </html>
-=======
->>>>>>> ee741403e08092f94326108fa9926696576bb33d
