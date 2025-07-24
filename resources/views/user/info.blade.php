@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-
-=======
->>>>>>> b3395f1bbd1474be9c0cca9bf2c093be533dee0e
 <!DOCTYPE html>
 <html lang="en">
 
@@ -671,8 +667,4 @@
 
 </body>
 
-<<<<<<< HEAD
 </html>
-=======
-</html>
->>>>>>> b3395f1bbd1474be9c0cca9bf2c093be533dee0e
