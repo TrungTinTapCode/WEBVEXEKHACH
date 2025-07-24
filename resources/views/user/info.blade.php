@@ -504,7 +504,7 @@
                                 <div id="locationList" class="list-group small"></div>
 
                                 <!-- Output -->
-                                <input type="hidden" name="dia_chi" id="addressInput" value="" />
+                                <input type="hidden" name="dia_chi_moi" id="addressInput" value="" />
                                 <div class="alert alert-info mt-3 mb-0">
                                     <strong>Địa chỉ đã chọn:</strong> <span id="selectedAddress">Chưa chọn</span>
                                 </div>

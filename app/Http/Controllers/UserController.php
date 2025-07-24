@@ -126,8 +126,21 @@ class UserController extends Controller
         }
 
         // Ghép địa chỉ đầy đủ
-        $fullAddress = trim($request->street) . ', ' . trim($request->dia_chi);
-        $user->dia_chi = $fullAddress;
+        $parts = [];
+
+        if ($request->filled('street')) {
+            $parts[] = trim($request->street);
+        }
+
+        if ($request->filled('dia_chi_moi')) {
+            $parts[] = trim($request->dia_chi_moi);
+        }
+
+        if (!empty($parts)) {
+            // Chỉ cập nhật nếu có dữ liệu địa chỉ mới
+            $user->dia_chi = implode(', ', $parts);
+        }
+
 
         $user->email        = $request->email;
         $user->phone_number = $request->phone_number;
@@ -136,5 +149,4 @@ class UserController extends Controller
 
         return back()->with('success', 'Thông tin đã được cập nhật!');
     }
-
 }
