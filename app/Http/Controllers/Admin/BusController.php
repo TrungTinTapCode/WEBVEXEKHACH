@@ -21,17 +21,27 @@ class BusController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $request->validate([
-            'license_plate' => 'required|string|max:20|unique:buses',
-            'bus_type' => 'required|string|max:50',
-            'total_seats' => 'required|integer|min:1',
-            'amenities' => 'nullable|string',
+{
+    $request->validate([
+        'license_plate' => 'required|string|max:20|unique:buses',
+        'bus_name' => 'required|string|max:50',
+        'bus_type' => 'required|string|max:50',
+        'total_seats' => 'required|integer|min:1',
+        'amenities' => 'nullable|string',
+    ]);
+
+    $bus = Bus::create($request->all());
+
+    // Tạo ghế cho xe vừa tạo
+    for ($i = 1; $i <= $bus->total_seats; $i++) {
+        $bus->seats()->create([
+            'seat_number' => $i,
+            'is_available' => true,
+            'is_booked' => false,
         ]);
+    }
 
-        Bus::create($request->all());
-
-        return redirect()->route('admin.buses.index')->with('success', 'Xe đã được thêm thành công');
+    return redirect()->route('admin.buses.index')->with('success', 'Xe đã được thêm thành công');
     }
 
     public function show(Bus $bus)
@@ -60,7 +70,8 @@ class BusController extends Controller
     }
 
     public function destroy(Bus $bus)
-    {
+    {   
+        $bus->seats()->delete();
         $bus->delete();
         return redirect()->route('admin.buses.index')->with('success', 'Xe đã được xóa');
     }

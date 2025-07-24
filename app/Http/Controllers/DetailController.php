@@ -7,17 +7,17 @@ use Illuminate\Http\Request;
 class DetailController extends Controller
 {
     public function show($id)
-    {
-        // Lấy thông tin chuyến xe, bus, danh sách ghế
-        $trip = Schedule::with(['bus', 'seats'])->findOrFail($id);
+{
+    $schedule = Schedule::with(['bus.seats', 'route'])->findOrFail($id);
 
-        // Đếm số ghế trống
-        $availableSeats = $trip->seats->where('status', 'available')->count();
+    $seats = $schedule->bus->seats;
+    $availableSeats = $seats->where('is_available', true)->where('is_booked', false)->count();
 
-        return view('detail', [
-            'trip' => $trip,
-            'seats' => $trip->seats,
-            'availableSeats' => $availableSeats
-        ]);
-    }
+    return view('detail', [
+        'schedule' => $schedule,
+        'seats' => $seats,
+        'availableSeats' => $availableSeats
+    ]);
+}
+
 }

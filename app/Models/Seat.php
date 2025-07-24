@@ -16,11 +16,13 @@ class Seat extends Model
         'bus_id',
         'seat_number',
         'seat_type',
-        'is_available'
+        'is_available',
+        'is_booked'
     ];
 
     protected $casts = [
-        'is_available' => 'boolean'
+        'is_available' => 'boolean',
+        'is_booked' => 'boolean',
     ];
 
     public function bus()
