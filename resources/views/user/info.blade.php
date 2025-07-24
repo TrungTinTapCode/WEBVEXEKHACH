@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+
+=======
+>>>>>>> b3395f1bbd1474be9c0cca9bf2c093be533dee0e
 <!DOCTYPE html>
 <html lang="en">
 
@@ -519,7 +523,7 @@
                 </div>
 
                 <div class="col-md-12">
-                    <label>Địa chỉ hiện tai</label>
+                    <label>Địa chỉ hiện tại</label>
                     <input type="text" class="form-control" value="{{ Auth::user()->dia_chi }}" disabled>
                 </div>
             </div>
@@ -667,4 +671,8 @@
 
 </body>
 
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> b3395f1bbd1474be9c0cca9bf2c093be533dee0e
