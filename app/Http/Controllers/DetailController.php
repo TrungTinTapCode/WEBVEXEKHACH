@@ -6,11 +6,13 @@ use Illuminate\Http\Request;
 
 class DetailController extends Controller
 {
-    public function show($id)
+public function show($id)
 {
     $schedule = Schedule::with(['bus.seats', 'route'])->findOrFail($id);
 
-    $seats = $schedule->bus->seats;
+    // Sử dụng optional để tránh lỗi nếu bus null
+    $seats = $schedule->bus->seats ?? collect();
+
     $availableSeats = $seats->where('is_available', true)->where('is_booked', false)->count();
 
     return view('detail', [
@@ -19,5 +21,7 @@ class DetailController extends Controller
         'availableSeats' => $availableSeats
     ]);
 }
+
+
 
 }

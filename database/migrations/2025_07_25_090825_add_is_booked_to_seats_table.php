@@ -9,14 +9,14 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
 {
     Schema::table('seats', function (Blueprint $table) {
-        $table->boolean('is_booked')->default(false);
+        $table->boolean('is_booked')->default(false)->after('is_available');
     });
 }
 
-public function down()
+public function down(): void
 {
     Schema::table('seats', function (Blueprint $table) {
         $table->dropColumn('is_booked');

@@ -355,12 +355,15 @@
 </head>
 
 <body>
+
     @include('header')
     <div class="container my-4">
         <div class="trip-card p-4">
             <div class="row align-items-center">
                 <div class="col-md-3">
-                    <img src="{{ asset('storage/' . $schedule->route->image) }}" alt="Ảnh tuyến" class="trip-image">
+                    @if($schedule->route?->image)
+<img src="{{ asset('storage/' . $schedule->route->image) }}" alt="Ảnh tuyến đường" style="width: 100%; border-radius: 20px">
+@endif
                 </div>
                 <div class="col-md-6">
                     <h5 class="mb-3">{{ $schedule->bus->bus_name }}</h5>
@@ -418,11 +421,8 @@
                         </div>
                         <div class="seat-column">
                             @php
-                                $lowerDeckSeats = $seats->filter(function($seat) {
-                                    // Giả định seat_number có thể cho biết tầng. Ví dụ: A1, A2, B1, B2...
-                                    // Hoặc bạn có thể thêm cột 'deck' vào bảng seats
-                                    // Hiện tại, mình sẽ chia đại khái làm 2 phần
-                                    return (int)filter_var($seat->seat_number, FILTER_SANITIZE_NUMBER_INT) <= ($schedule->bus->total_seats / 2);
+                                $lowerDeckSeats = $seats->filter(function($seat) use ($schedule) {
+    return (int)filter_var($seat->seat_number, FILTER_SANITIZE_NUMBER_INT) <= ($schedule->bus->total_seats / 2);
                                 })->sortBy('seat_number'); // Sắp xếp ghế theo số ghế
                                 $lowerDeckSeatPairs = $lowerDeckSeats->chunk(2);
                             @endphp
@@ -432,7 +432,7 @@
                                     @foreach ($pair as $seat)
                                         <div class="seat
                                             @if (!$seat->is_available) unavailable
-                                            @elseif ($seat->is_booked) booked
+                                            @elseif (($seat->is_booked ?? false) === true) booked
                                             @else available @endif"
                                             data-seat-id="{{ $seat->seat_id }}"
                                             data-price="{{ $schedule->route->price }}"
@@ -449,8 +449,8 @@
                         <div class="floor-title">Tầng Trên</div>
                         <div class="seat-column">
                             @php
-                                $upperDeckSeats = $seats->filter(function($seat) {
-                                    return (int)filter_var($seat->seat_number, FILTER_SANITIZE_NUMBER_INT) > ($schedule->bus->total_seats / 2);
+                                $upperDeckSeats = $seats->filter(function($seat) use ($schedule) {
+    return (int)filter_var($seat->seat_number, FILTER_SANITIZE_NUMBER_INT) <= ($schedule->bus->total_seats / 2);
                                 })->sortBy('seat_number'); // Sắp xếp ghế theo số ghế
                                 $upperDeckSeatPairs = $upperDeckSeats->chunk(2);
                             @endphp
@@ -537,7 +537,7 @@
 
         <script>
             // Lấy giá vé từ PHP
-            const seatPrice = {{ $schedule->route->price }};
+            const seatPrice = @json($schedule->route->price ?? 0);
             let selectedSeats = [];
 
             function toggleSeat(seatElement) {

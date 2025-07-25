@@ -34,6 +34,7 @@ class ScheduleController extends Controller
      */
     public function store(Request $request)
     {
+        
         $request->validate([
             'route_id' => 'required|exists:routes,id',
             'bus_id' => 'required|exists:buses,bus_id',
@@ -41,14 +42,13 @@ class ScheduleController extends Controller
             'arrival_time' => 'required|date',
         ]);
 
-        Schedule::create([
-            'route_id' => $request->route_id,
-            'bus_id' => $request->bus_id,
-            'departure_time' => $request->departure_time,
-            'arrival_time' => $request->arrival_time,
-            'status' => 'scheduled', // trạng thái mặc định
-        ]);
-
+        $schedule = Schedule::create([
+    'route_id' => $request->route_id,
+    'bus_id' => $request->bus_id,
+    'departure_time' => $request->departure_time,
+    'arrival_time' => $request->arrival_time,
+    'status' => 'scheduled',
+]);
         return redirect()->route('admin.schedules.index')->with('success', 'Lịch trình đã được thêm thành công.');
     }
 
