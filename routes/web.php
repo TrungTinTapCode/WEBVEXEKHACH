@@ -14,6 +14,8 @@ use App\Http\Controllers\Admin\BusController;
 use App\Http\Controllers\Admin\SeatController;
 use App\Http\Controllers\Admin\ScheduleController;
 use App\Http\Controllers\Admin\ReportController;
+use App\Http\Controllers\PaymentController;
+
 
 
 // Trang chủ
@@ -56,10 +58,13 @@ Route::middleware(['auth'])->group(function () {
 
 Route::post('/info', [UserController::class, 'store'])->name('info.store');
 
-// //thanh toán
-// Route::get('/payment', function () {
-//     return view('payment');
-// })->name('payment');
+//thanh toán
+Route::get('/payment', function () {
+    return view('payment');
+})->name('payment');
+
+//thanh toán off
+Route::get('/thanh-toan', [PaymentController::class, 'show'])->name('payment.show');
 
 //list đặt xe
 Route::get('/danhsachchuyen', [ListController::class, 'index'])->name('list');
