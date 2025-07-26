@@ -37,7 +37,7 @@ class DetailController extends Controller
 
         $account = auth()->user();
         if (!$account) {
-            return redirect()->route('login')->with('error', 'Vui lòng đăng nhập để đặt vé');
+            return redirect()->route('login.user')->with('error', 'Vui lòng đăng nhập để đặt vé');
         }
 
         $customer = Customer::where('phone_number', $account->phone_number)->first();

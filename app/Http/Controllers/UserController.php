@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Account;
+use App\Models\Customer;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -72,6 +73,14 @@ class UserController extends Controller
             'phone_number' => $request->phone_number,
             'password'     => Hash::make($request->password),
         ]);
+
+        // Tạo dữ liệu cho bảng customers
+        Customer::firstOrCreate(
+            ['phone_number' => $request->phone_number],
+            [
+                'full_name' => $request->name,
+            ]
+        );
 
         return redirect()->route('login.user')->with('success', 'Đăng ký thành công! Vui lòng đăng nhập.');
     }
