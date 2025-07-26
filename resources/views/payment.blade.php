@@ -154,67 +154,77 @@
 
                     <div class="mb-3">
                         <p class="mb-1">Số tiền cần thanh toán:</p>
-                        <h4 class="text-primary fw-bold">230,000 VND</h4>
+                        @isset($totalAmount)
+                            <h4 class="text-primary fw-bold">{{ number_format($totalAmount) }} VND</h4>
+                        @else
+                            <h4 class="text-danger">Đang cập nhật thông tin giá</h4>
+                        @endisset
                     </div>
 
-                    <div class="form-check mb-3">
-                        <input class="form-check-input" type="checkbox" value="" id="onlinePayment" checked>
-                        <label class="form-check-label fw-bold" for="onlinePayment">
-                            Thanh toán online
-                        </label>
-                    </div>
-
-                    <div class="fw-semibold mb-4">
-                        Sau khi thanh toán, vui lòng đợi vài giây để hệ thống cập nhật trạng thái vé.
-                    </div>
-
-                    <div class="mb-4">
-                        <h5 class="text-primary fw-bold">Thanh toán bằng thẻ nội địa</h5>
-                        <div class="row g-2">
-                            <div class="col-4 col-md-2">
-                                <div class="bank-logo" data-bank="VIETCOMBANK">
-                                    <img src="{{ asset('img/Bank-logo/Vietcombank.jpg') }}" alt="vietcombank" class="img-fluid ">
-                                </div>
-                            </div>
-                            <div class="col-4 col-md-2">
-                                <div class="bank-logo" data-bank="AGRIBANK">
-                                    <img src="{{ asset('img/Bank-logo/agribank.png') }}" alt="agribank" class="img-fluid ">
-                                </div>
-                            </div>
-                            <div class="col-4 col-md-2">
-                                <div class="bank-logo" data-bank="VIETINBANK">
-                                    <img src="{{ asset('img/Bank-logo/vietinbank.png') }}" alt="vietinbank" class="img-fluid ">
-                                </div>
-                            </div>
-                            <div class="col-4 col-md-2">
-                                <div class="bank-logo" data-bank="BIDV">
-                                    <img src="{{ asset('img/Bank-logo/bidv.png') }}" alt="bidv" class="img-fluid ">
-                                </div>
-                            </div>
+                    <form id="paymentForm" action="{{ route('booking.process.payment', $booking) }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="payment_method" id="paymentMethodInput">
+                        <input type="hidden" name="amount" value="{{ $totalAmount }}">
+                        
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" value="" id="onlinePayment" checked>
+                            <label class="form-check-label fw-bold" for="onlinePayment">
+                                Thanh toán online
+                            </label>
                         </div>
-                        <button class="payment-button mt-3">
-                            Thanh toán online <i class="bi bi-arrow-right-circle-fill ms-2"></i>
-                        </button>
-                    </div>
 
-                    <div>
-                        <h5 class="text-primary fw-bold">Thanh toán bằng thẻ quốc tế</h5>
-                        <div class="row g-2">
-                            <div class="col-4 col-md-2">
-                                <div class="bank-logo" data-bank="VISA">
-                                    <img src="{{ asset('img/Bank-logo/visa.png') }}" alt="visa" class="img-fluid ">
-                                </div>
-                            </div>
-                            <div class="col-4 col-md-2">
-                                <div class="bank-logo" data-bank="MASTERCARD">
-                                    <img src="{{ asset('img/Bank-logo/mastercard.png') }}" alt="mastercard" class="img-fluid">
-                                </div>
-                            </div>
+                        <div class="fw-semibold mb-4">
+                            Sau khi thanh toán, vui lòng đợi vài giây để hệ thống cập nhật trạng thái vé.
                         </div>
-                        <button class="payment-button mt-3">
-                            Thanh toán online <i class="bi bi-arrow-right-circle-fill ms-2"></i>
-                        </button>
-                    </div>
+
+                        <div class="mb-4">
+                            <h5 class="text-primary fw-bold">Thanh toán bằng thẻ nội địa</h5>
+                            <div class="row g-2">
+                                <div class="col-4 col-md-2">
+                                    <div class="bank-logo" data-bank="VIETCOMBANK">
+                                        <img src="{{ asset('img/Bank-logo/Vietcombank.jpg') }}" alt="vietcombank" class="img-fluid ">
+                                    </div>
+                                </div>
+                                <div class="col-4 col-md-2">
+                                    <div class="bank-logo" data-bank="AGRIBANK">
+                                        <img src="{{ asset('img/Bank-logo/agribank.png') }}" alt="agribank" class="img-fluid ">
+                                    </div>
+                                </div>
+                                <div class="col-4 col-md-2">
+                                    <div class="bank-logo" data-bank="VIETINBANK">
+                                        <img src="{{ asset('img/Bank-logo/vietinbank.png') }}" alt="vietinbank" class="img-fluid ">
+                                    </div>
+                                </div>
+                                <div class="col-4 col-md-2">
+                                    <div class="bank-logo" data-bank="BIDV">
+                                        <img src="{{ asset('img/Bank-logo/bidv.png') }}" alt="bidv" class="img-fluid ">
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="payment-button mt-3">
+                                Thanh toán online <i class="bi bi-arrow-right-circle-fill ms-2"></i>
+                            </button>
+                        </div>
+
+                        <div>
+                            <h5 class="text-primary fw-bold">Thanh toán bằng thẻ quốc tế</h5>
+                            <div class="row g-2">
+                                <div class="col-4 col-md-2">
+                                    <div class="bank-logo" data-bank="VISA">
+                                        <img src="{{ asset('img/Bank-logo/visa.png') }}" alt="visa" class="img-fluid ">
+                                    </div>
+                                </div>
+                                <div class="col-4 col-md-2">
+                                    <div class="bank-logo" data-bank="MASTERCARD">
+                                        <img src="{{ asset('img/Bank-logo/mastercard.png') }}" alt="mastercard" class="img-fluid">
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="payment-button mt-3">
+                                Thanh toán online <i class="bi bi-arrow-right-circle-fill ms-2"></i>
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
 
@@ -227,15 +237,20 @@
 
                     <div class="info-section">
                         <h6>Thông tin</h6>
-                        <p><span class="info-label">Họ tên:</span> <span class="info-value">Lê Hoàng Huy</span></p>
-                        <p><span class="info-label">Số điện thoại:</span> <span class="info-value">0999053049</span></p>
-                        <p><span class="info-label">Điểm lên xe:</span> <span class="info-value">256 Đ. Nguyễn Văn Cừ, Cần Thơ</span></p>
-                        <p><span class="info-label">Loại ghế:</span> <span class="info-value text-danger">Giường nằm</span></p>
-                        <p><span class="info-label">Chuyến:</span> <span class="info-value text-danger">Cần Thơ - Campuchia</span></p>
-                        <p><span class="info-label">Khởi hành:</span> <span class="info-value">11:00 06/07/2025</span></p>
-                        <p><span class="info-label">Số Ghế:</span> <span class="info-value">49A</span></p>
-                        <p><span class="info-label">Chi phí:</span> <span class="info-value">230,000 VND</span></p>
-                        <p class="text-success-note">(*) Chi phí đã bao gồm thuế VAT, bảo hiểm hành khách, dịch vụ wifi, nước và khăn lạnh.</p>
+                        <p><span class="info-label">Họ tên:</span> <span class="info-value">{{ $booking->customer->full_name ?? 'Chưa có thông tin' }}</span></p>
+                        <p><span class="info-label">Số điện thoại:</span> <span class="info-value">{{ $booking->customer->phone_number }}</span></p>
+                        <p><span class="info-label">Điểm lên xe:</span> <span class="info-value">{{ $booking->schedule->route->departure }}</span></p>
+                        <p><span class="info-label">Loại ghế:</span> <span class="info-value text-danger">{{ $booking->schedule->bus->bus_type }}</span></p>
+                        <p><span class="info-label">Chuyến:</span> <span class="info-value text-danger">{{ $booking->schedule->route->departure }} - {{ $booking->schedule->route->destination }}</span></p>
+                        <p><span class="info-label">Khởi hành:</span> <span class="info-value">{{ $booking->schedule->departure_time->format('H:i d/m/Y') }}</span></p>
+                        <p><span class="info-label">Số Ghế:</span> 
+                            <span class="info-value">
+                                @foreach($booking->details as $detail)
+                                    {{ $detail->seat->seat_number }},
+                                @endforeach
+                            </span>
+                        </p>
+                        <p><span class="info-label">Chi phí:</span> <span class="info-value">{{ number_format($booking->total_amount) }} VND</span></p>
                     </div>
                 </div>
             </div>
@@ -270,16 +285,24 @@
         });
 
         document.querySelectorAll('.payment-button').forEach(btn => {
-            btn.addEventListener('click', () => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                
                 if (!document.getElementById('onlinePayment').checked) {
                     alert('Chỉ hỗ trợ thanh toán online!');
                     return;
                 }
+                
                 if (!selectedBank) {
                     alert('Vui lòng chọn ngân hàng trước khi thanh toán!');
                     return;
                 }
-                alert(`Đang chuyển hướng đến cổng thanh toán ${selectedBank}...`);
+                
+                // Set payment method
+                document.getElementById('paymentMethodInput').value = selectedBank;
+                
+                // Submit form
+                document.getElementById('paymentForm').submit();
             });
         });
 
@@ -289,6 +312,26 @@
                 this.checked = true;
             }
         });
+    </script>
+    <script>
+        document.querySelectorAll('.payment-button').forEach(btn => {
+    btn.addEventListener('click', () => {
+        if (!document.getElementById('onlinePayment').checked) {
+            alert('Chỉ hỗ trợ thanh toán online!');
+            return;
+        }
+        if (!selectedBank) {
+            alert('Vui lòng chọn ngân hàng trước khi thanh toán!');
+            return;
+        }
+        
+        // Set payment method
+        document.getElementById('paymentMethodInput').value = selectedBank;
+        
+        // Submit form
+        document.getElementById('paymentForm').submit();
+    });
+});
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
 </body>

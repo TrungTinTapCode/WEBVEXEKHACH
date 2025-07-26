@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ListController;
 use App\Http\Controllers\DetailController;
+use App\Http\Controllers\userBookingController;
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\BookingController;
@@ -14,7 +15,6 @@ use App\Http\Controllers\Admin\BusController;
 use App\Http\Controllers\Admin\SeatController;
 use App\Http\Controllers\Admin\ScheduleController;
 use App\Http\Controllers\Admin\ReportController;
-use App\Http\Controllers\PaymentController;
 
 
 
@@ -59,20 +59,26 @@ Route::middleware(['auth'])->group(function () {
 Route::post('/info', [UserController::class, 'store'])->name('info.store');
 
 //thanh toán
-Route::get('/payment', function () {
+/*Route::get('/payment', function () {
     return view('payment');
-})->name('payment');
-
-//thanh toán off
-Route::get('/thanh-toan', [PaymentController::class, 'show'])->name('payment.show');
+})->name('payment');*/
 
 //list đặt xe
 Route::get('/danhsachchuyen', [ListController::class, 'index'])->name('list');
 //chi tiết 
 Route::get('/danhsachchuyen/{id}', [DetailController::class, 'show'])->name('detail');
-//đặt xe
-Route::get('/payment/{booking_code}', [BookingController::class, 'showPaymentForm'])->name('payment');
-Route::post('/book-seats', [\App\Http\Controllers\BookingController::class, 'store'])->name('book.seats');
+// Xử lý đặt vé
+Route::post('/danhsachchuyen/{id}/book', [DetailController::class, 'book'])->name('detail.book');
+// Trang thông tin đặt vé (offline)
+Route::get('/booking/{booking}/payment-offline', [userBookingController::class, 'paymentOffline'])->name('payment.offline');
+// Xác nhận đặt vé offline
+Route::post('/booking/{booking}/confirm', [userBookingController::class, 'confirmBooking'])->name('booking.confirm');
+// Trang thanh toán online
+Route::get('/booking/{booking}/payment', [userBookingController::class, 'payment'])->name('booking.payment');
+// Xử lý thanh toán
+Route::post('/booking/{booking}/process-payment', [userBookingController::class, 'processPayment'])->name('booking.process.payment');
+
+
 //Trang admin
 Route::prefix('admin')->name('admin.')->group(function () {
     //Dashboard
