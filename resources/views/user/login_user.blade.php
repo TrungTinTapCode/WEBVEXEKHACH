@@ -6,10 +6,12 @@
     <title>Đăng nhập</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+    <!-- <link rel="stylesheet" href="{{ asset('css/custom.css') }}"> -->
     <style>
         body {
-            background-color: #fff;
+            /* background-color: #fff; */
+            /* background-image: url('/img/bgr.jpg'); */
+             /* background-image: url('{{ asset('/img/bgr.jpg') }}'); */
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
@@ -27,8 +29,7 @@
             padding: 60px 40px;
             border-radius: 10px;
             color: #000;
-            /* background: url('{{ asset('/img/dn.jpg') }}') no-repeat center center; */
-            background-size: 1000px auto; /* 👈 Bạn chỉnh kích thước hình ở đây */
+            background-size: 1000px auto;
             background-repeat: no-repeat;
             background-position: center;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
@@ -77,6 +78,7 @@
         .text-link {
             font-size: 20px;
         }
+
     </style>
 </head>
 

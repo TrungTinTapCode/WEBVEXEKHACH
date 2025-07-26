@@ -27,7 +27,7 @@
                 <!-- MCO Đại sứ Dropdown -->
                 <li class="nav-item mx-2 dropdown">
                     <a class="nav-link fs-5 nav-link-hover-effect dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                        <i class="bi bi-infinity me-1" style="font-size: 1.3rem;"></i> Đối tác truyền thông
+                        <i class="bi bi-infinity me-1" style="font-size: 1.3rem;"></i> Đại sứ COSMO BUS
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li>
