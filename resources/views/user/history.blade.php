@@ -356,7 +356,7 @@
 
                 <!-- Nội dung tab -->
                 <div id="tab-current" class="tab-content-section active">
-                    <p style="font-size: 18px;">Bạn chưa có chuyến sắp đi nào, <a href="{{ route('home') }}" class="text-primary fw-bold">Đặt chuyến đi ngay</a></p>
+                    <p style="font-size: 18px;">Bạn chưa có chuyến sắp đi nào, <a href="{{ route('list') }}" class="text-primary fw-bold">Đặt chuyến đi ngay</a></p>
                 </div>
 
                 <div id="tab-completed" class="tab-content-section">
