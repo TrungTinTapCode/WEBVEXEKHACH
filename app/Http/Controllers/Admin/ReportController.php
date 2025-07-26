@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Payment;
+use App\Models\Booking;
 use App\Models\Report;
 use App\Models\Route;
 use Carbon\Carbon;
@@ -20,49 +20,47 @@ class ReportController extends Controller
 
     public function revenue(Request $request)
     {
-        $startDate = $request->input('start_date', Carbon::now()->startOfMonth()->format('Y-m-d'));
-        $endDate = $request->input('end_date', Carbon::now()->endOfMonth()->format('Y-m-d'));
-        
-        $payments = Payment::whereBetween('created_at', [$startDate, $endDate])
-            ->where('status', 'completed')
-            ->with('booking')
+        $startDate = $request->input('start_date', \Carbon\Carbon::now()->startOfMonth()->format('Y-m-d'));
+        $endDate = $request->input('end_date', \Carbon\Carbon::now()->endOfMonth()->format('Y-m-d'));
+
+        // Lấy các booking đã thanh toán trong khoảng thời gian lọc
+        $bookings = Booking::whereBetween('created_at', [$startDate, $endDate])
+            ->where('payment_status', 'paid')
+            ->with(['schedule.route'])
             ->get();
-            
-        $totalRevenue = $payments->sum('amount');
-        
-        return view('admin.reports.revenue', compact('payments', 'totalRevenue', 'startDate', 'endDate'));
+
+        $totalRevenue = $bookings->sum('total_amount');
+
+        return view('admin.reports.revenue', compact('bookings', 'totalRevenue', 'startDate', 'endDate'));
     }
 
     public function trips(Request $request)
     {
         $startDate = $request->input('start_date', Carbon::now()->startOfMonth()->format('Y-m-d'));
         $endDate = $request->input('end_date', Carbon::now()->endOfMonth()->format('Y-m-d'));
-        
-        // Lấy danh sách tuyến đường kèm thông tin booking thông qua schedule
+
         $routes = Route::with(['schedules' => function($query) use ($startDate, $endDate) {
-            $query->withCount(['bookings' => function($q) use ($startDate, $endDate) {
+            $query->with(['bookings' => function($q) use ($startDate, $endDate) {
                 $q->whereBetween('created_at', [$startDate, $endDate]);
-            }])
-            ->with(['bookings' => function($q) use ($startDate, $endDate) {
-                $q->whereBetween('created_at', [$startDate, $endDate])
-                ->with('payments');
             }]);
         }])->get();
-        
+
         // Tính toán số lượng booking và doanh thu cho từng route
         $routes->each(function($route) {
-            $route->bookings_count = $route->schedules->sum('bookings_count');
-            
+            // Tổng số booking của tất cả schedule thuộc route này
+            $route->bookings_count = $route->schedules->sum(function($schedule) {
+                return $schedule->bookings->count();
+            });
+
+            // Tổng doanh thu của tất cả booking thuộc route này
             $route->total_revenue = $route->schedules->reduce(function($carry, $schedule) {
-                return $carry + $schedule->bookings->sum(function($booking) {
-                    return $booking->payments->sum('amount');
-                });
+                return $carry + $schedule->bookings->sum('total_amount');
             }, 0);
-            
+
             // Gom tất cả bookings của các schedules vào một collection
             $route->all_bookings = $route->schedules->flatMap->bookings;
         });
-        
+
         return view('admin.reports.trips', compact('routes', 'startDate', 'endDate'));
     }
 

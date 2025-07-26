@@ -26,12 +26,29 @@ class BookingController extends Controller
 
     public function updateStatus(Request $request, Booking $booking)
     {
-        $validated = $request->validate([
-            'status' => 'required|in:pending,confirmed,cancelled,completed'
-        ]);
-        
-        $booking->update(['status' => $validated['status']]);
-        
-        return back()->with('success', 'Cập nhật trạng thái thành công');
+        if ($request->has('cancel')) {
+            $booking->update(['status' => 'cancelled', 'payment_status' => 'refunded']);
+            return back()->with('success', 'Đã hủy vé thành công!');
+        }
+
+        $nextStatus = [
+            'pending' => 'confirmed',
+            'confirmed' => 'completed',
+        ];
+
+        $current = $booking->status;
+        if (isset($nextStatus[$current])) {
+            $newStatus = $nextStatus[$current];
+            $updateData = ['status' => $newStatus];
+
+            if ($newStatus === 'completed') {
+                $updateData['payment_status'] = 'paid';
+            }
+
+            $booking->update($updateData);
+            return back()->with('success', 'Cập nhật trạng thái thành công!');
+        }
+
+        return back()->with('info', 'Không thể cập nhật trạng thái.');
     }
 }

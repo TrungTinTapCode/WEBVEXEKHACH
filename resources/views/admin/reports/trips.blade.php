@@ -86,7 +86,7 @@
                                 <td>{{ $booking->booking_id }}</td>
                                 <td>{{ $booking->created_at->format('d/m/Y H:i') }}</td>
                                 <td>{{ $booking->details->sum('quantity') }}</td>
-                                <td>{{ number_format($booking->payments->sum('amount')) }} VNĐ</td>
+                                <td>{{ number_format($booking->total_amount) }} VNĐ</td>
                                 <td>
                                     <span class="badge bg-{{ $booking->status === 'completed' ? 'success' : 'warning' }}">
                                         {{ $booking->status }}

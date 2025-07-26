@@ -14,11 +14,11 @@
                 <table class="table table-bordered">
                     <tr>
                         <th width="30%">Khách hàng</th>
-                        <td>{{ $booking->customer->full_name }}</td>
+                        <td>{{ $booking->customer->full_name ?? old('name') }}</td>
                     </tr>
                     <tr>
                         <th>Điện thoại</th>
-                        <td>{{ $booking->customer->phone_number }}</td>
+                        <td>{{ $booking->customer->phone_number ?? old('phone') }}</td>
                     </tr>
                     <tr>
                         <th>Chuyến đi</th>
@@ -36,28 +36,45 @@
                     <tr>
                         <th>Trạng thái</th>
                         <td>
-                            <form action="{{ route('admin.booking.update-status', $booking->booking_id) }}" 
-                                method="POST" class="form-inline">
-                                @csrf
-                                <select name="status" class="form-control form-control-sm mr-2">
-                                    @foreach(['pending', 'confirmed', 'cancelled', 'completed'] as $status)
-                                    <option value="{{ $status }}" {{ $booking->status == $status ? 'selected' : '' }}>
-                                        {{ __('booking.status.' . $status) }}
-                                    </option>
-                                    @endforeach
-                                </select>
-                                <button type="submit" class="btn btn-sm btn-primary">Cập nhật</button>
-                            </form>
+                            @php
+                                $statusLabels = [
+                                    'pending' => 'Chờ xác nhận',
+                                    'confirmed' => 'Đã xác nhận',
+                                    'cancelled' => 'Đã hủy',
+                                    'completed' => 'Hoàn thành'
+                                ];
+                                $canUpdate = in_array($booking->status, ['pending', 'confirmed']);
+                            @endphp
+
+                            <span class="badge
+                                @if($booking->status == 'confirmed') badge-success text-dark
+                                @elseif($booking->status == 'cancelled') badge-danger text-dark
+                                @elseif($booking->status == 'completed') badge-info text-dark
+                                @else badge-warning text-dark @endif">
+                                {{ $statusLabels[$booking->status] ?? $booking->status }}
+                            </span>
+
+                            @if($canUpdate)
+                                <form action="{{ route('admin.booking.update-status', $booking->booking_id) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    <button type="submit" class="btn btn-sm btn-primary ml-2">Cập nhật</button>
+                                </form>
+                                <form action="{{ route('admin.booking.update-status', $booking->booking_id) }}" method="POST" class="d-inline" onsubmit="return confirm('Bạn chắc chắn muốn hủy vé này?');">
+                                    @csrf
+                                    <input type="hidden" name="cancel" value="1">
+                                    <button type="submit" class="btn btn-sm btn-danger ml-2">Hủy vé</button>
+                                </form>
+                            @endif
                         </td>
                     </tr>
                     <tr>
                         <th>Thanh toán</th>
                         <td>
                             <span class="badge 
-                                @if($booking->payment_status == 'paid') badge-success
-                                @elseif($booking->payment_status == 'refunded') badge-info
-                                @else badge-danger @endif">
-                                {{ __('booking.payment.' . $booking->payment_status) }}
+                                @if($booking->payment_status == 'paid') badge-success text-dark
+                                @elseif($booking->payment_status == 'refunded') badge-info text-dark
+                                @else badge-danger text-dark @endif">
+                                {{ $paymentLabels[$booking->payment_status] ?? $booking->payment_status }}
                             </span>
                         </td>
                     </tr>
@@ -72,7 +89,6 @@
                             <tr>
                                 <th>Số ghế</th>
                                 <th>Loại ghế</th>
-                                <th>Hành khách</th>
                                 <th>Giá vé</th>
                             </tr>
                         </thead>
@@ -80,8 +96,16 @@
                             @foreach($booking->details as $detail)
                             <tr>
                                 <td>{{ $detail->seat->seat_number }}</td>
-                                <td>{{ __('seat.type.' . $detail->seat->seat_type) }}</td>
-                                <td>{{ $detail->passenger_name }}</td>
+                                <td>
+                                    @php
+                                        $seatTypes = [
+                                            'normal' => 'Ghế thường',
+                                            'vip' => 'Ghế VIP',
+                                            'bed' => 'Giường nằm'
+                                        ];
+                                    @endphp
+                                    {{ $seatTypes[$detail->seat->seat_type] ?? $detail->seat->seat_type }}
+                                </td>
                                 <td>{{ number_format($detail->price) }} VND</td>
                             </tr>
                             @endforeach
@@ -89,40 +113,6 @@
                     </table>
                 </div>
                 
-                <h4 class="mt-4">Lịch sử thanh toán</h4>
-                @if($booking->payments->count() > 0)
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Mã giao dịch</th>
-                            <th>Số tiền</th>
-                            <th>Phương thức</th>
-                            <th>Ngày thanh toán</th>
-                            <th>Trạng thái</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($booking->payments as $payment)
-                        <tr>
-                            <td>{{ $payment->transaction_code }}</td>
-                            <td>{{ number_format($payment->amount) }} VND</td>
-                            <td>{{ __('payment.method.' . $payment->payment_method) }}</td>
-                            <td>{{ $payment->payment_date->format('d/m/Y H:i') }}</td>
-                            <td>
-                                <span class="badge 
-                                    @if($payment->status == 'completed') badge-success
-                                    @elseif($payment->status == 'pending') badge-warning
-                                    @else badge-danger @endif">
-                                    {{ __('payment.status.' . $payment->status) }}
-                                </span>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-                @else
-                <div class="alert alert-info">Chưa có thanh toán nào</div>
-                @endif
             </div>
         </div>
         

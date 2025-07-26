@@ -44,20 +44,22 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($payments as $index => $payment)
+                                @foreach($bookings as $index => $booking)
                                 <tr>
                                     <td>{{ $index + 1 }}</td>
-                                    <td>{{ $payment->payment_id }}</td>
+                                    <td>{{ $booking->booking_code }}</td>
                                     <td>
-                                        @if($payment->booking && $payment->booking->route)
-                                            {{ $payment->booking->route->title }}
+                                        @if($booking->schedule && $booking->schedule->route)
+                                            {{ $booking->schedule->route->title }}
                                         @else
                                             N/A
                                         @endif
                                     </td>
-                                    <td class="text-right">{{ number_format($payment->amount) }} VNĐ</td>
-                                    <td>{{ $payment->payment_method }}</td>
-                                    <td>{{ $payment->created_at->format('d/m/Y H:i') }}</td>
+                                    <td class="text-right">{{ number_format($booking->total_amount) }} VNĐ</td>
+                                    <td>
+                                        {{ $booking->payment_status == 'paid' ? 'Đã thanh toán' : 'Chưa thanh toán' }}
+                                    </td>
+                                    <td>{{ $booking->created_at->format('d/m/Y H:i') }}</td>
                                 </tr>
                                 @endforeach
                             </tbody>
