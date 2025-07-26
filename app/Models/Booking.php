@@ -24,17 +24,17 @@ class Booking extends Model
 
     public function customer()
     {
-        return $this->belongsTo(Customer::class, 'customer_id');
+        return $this->belongsTo(Customer::class, 'customer_id','customer_id');
     }
 
     public function schedule()
     {
-        return $this->belongsTo(Schedule::class, 'schedule_id');
+        return $this->belongsTo(Schedule::class, 'schedule_id', 'schedule_id');
     }
 
     public function details()
     {
-        return $this->hasMany(BookingDetail::class, 'booking_id');
+        return $this->hasMany(BookingDetail::class, 'booking_id', 'booking_id');
     }
 
     public function payments()
