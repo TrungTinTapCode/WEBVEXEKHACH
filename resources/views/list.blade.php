@@ -206,7 +206,7 @@
 
                 <!-- Trip Item -->
                 @foreach($schedules as $schedule)
-                @if($schedule->route->is_active)
+                @if($schedule->is_active)
     <div class="card-custom">
         <div class="row g-2">
             <div class="col-auto">

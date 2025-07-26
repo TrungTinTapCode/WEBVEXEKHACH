@@ -356,16 +356,120 @@
 
                 <!-- Nội dung tab -->
                 <div id="tab-current" class="tab-content-section active">
+                    @if($currentBookings->isEmpty())
                     <p style="font-size: 18px;">Bạn chưa có chuyến sắp đi nào, <a href="{{ route('list') }}" class="text-primary fw-bold">Đặt chuyến đi ngay</a></p>
+                    @else
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Mã vé</th>
+                    <th>Tuyến</th>
+                    <th>Thời gian</th>
+                    <th>Ghế</th>
+                    <th>Trạng thái</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($currentBookings as $booking)
+                <tr>
+                    <td>{{ $booking->booking_code }}</td>
+                    <td>{{ $booking->schedule->route->departure }} → {{ $booking->schedule->route->destination }}</td>
+                    <td>{{ $booking->schedule->departure_time->format('d/m/Y H:i') }}</td>
+                    <td>
+                        @foreach($booking->details as $detail)
+                            {{ $detail->seat->seat_number }}
+                        @endforeach
+                    </td>
+                    <td><span class="badge bg-warning text-dark">Chờ xác nhận</span></td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    @endif
                 </div>
 
                 <div id="tab-completed" class="tab-content-section">
-                    <p style="font-size: 18px;">Bạn chưa hoàn thành chuyến nào.</p>
-                </div>
+    @if($completedBookings->isEmpty())
+        <p style="font-size: 18px;">Bạn chưa hoàn thành chuyến nào.</p>
+    @else
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Mã vé</th>
+                    <th>Tuyến</th>
+                    <th>Thời gian</th>
+                    <th>Ghế</th>
+                    <th>Trạng thái</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($completedBookings as $booking)
+                <tr>
+                    <td>{{ $booking->booking_code }}</td>
+                    <td>{{ $booking->schedule->route->departure }} → {{ $booking->schedule->route->destination }}</td>
+                    <td>{{ $booking->schedule->departure_time->format('d/m/Y H:i') }}</td>
+                    <td>
+                        @foreach($booking->details as $detail)
+                            {{ $detail->seat->seat_number }}
+                        @endforeach
+                    </td>
+                    <td><span class="badge bg-warning text-dark">Chờ xác nhận</span></td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    @endif
+</div>
 
                 <div id="tab-cancelled" class="tab-content-section">
-                    <p style="font-size: 18px;">Bạn chưa huỷ chuyến nào.</p>
-                </div>
+    @if($cancelledBookings->isEmpty())
+        <p style="font-size: 18px;">Bạn chưa huỷ chuyến nào.</p>
+    @else
+    <table class="table">
+            <thead>
+                <tr>
+                    <th>Mã vé</th>
+                    <th>Tuyến</th>
+                    <th>Thời gian</th>
+                    <th>Ghế</th>
+                    <th>Trạng thái</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($cancelledBookings as $booking)
+                <tr>
+                    <td>{{ $booking->booking_code }}</td>
+                    <td>{{ $booking->schedule->route->departure }} → {{ $booking->schedule->route->destination }}</td>
+                    <td>{{ $booking->schedule->departure_time->format('d/m/Y H:i') }}</td>
+                    <td>
+                        @foreach($booking->details as $detail)
+                            {{ $detail->seat->seat_number }}
+                        @endforeach
+                    </td>
+                    <td>
+                        @php
+                            $statusLabels = [
+                                'pending' => 'Chờ xác nhận',
+                                'confirmed' => 'Đã xác nhận',
+                                'cancelled' => 'Đã hủy',
+                                'completed' => 'Hoàn thành'
+                            ];
+                        @endphp
+                        <span class="badge
+                            @if($booking->status == 'pending') badge-success text-dark
+                            @elseif($booking->status == 'cancelled') badge-danger text-dark
+                            @elseif($booking->status == 'confirmed') badge-info text-dark
+                            @else badge-warning text-dark @endif">
+                            {{ $statusLabels[$booking->status] ?? $booking->status }}
+                        </span>
+                    </td>
+                    <td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    @endif
+</div>
             </div>
         </div>
     </div>

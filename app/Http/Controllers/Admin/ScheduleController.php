@@ -74,7 +74,19 @@ class ScheduleController extends Controller
             'arrival_time' => 'required|date',
         ]);
 
-        $schedule->update($request->all());
+        $schedule->route_id = $request->route_id;
+        $schedule->bus_id = $request->bus_id;
+        $schedule->departure_time = $request->departure_time;
+        $schedule->arrival_time = $request->arrival_time;
+        $schedule->status = $request->status;
+
+        if (in_array($request->status, ['departed', 'arrived', 'cancelled'])) {
+    $schedule->is_active = false;
+} else {
+    $schedule->is_active = true;
+}
+
+$schedule->save();
 
         return redirect()->route('admin.schedules.index')->with('success', 'Lịch trình đã được cập nhật');
     }

@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ListController;
 use App\Http\Controllers\DetailController;
 use App\Http\Controllers\userBookingController;
+use App\Http\Controllers\HistoryController;
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\BookingController;
@@ -28,6 +29,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // user-login
 Route::get('/user/login', [UserController::class, 'showLoginForm'])->name('login.user');
+Route::get('/login_user', [UserController::class, 'showLoginForm'])->name('login');
 Route::post('/user/login', [UserController::class, 'login']);
 
 // user-register
@@ -41,9 +43,7 @@ Route::post('/logout', function () {
 })->name('logout');
 
 // trang ds đơn hàng
-Route::get('/history', function () {
-    return view('user.history');
-})->name('history');
+Route::get('/history', [HistoryController::class, 'index'])->name('history')->middleware('auth');
 
 // thong tin - info
 Route::get('/info', function () {

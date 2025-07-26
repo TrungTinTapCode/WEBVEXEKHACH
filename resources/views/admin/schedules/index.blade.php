@@ -32,10 +32,28 @@
                     <td>{{ $schedule->arrival_time ? $schedule->arrival_time->format('H:i d/m/Y') : '-' }}</td>
                     <td>{{ $schedule->notes ?? '-' }}</td>
                     <td>
-                        <span class="badge {{ $schedule->status === 'active' ? 'bg-success' : 'bg-secondary' }}">
-                            {{ ucfirst($schedule->status) }}
+                        @php
+                            $statusLabels = [
+                                'scheduled' => 'Đã lên lịch',
+                                'departed' => 'Đã đi',
+                                'arrived' => 'Đã đến',
+                                'cancelled' => 'Đã hủy'
+                            ];
+
+                            $statusClasses = [
+                                'scheduled' => 'bg-primary text-white',
+                                'departed' => 'bg-info text-dark',
+                                'arrived' => 'bg-success text-white',
+                                'cancelled' => 'bg-danger text-white',
+                            ];
+
+                            $status = $schedule->status;
+                        @endphp
+                        <span class="badge {{ $statusClasses[$status] ?? 'bg-secondary text-white' }}">
+                            {{ $statusLabels[$status] ?? ucfirst($status) }}
                         </span>
                     </td>
+
                     <td>
                                 <a href="{{ route('admin.schedules.edit', $schedule->schedule_id) }}" class="btn btn-sm btn-warning">Sửa</a>
                                 <form action="{{ route('admin.schedules.destroy', $schedule->schedule_id) }}" method="POST" class="d-inline">

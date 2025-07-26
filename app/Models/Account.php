@@ -30,6 +30,7 @@ class Account extends Authenticatable
 
     public function customer()
     {
-        return Customer::where('phone_number', $this->phone_number)->first();
+        
+        return $this->hasOne(Customer::class, 'phone_number', 'phone_number');
     }
 }
