@@ -27,4 +27,9 @@ class Account extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    public function customer()
+    {
+        return Customer::where('phone_number', $this->phone_number)->first();
+    }
 }
