@@ -66,7 +66,7 @@
                     </ul>
                 </li>
 
-               <!-- Dropdown Đăng nhập/Đăng ký và Thông tin tài khoản/đăng xuất -->
+            <!-- Dropdown Đăng nhập/Đăng ký và Thông tin tài khoản/đăng xuất -->
                 <li class="nav-item mx-2 dropdown">
                     <a class="nav-link fs-5 nav-link-hover-effect dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                         <i class="bi bi-person-circle me-1" style="font-size: 1.3rem;"></i>

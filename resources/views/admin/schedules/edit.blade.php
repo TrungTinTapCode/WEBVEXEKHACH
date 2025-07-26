@@ -40,6 +40,17 @@
                     <input type="datetime-local" name="arrival_time" class="form-control"
                         value="{{ \Carbon\Carbon::parse($schedule->arrival_time)->format('Y-m-d\TH:i') }}" required>
                 </div>
+                <div class="mb-3">
+                    <label for="status" class="form-label">Trạng thái</label>
+                    <select name="status" class="form-control" required>
+                        @foreach (['scheduled', 'departed', 'arrived', 'cancelled'] as $status)
+                            <option value="{{ $status }}" {{ $schedule->status === $status ? 'selected' : '' }}>
+                                {{ ucfirst($status) }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
                 <button type="submit" class="btn btn-primary">Cập nhật</button>
                 <a href="{{ route('admin.schedules.index') }}" class="btn btn-secondary">Hủy</a>
             </form>

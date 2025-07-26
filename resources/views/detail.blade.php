@@ -9,7 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
     <style>
-        
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f8f9fa;
@@ -78,10 +77,10 @@
             position: relative;
             background-color: #fff;
             transition: all 0.3s ease;
-            display: flex; /* Thêm để căn giữa số ghế */
-            justify-content: center; /* Thêm để căn giữa số ghế */
-            align-items: center; /* Thêm để căn giữa số ghế */
-            font-weight: bold; /* Thêm để số ghế nổi bật */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
         }
 
         .seat.unavailable {
@@ -96,33 +95,21 @@
 
         .seat.available {
             border: 2px solid #d633ff;
-            background-color: #fff; /* Đảm bảo màu nền là trắng cho ghế có sẵn */
+            background-color: #fff;
         }
 
         .seat.selected {
             background-color: #32cd32;
             border-color: #32cd32;
-        }
-
-        .seat.selected::after {
-            /* content: '✓'; -- Bỏ content này để hiện số ghế */
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
             color: white;
-            font-weight: bold;
-            font-size: 18px;
         }
 
-        /* Thêm style cho ghế đã đặt */
         .seat.booked {
-            background-color: #ffc107; /* Màu vàng cho ghế đã đặt */
+            background-color: #ffc107;
             border-color: #ffc107;
             cursor: not-allowed;
             color: #fff;
         }
-
 
         .bus-layout {
             display: flex;
@@ -226,7 +213,6 @@
             background-color: #0056b3;
         }
 
-    /* Payment Methods and App Download */
         .payment-section {
             background: white;
             border-radius: 15px;
@@ -303,64 +289,23 @@
         .tiktok {
             background-color: #000000;
         }
-        .seat-map {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr); /* 4 cột ghế, bạn có thể điều chỉnh */
-            gap: 10px;
-            padding: 20px;
-            background-color: #f0f0f0;
-            border-radius: 8px;
-            margin-top: 20px;
-        }
-
-        .seat {
-            width: 50px; /* Kích thước ghế */
-            height: 50px;
-            background-color: #ccc;
-            border: 1px solid #aaa;
-            border-radius: 5px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.2s ease-in-out;
-        }
-
-        .seat.available {
-            background-color: #d4edda; /* Màu xanh lá cây nhạt */
-            border-color: #28a745;
-            cursor: pointer;
-        }
-
-        .seat.booked {
-            background-color: #f8d7da; /* Màu đỏ nhạt */
-            border-color: #dc3545;
-            cursor: not-allowed;
-            opacity: 0.7;
-        }
-
-        .seat.selected {
-            background-color: #007bff; /* Màu xanh dương */
-            color: white;
-            border-color: #0056b3;
-        }
-        .seat.unavailable { /* Cho ghế không khả dụng (ví dụ: không tồn tại thực) */
-            background-color: #e2e6ea;
-            border-color: #c6c6c6;
-            cursor: not-allowed;
-            opacity: 0.5;
-        }
     </style>
 </head>
 
 <body>
     @include('header')
+    @if(session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
     <div class="container my-4">
         <div class="trip-card p-4">
             <div class="row align-items-center">
                 <div class="col-md-3">
-                    <img src="{{ asset('storage/' . $schedule->route->image) }}" alt="Ảnh tuyến" class="trip-image">
+                    @if($schedule->route?->image)
+                        <img src="{{ asset('storage/' . $schedule->route->image) }}" alt="Ảnh tuyến đường" style="width: 100%; border-radius: 20px">
+                    @endif
                 </div>
                 <div class="col-md-6">
                     <h5 class="mb-3">{{ $schedule->bus->bus_name }}</h5>
@@ -418,12 +363,18 @@
                         </div>
                         <div class="seat-column">
                             @php
-                                $lowerDeckSeats = $seats->filter(function($seat) {
-                                    // Giả định seat_number có thể cho biết tầng. Ví dụ: A1, A2, B1, B2...
-                                    // Hoặc bạn có thể thêm cột 'deck' vào bảng seats
-                                    // Hiện tại, mình sẽ chia đại khái làm 2 phần
-                                    return (int)filter_var($seat->seat_number, FILTER_SANITIZE_NUMBER_INT) <= ($schedule->bus->total_seats / 2);
-                                })->sortBy('seat_number'); // Sắp xếp ghế theo số ghế
+                                // Lấy tổng số ghế và chia đôi cho 2 tầng
+                                $totalSeats = $schedule->bus->total_seats;
+                                $halfSeats = ceil($totalSeats / 2);
+                                
+                                // Lọc ghế tầng dưới (từ ghế 1 đến nửa tổng số ghế)
+                                $lowerDeckSeats = $seats->filter(function($seat) use ($halfSeats) {
+                                    $seatNumber = (int) preg_replace('/[^0-9]/', '', $seat->seat_number);
+                                    return $seatNumber <= $halfSeats;
+                                })->sortBy(function($seat) {
+                                    return (int) preg_replace('/[^0-9]/', '', $seat->seat_number);
+                                });
+                                
                                 $lowerDeckSeatPairs = $lowerDeckSeats->chunk(2);
                             @endphp
 
@@ -431,8 +382,8 @@
                                 <div class="seat-row">
                                     @foreach ($pair as $seat)
                                         <div class="seat
-                                            @if (!$seat->is_available) unavailable
-                                            @elseif ($seat->is_booked) booked
+                                            @if(!$seat->is_available) unavailable
+                                            @elseif($seat->is_booked) booked
                                             @else available @endif"
                                             data-seat-id="{{ $seat->seat_id }}"
                                             data-price="{{ $schedule->route->price }}"
@@ -449,9 +400,14 @@
                         <div class="floor-title">Tầng Trên</div>
                         <div class="seat-column">
                             @php
-                                $upperDeckSeats = $seats->filter(function($seat) {
-                                    return (int)filter_var($seat->seat_number, FILTER_SANITIZE_NUMBER_INT) > ($schedule->bus->total_seats / 2);
-                                })->sortBy('seat_number'); // Sắp xếp ghế theo số ghế
+                                // Lọc ghế tầng trên (từ nửa tổng số ghế + 1 đến hết)
+                                $upperDeckSeats = $seats->filter(function($seat) use ($halfSeats) {
+                                    $seatNumber = (int) preg_replace('/[^0-9]/', '', $seat->seat_number);
+                                    return $seatNumber > $halfSeats;
+                                })->sortBy(function($seat) {
+                                    return (int) preg_replace('/[^0-9]/', '', $seat->seat_number);
+                                });
+                                
                                 $upperDeckSeatPairs = $upperDeckSeats->chunk(2);
                             @endphp
 
@@ -459,8 +415,8 @@
                                 <div class="seat-row">
                                     @foreach ($pair as $seat)
                                         <div class="seat
-                                            @if (!$seat->is_available) unavailable
-                                            @elseif ($seat->is_booked) booked
+                                            @if(!$seat->is_available) unavailable
+                                            @elseif($seat->is_booked) booked
                                             @else available @endif"
                                             data-seat-id="{{ $seat->seat_id }}"
                                             data-price="{{ $schedule->route->price }}"
@@ -477,7 +433,7 @@
 
             <div class="bottom-bar">
                 <span class="total-text">Tổng cộng: <span id="totalPrice">0đ</span></span>
-                <form id="bookingForm" action="{{ route('book.seats') }}" method="POST">
+                <form id="bookingForm" action="{{ route('detail.book', $schedule->schedule_id) }}" method="POST">
                     @csrf
                     <input type="hidden" name="schedule_id" value="{{ $schedule->schedule_id }}">
                     <input type="hidden" name="selected_seat_ids" id="selectedSeatIds">
@@ -517,7 +473,6 @@
                         </div>
                     </div>
 
-
                     <div class="social-section">
                         <h6 class="fw-bold">Kết nối với COSMO BUS</h6>
                         <div class="social-links justify-content-start">
@@ -536,12 +491,14 @@
         </div>
 
         <script>
-            // Lấy giá vé từ PHP
-            const seatPrice = {{ $schedule->route->price }};
+            const seatPrice = {{ $schedule->route->price ?? 0 }};
             let selectedSeats = [];
 
+            function updateSelectedSeatsInput() {
+                document.getElementById('selectedSeatIds').value = JSON.stringify(selectedSeats);
+            }
+
             function toggleSeat(seatElement) {
-                // Không cho phép chọn ghế không bán hoặc đã đặt
                 if (seatElement.classList.contains('unavailable') || seatElement.classList.contains('booked')) {
                     return;
                 }
@@ -551,13 +508,15 @@
                 if (seatElement.classList.contains('selected')) {
                     seatElement.classList.remove('selected');
                     seatElement.classList.add('available');
-                    selectedSeats = selectedSeats.filter(id => id !== seatId); // Xóa khỏi danh sách
+                    selectedSeats = selectedSeats.filter(id => id !== seatId);
                 } else if (seatElement.classList.contains('available')) {
                     seatElement.classList.remove('available');
                     seatElement.classList.add('selected');
-                    selectedSeats.push(seatId); // Thêm vào danh sách
+                    selectedSeats.push(seatId);
                 }
+                
                 updateTotalPrice();
+                updateSelectedSeatsInput();
             }
 
             function updateTotalPrice() {
@@ -566,22 +525,21 @@
             }
 
             function validateAndSubmitForm() {
+                const selectedSeats = JSON.parse(document.getElementById('selectedSeatIds').value || '[]');
+
                 if (selectedSeats.length === 0) {
                     alert('Vui lòng chọn ít nhất một ghế để tiếp tục đặt vé!');
-                    return false; // Ngăn chặn form submit
+                    return false;
                 }
-                // Gán danh sách ID ghế đã chọn vào input hidden
-                document.getElementById('selectedSeatIds').value = JSON.stringify(selectedSeats);
-                return true; // Cho phép form submit
+                return true;
             }
 
-            // Gọi hàm này khi trang được tải để cập nhật tổng tiền ban đầu (nếu có ghế đã chọn sẵn, mặc dù ở đây không có)
+            // Khởi tạo tổng tiền khi trang được tải
             document.addEventListener('DOMContentLoaded', function() {
-                updateTotalPrice(); // Đảm bảo tổng tiền hiển thị 0đ khi tải trang
+                updateTotalPrice();
             });
         </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-
     </div>
     @include('footer')
 </body>

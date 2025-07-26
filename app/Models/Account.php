@@ -27,4 +27,10 @@ class Account extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    public function customer()
+    {
+        
+        return $this->hasOne(Customer::class, 'phone_number', 'phone_number');
+    }
 }

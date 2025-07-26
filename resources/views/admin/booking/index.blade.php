@@ -44,20 +44,35 @@
                     </td>
                     <td>{{ number_format($booking->total_amount) }} VND</td>
                     <td>
-                        <span class="badge 
-                            @if($booking->status == 'confirmed') badge-success
-                            @elseif($booking->status == 'cancelled') badge-danger
-                            @elseif($booking->status == 'completed') badge-info
-                            @else badge-warning @endif">
-                            {{ __('booking.status.' . $booking->status) }}
+                        @php
+                            $statusLabels = [
+                                'pending' => 'Chờ xác nhận',
+                                'confirmed' => 'Đã xác nhận',
+                                'cancelled' => 'Đã hủy',
+                                'completed' => 'Hoàn thành'
+                            ];
+                        @endphp
+                        <span class="badge
+                            @if($booking->status == 'pending') badge-success text-dark
+                            @elseif($booking->status == 'cancelled') badge-danger text-dark
+                            @elseif($booking->status == 'confirmed') badge-info text-dark
+                            @else badge-warning text-dark @endif">
+                            {{ $statusLabels[$booking->status] ?? $booking->status }}
                         </span>
                     </td>
                     <td>
+                        @php
+                            $paymentLabels = [
+                                'unpaid' => 'Chưa thanh toán',
+                                'paid' => 'Đã thanh toán',
+                                'refunded' => 'Đã hoàn tiền'
+                            ];
+                        @endphp
                         <span class="badge 
-                            @if($booking->payment_status == 'paid') badge-success
-                            @elseif($booking->payment_status == 'refunded') badge-info
-                            @else badge-danger @endif">
-                            {{ __('booking.payment.' . $booking->payment_status) }}
+                            @if($booking->payment_status == 'paid') badge-success text-dark
+                            @elseif($booking->payment_status == 'refunded') badge-info text-dark
+                            @else badge-danger text-dark @endif">
+                            {{ $paymentLabels[$booking->payment_status] ?? $booking->payment_status }}
                         </span>
                     </td>
                     <td>{{ $booking->created_at->format('d/m/Y H:i') }}</td>

@@ -7,7 +7,7 @@
             <h3>Thêm tuyến xe mới</h3>
         </div>
         <div class="card-body" style="background-color: #fff;">
-            <form action="{{ route('admin.routes.store') }}" method="POST">
+            <form action="{{ route('admin.routes.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-3">
                     <label for="title" class="form-label">Tên tuyến</label>

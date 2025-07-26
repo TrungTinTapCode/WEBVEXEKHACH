@@ -32,14 +32,16 @@ class BusController extends Controller
 
     $bus = Bus::create($request->all());
 
-    // Tạo ghế cho xe vừa tạo
+    //Tạo ghế cho xe vừa tạo
     for ($i = 1; $i <= $bus->total_seats; $i++) {
-        $bus->seats()->create([
-            'seat_number' => $i,
-            'is_available' => true,
-            'is_booked' => false,
-        ]);
-    }
+    \App\Models\Seat::create([
+        'bus_id' => $bus->bus_id, // đảm bảo đúng key
+        'seat_number' => $i,
+        'is_available' => true,
+        'is_booked' => false,
+    ]);
+}
+
 
     return redirect()->route('admin.buses.index')->with('success', 'Xe đã được thêm thành công');
     }

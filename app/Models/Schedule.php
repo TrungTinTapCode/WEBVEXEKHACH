@@ -20,6 +20,8 @@ class Schedule extends Model
         'status',
         'actual_departure',
         'actual_arrival',
+        'is_active',
+        'completed',
         'notes'
     ];
 
@@ -27,12 +29,14 @@ class Schedule extends Model
         'departure_time' => 'datetime',
         'arrival_time' => 'datetime',
         'actual_departure' => 'datetime',
-        'actual_arrival' => 'datetime'
+        'actual_arrival' => 'datetime',
+        'is_active' => 'boolean',
+        'completed' => 'boolean',
     ];
 
     public function bus()
     {
-        return $this->belongsTo(Bus::class, 'bus_id');
+        return $this->belongsTo(Bus::class, 'bus_id', 'bus_id');
     }
 
     public function route()
@@ -42,7 +46,7 @@ class Schedule extends Model
 
     public function bookings()
     {
-        return $this->hasMany(Booking::class, 'schedule_id');
+        return $this->hasMany(Booking::class, 'schedule_id', 'schedule_id');
     }
     public function seats()
     {

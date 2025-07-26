@@ -34,6 +34,7 @@ class ScheduleController extends Controller
      */
     public function store(Request $request)
     {
+        
         $request->validate([
             'route_id' => 'required|exists:routes,id',
             'bus_id' => 'required|exists:buses,bus_id',
@@ -41,14 +42,13 @@ class ScheduleController extends Controller
             'arrival_time' => 'required|date',
         ]);
 
-        Schedule::create([
-            'route_id' => $request->route_id,
-            'bus_id' => $request->bus_id,
-            'departure_time' => $request->departure_time,
-            'arrival_time' => $request->arrival_time,
-            'status' => 'scheduled', // trạng thái mặc định
-        ]);
-
+        $schedule = Schedule::create([
+    'route_id' => $request->route_id,
+    'bus_id' => $request->bus_id,
+    'departure_time' => $request->departure_time,
+    'arrival_time' => $request->arrival_time,
+    'status' => 'scheduled',
+]);
         return redirect()->route('admin.schedules.index')->with('success', 'Lịch trình đã được thêm thành công.');
     }
 
@@ -74,7 +74,29 @@ class ScheduleController extends Controller
             'arrival_time' => 'required|date',
         ]);
 
-        $schedule->update($request->all());
+        $schedule->route_id = $request->route_id;
+        $schedule->bus_id = $request->bus_id;
+        $schedule->departure_time = $request->departure_time;
+        $schedule->arrival_time = $request->arrival_time;
+        $schedule->status = $request->status;
+
+        if (in_array($request->status, ['departed', 'arrived', 'cancelled'])) {
+    $schedule->is_active = false;
+} else {
+    $schedule->is_active = true;
+}
+        if ($request->status === 'arrived') {
+        $schedule->completed = true;
+
+        // Cập nhật tất cả bookings của schedule này thành completed
+        $schedule->bookings()->where('status', 'pending')->update([
+            'status' => 'completed'
+        ]);
+    } else {
+        $schedule->completed = false;
+    }
+
+$schedule->save();
 
         return redirect()->route('admin.schedules.index')->with('success', 'Lịch trình đã được cập nhật');
     }

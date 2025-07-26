@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up()
 {
-    Schema::table('seats', function (Blueprint $table) {
-        $table->boolean('is_booked')->default(false);
+    Schema::table('schedules', function (Blueprint $table) {
+        $table->boolean('is_active')->default(true);
     });
 }
 
 public function down()
 {
-    Schema::table('seats', function (Blueprint $table) {
-        $table->dropColumn('is_booked');
+    Schema::table('schedules', function (Blueprint $table) {
+        $table->dropColumn('is_active');
     });
 }
 
