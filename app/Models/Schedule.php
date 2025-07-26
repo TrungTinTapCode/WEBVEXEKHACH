@@ -21,6 +21,7 @@ class Schedule extends Model
         'actual_departure',
         'actual_arrival',
         'is_active',
+        'completed',
         'notes'
     ];
 
@@ -30,6 +31,7 @@ class Schedule extends Model
         'actual_departure' => 'datetime',
         'actual_arrival' => 'datetime',
         'is_active' => 'boolean',
+        'completed' => 'boolean',
     ];
 
     public function bus()

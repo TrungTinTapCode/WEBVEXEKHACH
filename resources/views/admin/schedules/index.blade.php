@@ -20,6 +20,8 @@
                     <th>Giờ đến dự kiến</th>
                     <th>Ghi chú</th>
                     <th>Trạng thái</th>
+                    <th>Hoàn thành</th>
+                    <th>Hành động</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -53,7 +55,7 @@
                             {{ $statusLabels[$status] ?? ucfirst($status) }}
                         </span>
                     </td>
-
+                    <td>{{ $schedule->completed ? '✓' : '✗' }}</td>
                     <td>
                                 <a href="{{ route('admin.schedules.edit', $schedule->schedule_id) }}" class="btn btn-sm btn-warning">Sửa</a>
                                 <form action="{{ route('admin.schedules.destroy', $schedule->schedule_id) }}" method="POST" class="d-inline">

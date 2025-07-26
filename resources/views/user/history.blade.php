@@ -380,7 +380,23 @@
                             {{ $detail->seat->seat_number }}
                         @endforeach
                     </td>
-                    <td><span class="badge bg-warning text-dark">Chờ xác nhận</span></td>
+                    <td>
+                        @php
+                            $statusLabels = [
+                                'pending' => 'Chờ xác nhận',
+                                'confirmed' => 'Đã xác nhận',
+                                'cancelled' => 'Đã hủy',
+                                'completed' => 'Hoàn thành'
+                            ];
+                        @endphp
+                        <span class="badge
+                            @if($booking->status == 'pending') badge-success text-dark
+                            @elseif($booking->status == 'cancelled') badge-danger text-dark
+                            @elseif($booking->status == 'confirmed') badge-info text-dark
+                            @else badge-warning text-dark @endif">
+                            {{ $statusLabels[$booking->status] ?? $booking->status }}
+                        </span>
+                    </td>
                 </tr>
                 @endforeach
             </tbody>
@@ -413,7 +429,23 @@
                             {{ $detail->seat->seat_number }}
                         @endforeach
                     </td>
-                    <td><span class="badge bg-warning text-dark">Chờ xác nhận</span></td>
+                    <td>
+                        @php
+                            $statusLabels = [
+                                'pending' => 'Chờ xác nhận',
+                                'confirmed' => 'Đã xác nhận',
+                                'cancelled' => 'Đã hủy',
+                                'completed' => 'Hoàn thành'
+                            ];
+                        @endphp
+                        <span class="badge
+                            @if($booking->status == 'pending') badge-success text-dark
+                            @elseif($booking->status == 'cancelled') badge-danger text-dark
+                            @elseif($booking->status == 'confirmed') badge-info text-dark
+                            @else badge-warning text-dark @endif">
+                            {{ $statusLabels[$booking->status] ?? $booking->status }}
+                        </span>
+                    </td>
                 </tr>
                 @endforeach
             </tbody>

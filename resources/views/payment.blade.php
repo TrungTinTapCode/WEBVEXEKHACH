@@ -174,7 +174,7 @@
                         </div>
 
                         <div class="fw-semibold mb-4">
-                            Sau khi thanh toán, vui lòng đợi vài giây để hệ thống cập nhật trạng thái vé.
+                            Sau khi thanh toán, vui lòng đợi vài phút để hệ thống cập nhật trạng thái vé.
                         </div>
 
                         <div class="mb-4">
@@ -269,7 +269,7 @@
                 `${minutes}:${seconds.toString().padStart(2, '0')}`;
             if (timeLeft <= 0) {
                 clearInterval(timerInterval);
-                alert('Hết thời gian thanh toán! Ghế đã bị huỷ.');
+                alert('Hết thời gian thanh toán! Vé đã bị huỷ.');
             }
             timeLeft--;
         }

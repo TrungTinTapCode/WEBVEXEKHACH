@@ -85,6 +85,16 @@ class ScheduleController extends Controller
 } else {
     $schedule->is_active = true;
 }
+        if ($request->status === 'arrived') {
+        $schedule->completed = true;
+
+        // Cập nhật tất cả bookings của schedule này thành completed
+        $schedule->bookings()->where('status', 'pending')->update([
+            'status' => 'completed'
+        ]);
+    } else {
+        $schedule->completed = false;
+    }
 
 $schedule->save();
 

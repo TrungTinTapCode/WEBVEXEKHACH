@@ -201,7 +201,7 @@
 
             <!-- Results Column -->
             <div class="col-md-9">
-                <h5>Kết quả: <strong>{{ $schedules->filter(fn($s) => $s->route->is_active)->count() }} chuyến</strong></h5>
+                <h5>Kết quả: <strong>{{ $schedules->filter(fn($s) => $s->is_active)->count() }} chuyến</strong></h5>
 
 
                 <!-- Trip Item -->
