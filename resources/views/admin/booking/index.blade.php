@@ -28,7 +28,7 @@
                     <th>Trạng thái</th>
                     <th>Thanh toán</th>
                     <th>Ngày đặt</th>
-                    <th>Hành động</th>
+                    <th>Chi tiết vé</th>
                 </tr>
             </thead>
             <tbody>
@@ -37,7 +37,7 @@
                     <td>{{ $booking->booking_code }}</td>
                     <td>{{ $booking->customer->full_name }}</td>
                     <td>
-                        {{ $booking->schedule->route->departure }} → 
+                        {{ $booking->schedule->route->departure }} →
                         {{ $booking->schedule->route->destination }}<br>
                         <br>
                         <small>{{ $booking->schedule->departure_time->format('d/m/Y H:i') }}</small>
@@ -68,7 +68,7 @@
                                 'refunded' => 'Đã hoàn tiền'
                             ];
                         @endphp
-                        <span class="badge 
+                        <span class="badge
                             @if($booking->payment_status == 'paid') badge-success text-dark
                             @elseif($booking->payment_status == 'refunded') badge-info text-dark
                             @else badge-danger text-dark @endif">
@@ -77,7 +77,7 @@
                     </td>
                     <td>{{ $booking->created_at->format('d/m/Y H:i') }}</td>
                     <td>
-                        <a href="{{ route('admin.booking.show', $booking->booking_id) }}" 
+                        <a href="{{ route('admin.booking.show', $booking->booking_id) }}"
                         class="btn btn-sm btn-primary" title="Xem chi tiết">
                             <i class="fas fa-eye"></i>
                         </a>
@@ -86,7 +86,7 @@
                 @endforeach
             </tbody>
         </table>
-        
+
         <div class="mt-3">
             {{ $bookings->links() }}
         </div>

@@ -13,12 +13,12 @@
                         <div class="row mb-3">
                             <div class="col-md-4">
                                 <label for="start_date">Từ ngày</label>
-                                <input type="date" name="start_date" id="start_date" class="form-control" 
+                                <input type="date" name="start_date" id="start_date" class="form-control"
                                     value="{{ $startDate }}">
                             </div>
                             <div class="col-md-4">
                                 <label for="end_date">Đến ngày</label>
-                                <input type="date" name="end_date" id="end_date" class="form-control" 
+                                <input type="date" name="end_date" id="end_date" class="form-control"
                                     value="{{ $endDate }}">
                             </div>
                             <div class="col-md-4 d-flex align-items-end">
@@ -35,11 +35,11 @@
                         <table class="table table-bordered table-hover">
                             <thead class="thead-light">
                                 <tr>
-                                    <th>#</th>
+                                    <th>STT</th>
                                     <th>Mã thanh toán</th>
                                     <th>Tuyến đường</th>
                                     <th>Số tiền</th>
-                                    <th>Phương thức</th>
+                                    <th>Thanh toán</th>
                                     <th>Ngày thanh toán</th>
                                 </tr>
                             </thead>

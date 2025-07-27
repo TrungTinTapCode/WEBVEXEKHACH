@@ -22,7 +22,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Tên tuyến</th>
-                    <th>Ảnh</th>
+                    <th>Ảnh xe bus</th>
                     <th>Giá</th>
                     <th>Nơi đi - Nơi đến</th>
                     <th>Trạng thái</th>

@@ -222,8 +222,7 @@
                         <div class="text-muted small">{{ $schedule->bus->bus_type }}</div>
                         <div class="d-flex align-items-center small mt-1">
                             <i class="bi bi-clock me-1"></i> {{ $schedule->departure_time }} - {{ $schedule->route->departure }}
-                            <span class="ms-3">Còn {{ $schedule->available_seats ?? '...' }} chỗ trống</span>
-                        </div> <br>
+                        </div>
                         <div class="d-flex align-items-center small">
                             <i class="bi bi-clock me-1"></i> {{ $schedule->arrival_time }} - {{ $schedule->route->destination }}
                             <a href="{{ route('detail', ['id' => $schedule->schedule_id]) }}" class="ms-3 trip-detail-link">Thông tin chi tiết</a>
