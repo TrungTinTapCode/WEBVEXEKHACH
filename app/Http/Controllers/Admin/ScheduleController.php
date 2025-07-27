@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Seat;
 use App\Models\Schedule;
 use App\Models\Route;
 use App\Models\Bus;
@@ -94,6 +95,12 @@ class ScheduleController extends Controller
         ]);
     } else {
         $schedule->completed = false;
+    }
+    if ($request->status === 'arrived') {
+        // Cập nhật ghế của bus thành đã sẵn sàng
+        Seat::where('bus_id', $schedule->bus_id)->update(['is_booked' => false]);
+        Seat::where('bus_id', $schedule->bus_id)->update(['is_available' => true]);
+        
     }
 
 $schedule->save();

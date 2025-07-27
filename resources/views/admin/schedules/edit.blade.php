@@ -12,7 +12,7 @@
                 @method('PUT')
                 <div class="mb-3">
                     <label for="route_id" class="form-label">Tuyến xe</label>
-                    <select name="route_id" class="form-control" required>
+                    <select name="route_id" class="form-control" required value="{{ old('schedule', $schedule->route_id) }}">
                         @foreach($routes as $route)
                             <option value="{{ $route->id }}" {{ $route->id == $schedule->route_id ? 'selected' : '' }}>
                                 {{ $route->departure }} → {{ $route->destination }}
@@ -22,9 +22,9 @@
                 </div>
                 <div class="mb-3">
                     <label for="bus_id" class="form-label">Xe buýt</label>
-                    <select name="bus_id" class="form-control" required>
+                    <select name="bus_id" class="form-control" required value="{{ old('bus', $schedule->bus_id) }}">
                         @foreach($buses as $bus)
-                            <option value="{{ $bus->bus_id }}" {{ $bus->id == $schedule->bus_id ? 'selected' : '' }}>
+                            <option value="{{ $bus->bus_id }}" {{ $bus->bus_id == $schedule->bus_id ? 'selected' : '' }}>
                                 {{ $bus->bus_name }} ({{ $bus->license_plate }})
                             </option>
                         @endforeach
