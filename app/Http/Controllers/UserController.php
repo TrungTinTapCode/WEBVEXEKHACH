@@ -75,6 +75,7 @@ class UserController extends Controller
         ]);
 
         // Tạo dữ liệu cho bảng customers
+
         Customer::firstOrCreate(
             ['phone_number' => $request->phone_number],
             [
@@ -156,6 +157,7 @@ class UserController extends Controller
         $user->gender       = $request->gender;
         $user->save();
         // Cập nhật thông tin khách hàng
+        
         $customer = $user->customer;
         $customer->full_name = $request->name;
         $customer->email     = $request->email;

@@ -458,7 +458,9 @@
                 <div class="col-md-3">
                     <label>Ngày sinh</label>
                     <div class="input-group">
-                        <input id="ngay_sinh" name="ngay_sinh" type="text" class="form-control" value="{{ Auth::user()->ngay_sinh }}">
+                        <!-- <input id="ngay_sinh" name="ngay_sinh" type="text" class="form-control" value="{{ Auth::user()->ngay_sinh }}"> -->
+                        <input id="ngay_sinh" name="ngay_sinh" type="text" class="form-control"
+                            value="{{ old('ngay_sinh', \Carbon\Carbon::parse(Auth::user()->ngay_sinh)->format('d-m-Y')) }}">
                         <span class="input-group-text"><i class="bi bi-calendar-date"></i></span>
                     </div>
                 </div>
