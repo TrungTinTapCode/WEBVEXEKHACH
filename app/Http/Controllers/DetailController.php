@@ -16,9 +16,14 @@ class DetailController extends Controller
     {
         $schedule = Schedule::with(['route', 'bus', 'seats'])
             ->findOrFail($id);
+        $schedule_id = $schedule->schedule_id;
 
-        $seats = $schedule->seats->map(function ($seat) {
-            $seat->is_booked = $seat->bookingDetails()->exists();
+        $seats = $schedule->seats->map(function ($seat) use ($schedule_id) {
+            $seat->is_booked = $seat->bookingDetails()
+            ->whereHas('booking', function($query) use ($schedule_id) {
+                $query->where('schedule_id', $schedule_id)
+                    ->where('status', '!=', 'cancelled'); // Chỉ lấy booking còn hiệu lực
+            })->exists();
             return $seat;
         });
 

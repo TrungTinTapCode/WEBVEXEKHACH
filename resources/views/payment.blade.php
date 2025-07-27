@@ -313,14 +313,6 @@
         });
     </script>
     <script>
-        const bankMap = {
-            'VIETCOMBANK': 'bank_transfer',
-            'AGRIBANK': 'bank_transfer',
-            'VIETINBANK': 'bank_transfer',
-            'BIDV': 'bank_transfer',
-            'VISA': 'credit_card',
-            'MASTERCARD': 'credit_card'
-        };
         document.querySelectorAll('.payment-button').forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();

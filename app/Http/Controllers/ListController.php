@@ -13,13 +13,15 @@ class ListController extends Controller
 
     // Nếu có filter từ form, thêm điều kiện vào query
     if ($request->departure) {
-        $query->where('start_station', 'like', '%' . $request->departure . '%');
+        $query->whereHas('route', function ($q) use ($request) {
+            $q->where('departure', 'like', '%' . $request->departure . '%');
+        });
     }
+
     if ($request->destination) {
-        $query->where('end_station', 'like', '%' . $request->destination . '%');
-    }
-    if ($request->date) {
-        $query->whereDate('start_time', $request->date);
+        $query->whereHas('route', function ($q) use ($request) {
+            $q->where('destination', 'like', '%' . $request->destination . '%');
+        });
     }
 
     $schedules = $query->get();

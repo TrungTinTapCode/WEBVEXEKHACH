@@ -83,8 +83,8 @@ class userBookingController extends Controller
         ]);
 
         $booking->update([
-            'payment_status' => 'paid',
-            'status' => 'confirmed',
+            'payment_status' => 'unpaid',
+            'status' => 'pending',
         ]);
 
         Payment::create([
@@ -92,8 +92,22 @@ class userBookingController extends Controller
             'amount' => $booking->total_amount,
             'payment_method' => $request->payment_method,
             'transaction_code' => Str::random(12),
-            'status' => 'completed',
+            'status' => 'pending',
         ]);
+
+        $bankUrls = [
+            'VIETCOMBANK'  => 'https://vcbdigibank.vietcombank.com.vn/auth',
+            'AGRIBANK'     => 'https://agribankplus.agribank.com.vn/login',
+            'VIETTINBANK'  => 'https://ipay.vietinbank.vn/login',
+            'BIDV'         => 'https://smartbanking.bidv.com.vn/dang-nhap',
+            'VISA'         => 'https://www.visa.com.vn/',
+            'MASTERCARD'   => 'https://www.mastercard.com.vn/vi-vn.html',
+        ];
+
+        $method = $request->payment_method;
+        if (isset($bankUrls[$method])) {
+            return redirect()->away($bankUrls[$method]);
+        }
 
         return redirect()->route('home')->with('success', 'Thanh toán thành công! Vé đã được xác nhận.');
     }

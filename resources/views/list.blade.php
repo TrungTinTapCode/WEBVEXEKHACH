@@ -8,6 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
 
     <style>
@@ -150,10 +151,10 @@
 
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="xe-khach" role="tabpanel" aria-labelledby="xe-khach-tab">
-                    <form class="bg-white p-2 rounded-bottom shadow d-flex align-items-center flex-nowrap">
+                    <form action="{{ route('list') }}" method="GET" class="bg-white p-2 rounded-bottom shadow d-flex align-items-center flex-nowrap">
                         <div class="input-group input-group-sm flex-grow-1 me-2 my-0">
                             <span class="input-group-text"><i class="bi bi-geo-alt-fill"></i></span>
-                            <input type="text" class="form-control" id="departure" placeholder="Nơi xuất phát">
+                            <input type="text" class="form-control" name="departure" placeholder="Nơi xuất phát">
                         </div>
 
                         <div class="text-center me-2 d-none d-md-block">
@@ -162,16 +163,17 @@
 
                         <div class="input-group input-group-sm flex-grow-1 me-2 my-0">
                             <span class="input-group-text"><i class="bi bi-geo-alt-fill"></i></span>
-                            <input type="text" class="form-control" id="destination" placeholder="Nơi đến">
+                            <input type="text" class="form-control" name="destination" placeholder="Nơi đến">
                         </div>
 
                         <div class="input-group input-group-sm flex-grow-1 me-2 my-0">
                             <span class="input-group-text"><i class="bi bi-calendar-date"></i></span>
-                            <input type="text" class="form-control" data-datepicker data-placeholder="Chọn ngày đi">
+                            <input type="text" class="form-control" name="date" placeholder="Chọn ngày đi">
                         </div>
 
                         <button type="submit" class="btn btn-warning btn-sm flex-shrink-0 my-0">Tìm kiếm</button>
                     </form>
+
                 </div>
             </div>
         </div>
@@ -222,6 +224,10 @@
                         <div class="text-muted small">{{ $schedule->bus->bus_type }}</div>
                         <div class="d-flex align-items-center small mt-1">
                             <i class="bi bi-clock me-1"></i> {{ $schedule->departure_time }} - {{ $schedule->route->departure }}
+<<<<<<< HEAD
+=======
+                            <!-- <span class="ms-3">Còn {{ $schedule->available_seats ?? '...' }} chỗ trống</span> -->
+>>>>>>> 335be47db0487c1cb18a68ae897e3f37c7818de1
                         </div>
                         <div class="d-flex align-items-center small">
                             <i class="bi bi-clock me-1"></i> {{ $schedule->arrival_time }} - {{ $schedule->route->destination }}
@@ -315,6 +321,12 @@
         input.addEventListener('blur', () => {
             if (!input.value) input.type = 'text';
         });
+    });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+    flatpickr("input[name='date']", {
+        dateFormat: "Y-m-d", // Laravel expects this format for whereDate
     });
 </script>
 </body>
