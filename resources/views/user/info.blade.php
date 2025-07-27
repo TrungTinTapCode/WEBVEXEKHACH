@@ -430,6 +430,9 @@
                 <div class="col-md-6">
                     <label>Họ Và Tên <span class="required">*</span></label>
                     <input type="text" name="name" class="form-control" value="{{ Auth::user()->name }}">
+                    @error('name')
+                    <div class="text-danger small mt-1">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="col-md-3">
@@ -448,11 +451,17 @@
                 <div class="col-md-6">
                     <label>E-mail</label>
                     <input type="email" name="email" class="form-control" value="{{ Auth::user()->email }}">
+                    @error('email')
+                    <div class="text-danger small mt-1">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="col-md-3">
                     <label>Số Điện Thoại</label>
                     <input type="text" name="phone_number" class="form-control" value="{{ Auth::user()->phone_number }}">
+                    @error('phone_number')
+                    <div class="text-danger small mt-1">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="col-md-3">

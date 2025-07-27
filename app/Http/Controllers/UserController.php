@@ -120,9 +120,13 @@ class UserController extends Controller
             'ngay_sinh'    => 'nullable|date',
             'street'       => 'nullable|string|max:255',
             'dia_chi'      => 'nullable|string|max:255',
-            'email'        => 'nullable|email|max:255',
+            'email' => ['nullable', 'email', 'max:255', 'regex:/^[a-z0-9._%+-]+@gmail\.com$/'],
             'phone_number' => 'nullable|string|max:20',
             'gender'       => 'nullable|string|max:10',
+        ],[
+            'email.regex'        => 'Email phải là địa chỉ @gmail.com.',
+            'email.email'        => 'Email không đúng định dạng.',
+            'email.regex'        => 'Email chỉ được chứa chữ thường, số, và phải là địa chỉ @gmail.com hợp lệ.',
         ]);
 
         /** @var \App\Models\Account $user */
