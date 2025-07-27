@@ -57,11 +57,15 @@
                     </td>
                     <td>{{ $schedule->completed ? '✓' : '✗' }}</td>
                     <td>
-                                <a href="{{ route('admin.schedules.edit', $schedule->schedule_id) }}" class="btn btn-sm btn-warning">Sửa</a>
+                                <a href="{{ route('admin.schedules.edit', $schedule->schedule_id) }}" class="btn btn-sm btn-warning">
+                                    <i class="fas fa-edit"></i>
+                                </a>
                                 <form action="{{ route('admin.schedules.destroy', $schedule->schedule_id) }}" method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-sm btn-danger" onclick="return confirm('Bạn chắc chắn muốn xóa?')">Xóa</button>
+                                    <button class="btn btn-sm btn-danger" onclick="return confirm('Bạn chắc chắn muốn xóa?')">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
                                 </form>
                             </td>
                 </tr>

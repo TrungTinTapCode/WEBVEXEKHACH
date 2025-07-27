@@ -26,6 +26,7 @@ class BookingController extends Controller
 
     public function updateStatus(Request $request, Booking $booking)
     {
+
         if ($request->has('cancel')) {
             $booking->update(['status' => 'cancelled', 'payment_status' => 'refunded']);
             return back()->with('success', 'Đã hủy vé thành công!');

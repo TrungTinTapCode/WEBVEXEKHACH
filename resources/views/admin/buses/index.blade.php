@@ -35,11 +35,15 @@
                         <td>
                             <!-- Show đang lỗi -->
                             <!--<a href="{{ route('admin.buses.show', $bus->bus_id) }}" class="btn btn-info">Xem</a>-->
-                            <a href="{{ route('admin.buses.edit', $bus->bus_id) }}" class="btn btn-warning">Sửa</a>
+                            <a href="{{ route('admin.buses.edit', $bus->bus_id) }}" class="btn btn-warning">
+                                <i class="fas fa-edit"></i>
+                            </a>
                             <form action="{{ route('admin.buses.destroy', $bus->bus_id) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
-                                <button class="btn btn-sm btn-danger" onclick="return confirm('Xác nhận xóa?')">Xóa</button>
+                                <button class="btn btn-sm btn-danger" onclick="return confirm('Xác nhận xóa?')">
+                                    <i class="fas fa-trash"></i>
+                                </button>
                             </form>
                         </td>
                     </tr>

@@ -2,36 +2,6 @@
 
 @section('title', 'Dashboard')
 
-@php
-    // Dữ liệu mẫu để test giao diện tại chưa có dữ liệu thực
-    $totalRoutes = 15;
-    $totalBuses = 8;
-    $todayBookings = 23;
-    $todayRevenue = 12500000;
-
-    $recentBookings = [
-        (object)[
-            'booking_id' => 1,
-            'booking_code' => 'BK20230001',
-            'customer' => (object)['full_name' => 'Nguyễn Văn A'],
-            'total_amount' => 350000,
-            'created_at' => now()->subHours(2)
-        ],
-        (object)[
-            'booking_id' => 2,
-            'booking_code' => 'BK20230002',
-            'customer' => (object)['full_name' => 'Trần Thị B'],
-            'total_amount' => 420000,
-            'created_at' => now()->subHours(5)
-        ]
-    ];
-
-    $revenueChart = [
-        'labels' => ['15/05', '16/05', '17/05', '18/05', '19/05', '20/05', '21/05'],
-        'data' => [12000000, 8000000, 15000000, 9000000, 11000000, 13000000, 12500000]
-    ];
-@endphp
-
 @section('content')
 <div class="row">
     <div class="col-md-3">

@@ -23,15 +23,15 @@
                     <tr>
                         <th>Chuyến đi</th>
                         <td>
-        @if($booking->schedule && $booking->schedule->route)
-            {{ $booking->schedule->route->departure }} →
-            {{ $booking->schedule->route->destination }}<br>
-            <br>
-            <small>Khởi hành: {{ $booking->schedule->departure_time->format('d/m/Y H:i') }}</small>
-        @else
-            <span class="text-danger">Không có thông tin chuyến đi</span>
-        @endif
-    </td>
+                            @if($booking->schedule && $booking->schedule->route)
+                                {{ $booking->schedule->route->departure }} →
+                                {{ $booking->schedule->route->destination }}<br>
+                                <br>
+                                <small>Khởi hành: {{ $booking->schedule->departure_time->format('d/m/Y H:i') }}</small>
+                            @else
+                                <span class="text-danger">Không có thông tin chuyến đi</span>
+                            @endif
+                        </td>
                     </tr>
                     <tr>
                         <th>Tổng tiền</th>
@@ -116,7 +116,7 @@
                         </tbody>
                     </table>
                 </div>
-                
+                            
             </div>
         </div>
         
