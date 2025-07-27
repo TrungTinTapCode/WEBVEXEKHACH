@@ -94,44 +94,39 @@
             text-align: start;
             margin: 40px 0;
         }
+.social-icon.facebook {
+    background-color: #1877f2; /* Facebook blue */
+    color: #fff;
+}
 
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 20px;
-        }
+.social-icon.youtube {
+    background-color: #ff0000; /* YouTube red */
+    color: #fff;
+}
 
-        .social-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 30px;
-            color: #fff;
-            text-decoration: none;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
+.social-icon.tiktok {
+    background-color: #000000; /* TikTok black */
+    color: #fff;
+}
 
-        .social-icon:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-        }
+.social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    text-decoration: none;
+    font-size: 18px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
 
-        .facebook {
-            background-color: #1877f2;
-        }
+.social-icon:hover {
+    transform: scale(1.1);
+    opacity: 0.9;
+}
 
-        .youtube {
-            background-color: #ff0000;
-        }
-
-        .tiktok {
-            background-color: #000000;
-        }
 
         .banner .container {
             margin-top: 40px;
@@ -243,8 +238,9 @@ form.bg-white .btn-warning {
     }
 
     .social-icon:hover {
-        color: #007bff;
+        color:rgb(255, 255, 255);
     }
+
     </style>
 </head>
 
