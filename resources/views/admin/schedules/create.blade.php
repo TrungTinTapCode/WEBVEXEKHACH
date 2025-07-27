@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="card shadow">
-        <div class="card-header" style="background-color: #07bff;">
+        <div class="card-header">
             <h3>Thêm lịch trình mới</h3>
         </div>
         <div class="card-body" style="background-color: #fff;">
@@ -34,10 +34,10 @@
                     <input type="datetime-local" name="departure_time" class="form-control" required>
                 </div>
                 <div class="mb-3">
-                    <label for="arrival_time" class="form-label">Giờ đến</label>
+                    <label for="arrival_time" class="form-label">Giờ đến (Dự kiến)</label>
                     <input type="datetime-local" name="arrival_time" class="form-control" required>
                 </div>
-                
+
                 <button type="submit" class="btn btn-primary">Lưu</button>
                 <a href="{{ route('admin.schedules.index') }}" class="btn btn-secondary">Hủy</a>
             </form>

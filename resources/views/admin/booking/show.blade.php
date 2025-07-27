@@ -5,7 +5,8 @@
 @section('content')
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title">Chi tiết Đặt vé: {{ $booking->booking_code }}</h3>
+        <h2 class="card-title"><strong>CHI TIẾT</strong></h2>
+        <h3 class="card-title">MÃ VÉ: {{ $booking->booking_code }}</h3>
     </div>
     <div class="card-body">
         <div class="row">
@@ -74,7 +75,7 @@
                     <tr>
                         <th>Thanh toán</th>
                         <td>
-                            <span class="badge 
+                            <span class="badge
                                 @if($booking->payment_status == 'paid') badge-success text-dark
                                 @elseif($booking->payment_status == 'refunded') badge-info text-dark
                                 @else badge-danger text-dark @endif">
@@ -84,7 +85,7 @@
                     </tr>
                 </table>
             </div>
-            
+
             <div class="col-md-6">
                 <h4>Danh sách ghế</h4>
                 <div class="table-responsive">
@@ -116,10 +117,10 @@
                         </tbody>
                     </table>
                 </div>
-                            
+
             </div>
         </div>
-        
+
         <div class="mt-4">
             <a href="{{ route('admin.booking.index') }}" class="btn btn-secondary">
                 <i class="fas fa-arrow-left"></i> Quay lại

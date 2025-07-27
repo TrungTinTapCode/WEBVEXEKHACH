@@ -18,7 +18,7 @@
                     <th>Xe</th>
                     <th>Giờ đi dự kiến</th>
                     <th>Giờ đến dự kiến</th>
-                    <th>Ghi chú</th>
+                    <!-- <th>Ghi chú</th> -->
                     <th>Trạng thái</th>
                     <th>Hoàn thành</th>
                     <th>Hành động</th>
@@ -32,12 +32,12 @@
                     <td>{{ $schedule->bus->bus_name ?? 'Chưa gán xe' }}</td>
                     <td>{{ $schedule->departure_time ? $schedule->departure_time->format('H:i d/m/Y') : '-' }}</td>
                     <td>{{ $schedule->arrival_time ? $schedule->arrival_time->format('H:i d/m/Y') : '-' }}</td>
-                    <td>{{ $schedule->notes ?? '-' }}</td>
+                    <!-- <td>{{ $schedule->notes ?? '-' }}</td> -->
                     <td>
                         @php
                             $statusLabels = [
                                 'scheduled' => 'Đã lên lịch',
-                                'departed' => 'Đã đi',
+                                'departed' => 'Đang khởi hành',
                                 'arrived' => 'Đã đến',
                                 'cancelled' => 'Đã hủy'
                             ];

@@ -6,12 +6,12 @@
     <title>Đăng nhập</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-    <!-- <link rel="stylesheet" href="{{ asset('css/custom.css') }}"> -->
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
     <style>
         body {
             /* background-color: #fff; */
-            /* background-image: url('/img/bgr.jpg'); */
-             /* background-image: url('{{ asset('/img/bgr.jpg') }}'); */
+            /* background-image: url('/public/img/bgr.jpg'); */
+             /* background-image: url('{{ asset('/public/img/bgr.jpg') }}'); */
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 

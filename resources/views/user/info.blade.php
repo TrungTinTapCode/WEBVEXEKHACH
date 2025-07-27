@@ -530,7 +530,7 @@
                 {{-- Nút đăng xuất --}}
                 <form method="POST" action="{{ route('logout') }}" class="d-inline">
                     @csrf
-                    <button type="submit" class="btn btn-danger px-4 ms-2">Đăng xuất</button>
+                    <!-- <button type="submit" class="btn btn-danger px-4 ms-2">Đăng xuất</button> -->
                 </form>
             </div>
         </form>
