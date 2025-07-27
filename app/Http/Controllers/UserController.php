@@ -157,7 +157,7 @@ class UserController extends Controller
 
 
         $user->email        = $request->email;
-        $user->phone_number = $request->phone_number;
+        // $user->phone_number = $request->phone_number;
         $user->gender       = $request->gender;
         $user->save();
         // Cập nhật thông tin khách hàng
@@ -165,7 +165,7 @@ class UserController extends Controller
         $customer = $user->customer;
         $customer->full_name = $request->name;
         $customer->email     = $request->email;
-        $customer->phone_number = $request->phone_number;
+        // $customer->phone_number = $request->phone_number;
         // $customer->gender    = $request->gender;
         $customer->save();
 
