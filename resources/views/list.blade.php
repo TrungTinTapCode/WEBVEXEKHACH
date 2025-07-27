@@ -317,7 +317,7 @@ form.bg-white .btn-warning {
 
             <!-- Results Column -->
             <div class="col-md-9">
-                <h5 class="text-white">Kết quả: <strong>{{ $schedules->filter(fn($s) => $s->is_active)->count() }} chuyến</strong></h5>
+                <h3 class="text-white">Kết quả: <strong>{{ $schedules->filter(fn($s) => $s->is_active)->count() }} chuyến</strong></h3>
 
 
                 <!-- Trip Item -->
