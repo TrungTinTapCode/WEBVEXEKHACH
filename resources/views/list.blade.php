@@ -12,8 +12,14 @@
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
 
     <style>
+.card {
+            background-color: rgb(255, 255, 255);
+            border-radius: 10px;
+            padding: 20px;
+        }
+
         .card-custom {
-            border: 1px solid #e0e0e0;
+            border: 1px solid rgb(255, 255, 255);
             border-radius: 12px;
             padding: 16px;
             margin-bottom: 20px;
@@ -50,7 +56,6 @@
             font-size: 0.9rem;
         }
 
-        /* Payment Methods and App Download */
         .payment-section {
             background: white;
             border-radius: 15px;
@@ -132,11 +137,120 @@
             margin-top: 40px;
             margin-bottom: 60px;
         }
+        body {
+     background: url('{{ asset('img/bgr.jpg') }}') center/cover no-repeat;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+}
+.sort-box {
+    background-color: #ffffff; /* nền trắng */
+    color: #000000; /* chữ đen */
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05); /* đổ bóng nhẹ */
+}
+.sort-box .form-check-label {
+    color: #000000;
+}
+
+form.bg-white {
+    background-color: #ffffff; /* nền trắng */
+    color: #000000; /* chữ đen */
+}
+
+form.bg-white .form-control {
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid #ced4da;
+}
+
+form.bg-white .form-control::placeholder {
+    color: #6c757d; /* placeholder xám nhạt */
+}
+
+form.bg-white .input-group-text {
+    background-color: #f8f9fa;
+    color: #000000;
+    border: 1px solid #ced4da;
+}
+
+form.bg-white .btn-warning {
+    color: #000000;
+    font-weight: bold;
+}
+.card-custom {
+        background-color: #ffffff;
+        color: #000000;
+        border: 1px solid #ddd;
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 15px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    .trip-title {
+        font-weight: bold;
+        font-size: 16px;
+        color: #000;
+    }
+
+    .trip-detail-link {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .trip-detail-link:hover {
+        text-decoration: underline;
+    }
+
+    .trip-note {
+        font-weight: bold;
+        color: #d9534f;
+    }
+
+    /* Ảnh trong thẻ kết quả */
+    .trip-image {
+        width: 120px;
+        height: 90px;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+
+    /* Thanh toán & app */
+    .payment-section {
+        background-color: #ffffff;
+        color: #000000;
+        padding: 20px;
+        border-radius: 10px;
+        margin-top: 30px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .payment-method img,
+    .qr-img,
+    .store-img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .social-icon {
+        font-size: 20px;
+        margin-right: 10px;
+        color: #000;
+        text-decoration: none;
+    }
+
+    .social-icon:hover {
+        color: #007bff;
+    }
     </style>
 </head>
 
 <body>
     @include('header')
+<div class="listt">
 
     <!-- tìm kiếm -->
     <div class="banner">
@@ -184,7 +298,7 @@
         <div class="row">
             <!-- Filter Column -->
             <div class="col-md-3">
-                <div class="sort-box">
+                <div class="sort-box ">
                     <h5 class="mb-3">Sắp xếp</h5>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="sortOption" id="defaultSort" checked>
@@ -224,10 +338,10 @@
                         <div class="text-muted small">{{ $schedule->bus->bus_type }}</div>
                         <div class="d-flex align-items-center small mt-1">
                             <i class="bi bi-clock me-1"></i> {{ $schedule->departure_time }} - {{ $schedule->route->departure }}
-<<<<<<< HEAD
-=======
+
+
                             <!-- <span class="ms-3">Còn {{ $schedule->available_seats ?? '...' }} chỗ trống</span> -->
->>>>>>> 335be47db0487c1cb18a68ae897e3f37c7818de1
+
                         </div>
                         <div class="d-flex align-items-center small">
                             <i class="bi bi-clock me-1"></i> {{ $schedule->arrival_time }} - {{ $schedule->route->destination }}
@@ -238,7 +352,7 @@
                         <div class="trip-note">Từ {{ number_format($schedule->route->price) }}đ</div>
                     </div>
                 </div>
-                <div class="fw-semibold text-end mt-1">Không cần thanh toán trước</div>
+
             </div>
         </div>
     </div>
@@ -303,6 +417,7 @@
             </div>
         </div>
     </div>
+</div>
 
 </body>
 

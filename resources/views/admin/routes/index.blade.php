@@ -3,6 +3,51 @@
 @section('title', 'Quản lý Tuyến đường')
 
 @section('content')
+<style>
+    body {
+        background-image: url('/img/bgr8.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .card {
+        background-color: rgba(255, 255, 255, 0.85) !important;
+        box-shadow: 0 0 15px rgba(0,0,0,0.15);
+    }
+
+    .card-header {
+        background-color: rgba(0, 123, 255, 0.08); /* màu nhạt của primary */
+        font-weight: bold;
+    }
+
+    .table th, .table td {
+        vertical-align: middle;
+    }
+
+    .bg-primary {
+        background-color: #007bff !important;
+    }
+
+    .text-white {
+        color: #fff !important;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: rgba(0, 123, 255, 0.05);
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #004085;
+    }
+</style>
+
 <div class="card">
     <div class="card-header">
         <div class="row">

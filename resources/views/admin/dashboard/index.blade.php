@@ -3,9 +3,34 @@
 @section('title', 'Dashboard')
 
 @section('content')
+@section('content')
+<style>
+    body {
+        background-image: url('img/bgr.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .card {
+        background-color: rgba(255, 255, 255, 0.85) !important;
+        color: black;
+    }
+
+    .card-header {
+        background-color: rgba(0, 0, 0, 0.05);
+        font-weight: bold;
+    }
+
+    .list-group-item {
+        background-color: rgba(255, 255, 255, 0.95);
+        color: #000;
+    }
+</style>
+
 <div class="row">
     <div class="col-md-3">
-        <div class="card bg-primary text-white mb-4">
+        <div class="card bg-primary text-black mb-4">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
@@ -19,7 +44,7 @@
     </div>
 
     <div class="col-md-3">
-        <div class="card bg-success text-white mb-4">
+        <div class="card bg-success text-black mb-4">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
@@ -33,7 +58,7 @@
     </div>
 
     <div class="col-md-3">
-        <div class="card bg-info text-white mb-4">
+        <div class="card bg-info text-black mb-4">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
@@ -47,7 +72,7 @@
     </div>
 
     <div class="col-md-3">
-        <div class="card bg-warning text-white mb-4">
+        <div class="card bg-warning text-black mb-4">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
                     <div>

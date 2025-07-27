@@ -9,9 +9,35 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
     <style>
-        body {
-            background-color: #f8f9fa;
-        }
+       body {
+    position: relative;
+    z-index: 0;
+}
+
+/* Đây là lớp nền mờ */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: url('{{ asset('img/bgr.jpg') }}') center/cover no-repeat;
+    /* opacity: 0.2; chỉnh độ mờ ở đây */
+    z-index: -1;
+    /* Nếu muốn làm mờ bằng blur: bỏ comment dòng dưới */
+    filter: blur(2px);
+}
+
+/* Nếu bạn vẫn muốn nền cho phần .thongtin thì giữ lại, hoặc xoá đi nếu chỉ dùng cho toàn trang */
+.thongtin {
+    /* Có thể xóa nếu bạn đã dùng ::before cho body */
+    /* background-image: url('{{ asset('img/bgr.jpg') }}'); */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* padding: 50px 0; */
+    margin-bottom: 50px;
+}
+
+
 
         .breadcrumb-item a {
             color: #0090ff;
@@ -47,7 +73,7 @@
         }
 
         .seat-info {
-            background-color: #f8f9fa;
+            background-color: rgb(255, 255, 255);
             border-radius: 8px;
             padding: 15px;
             margin-bottom: 20px;
@@ -58,163 +84,192 @@
             margin-right: 5px;
             margin-bottom: 5px;
         }
+
+        .breadcrumb {
+    color: #fff;
+}
+
+.breadcrumb a {
+    color: #fff !important;
+    text-decoration: none;
+}
+
+.breadcrumb-item.active {
+    color: #fff !important;
+}
+
+/* Màu cho dấu "/" ngăn cách */
+.breadcrumb-item + .breadcrumb-item::before {
+    color: #fff;
+}
+
+
     </style>
 </head>
 
 <body>
     @include('header')
 
-    <div class="container py-4">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('home') }}">Trang chủ</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Thông tin đặt vé</li>
-            </ol>
-        </nav>
+    <div class="thongtin">
+        <div class="container py-4">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ route('home') }}">Trang chủ</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Thông tin đặt vé</li>
+                </ol>
+            </nav>
 
-        <div class="row g-4">
-            <!-- Cột bên trái: Thông tin liên hệ -->
-            <div class="col-md-7">
-                <div class="card">
-                    <div class="card-header">Thông tin hành khách</div>
-                    <div class="card-body">
-                        <form id="contactForm" action="{{ route('booking.confirm', $booking) }}" method="POST">
-                            @csrf
+            <div class="row g-4">
+                <!-- Cột bên trái: Thông tin liên hệ -->
+                <div class="col-md-7">
+                    <div class="card">
+                        <div class="card-header">Thông tin hành khách</div>
+                        <div class="card-body">
+                            <form id="contactForm" action="{{ route('booking.confirm', $booking) }}" method="POST">
+                                @csrf
 
-                            <!-- Hiển thị thông tin ghế đã chọn -->
-                            <div class="seat-info mb-4">
-                                <h6>Thông tin ghế đã chọn:</h6>
-                                <div class="d-flex flex-wrap">
-                                    @foreach($booking->details as $detail)
+                                <!-- Hiển thị thông tin ghế đã chọn -->
+                                <div class="seat-info mb-4">
+                                    <h6>Thông tin ghế đã chọn:</h6>
+                                    <div class="d-flex flex-wrap">
+                                        @foreach($booking->details as $detail)
                                         <span class="badge bg-primary seat-badge">
                                             Ghế {{ $detail->seat->seat_number }} - {{ number_format($detail->price) }}đ
                                         </span>
-                                    @endforeach
-                                </div>
-                                <div class="fw-bold mt-2">
-                                    Tổng cộng: {{ number_format($booking->total_amount) }}đ
-                                </div>
-                            </div>
-
-                            <!-- Form thông tin khách hàng -->
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label class="form-label">Họ tên <span class="required">*</span></label>
-                                        <input type="text" class="form-control" name="name"
-                                               value="{{ $booking->customer->full_name ?? old('name') }}" required>
+                                        @endforeach
+                                    </div>
+                                    <div class="fw-bold mt-2">
+                                        Tổng cộng: {{ number_format($booking->total_amount) }}đ
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label class="form-label">Số điện thoại <span class="required">*</span></label>
-                                        <input type="tel" class="form-control" name="phone"
-                                               value="{{ $booking->customer->phone_number ?? old('phone') }}" required>
+
+                                <!-- Form thông tin khách hàng -->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">Họ tên <span class="required">*</span></label>
+                                            <input type="text" class="form-control" name="name"
+                                                value="{{ $booking->customer->full_name ?? old('name') }}" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">Số điện thoại <span class="required">*</span></label>
+                                            <input type="tel" class="form-control" name="phone"
+                                                value="{{ $booking->customer->phone_number ?? old('phone') }}" required>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label class="form-label">Email <span class="required">*</span></label>
-                                        <input type="email" class="form-control" name="email"
-                                               value="{{ $booking->customer->email ?? old('email') }}" required>
-                                        @error('email')
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">Email <span class="required">*</span></label>
+                                            <input type="email" class="form-control" name="email"
+                                                value="{{ $booking->customer->email ?? old('email') }}" required>
+                                            @error('email')
                                             <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">CMND/CCCD</label>
+                                            <input type="text" class="form-control" name="id_card"
+                                                value="{{ $booking->customer->id_card ?? old('id_card') }}">
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label class="form-label">CMND/CCCD</label>
-                                        <input type="text" class="form-control" name="id_card"
-                                               value="{{ $booking->customer->id_card ?? old('id_card') }}">
-                                    </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Địa chỉ</label>
+                                    <input type="text" class="form-control" name="address"
+                                        value="{{ $booking->customer->address ?? old('address') }}">
                                 </div>
-                            </div>
 
-                            <div class="mb-3">
-                                <label class="form-label">Địa chỉ</label>
-                                <input type="text" class="form-control" name="address"
-                                       value="{{ $booking->customer->address ?? old('address') }}">
-                            </div>
+                                <div class="alert alert-success mt-3">
+                                    ✅ Thông tin vé xe sẽ được gửi đến số điện thoại và email bạn cung cấp.
+                                </div>
 
-                            <div class="alert alert-success mt-3">
-                                ✅ Thông tin đơn hàng sẽ được gửi đến số điện thoại và email bạn cung cấp.
-                            </div>
-
-                            <div class="d-flex justify-content-between mt-4">
-                                <button type="submit" class="btn btn-confirm px-4">
-                                    <i class="bi bi-check-circle"></i> Xác nhận đặt vé
-                                </button>
-                                <a href="{{ route('booking.payment', ['booking' => $booking->booking_id]) }}" class="btn btn-payment px-4">
-                                    <i class="bi bi-credit-card"></i> Thanh toán online
-                                </a>
-                            </div>
-                        </form>
+                                <div class="d-flex justify-content-between mt-4">
+                                    <button type="submit" class="btn btn-confirm px-4">
+                                        <i class="bi bi-check-circle"></i> Xác nhận đặt vé
+                                    </button>
+                                    <a href="{{ route('booking.payment', ['booking' => $booking->booking_id]) }}" class="btn btn-payment px-4">
+                                        <i class="bi bi-credit-card"></i> Thanh toán online
+                                    </a>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Cột bên phải: Thông tin chuyến đi -->
-            <div class="col-md-5">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between mb-2">
-                            <div class="text-muted">
-                                <i class="bi bi-bus-front"></i>
-                                <strong>{{ $booking->schedule->departure_time->format('l, d/m/Y') }}</strong>
+                <!-- Cột bên phải: Thông tin chuyến đi -->
+                <div class="col-md-5">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between mb-2">
+                                <div class="text-muted">
+                                    <i class="bi bi-bus-front"></i>
+                                    <strong>{{ $booking->schedule->departure_time->format('l, d/m/Y') }}</strong>
+                                </div>
+                                <span class="badge bg-warning text-dark">Chưa thanh toán</span>
                             </div>
-                            <span class="badge bg-warning text-dark">Chưa thanh toán</span>
-                        </div>
 
-                        <div class="d-flex mb-3">
-                            @if($booking->schedule->bus->image)
+                            <div class="d-flex mb-3">
+                                @if($booking->schedule->bus->image)
                                 <img src="{{ asset('storage/' . $booking->schedule->bus->image) }}" alt="Bus Image" class="me-3 rounded" width="100" height="60">
-                            @endif
-                            <div>
-                                <div class="fw-bold">{{ $booking->schedule->bus->bus_name }}</div>
-                                <div class="text-muted small">{{ $booking->schedule->bus->bus_type }}</div>
-                                <div class="text-muted small">
-                                    <i class="bi bi-person"></i> {{ $booking->details->count() }} hành khách
-                                </div>
-                            </div>
-                        </div>
-
-                        <hr>
-
-                        <div class="mb-2">
-                            <div class="d-flex">
-                                <div class="text-center me-3" style="width: 60px;">
-                                    <div class="fw-bold">{{ $booking->schedule->departure_time->format('H:i') }}</div>
-                                    <div class="text-muted small">({{ $booking->schedule->departure_time->format('d/m') }})</div>
-                                    <div class="my-1">
-                                        <span class="badge bg-primary rounded-circle" style="width: 8px; height: 8px;"></span>
-                                    </div>
-                                </div>
-                                <div class="flex-grow-1">
-                                    <div class="fw-bold">{{ $booking->schedule->route->departure }}</div>
+                                @endif
+                                <div>
+                                    <div class="fw-bold">{{ $booking->schedule->bus->bus_name }}</div>
+                                    <div class="text-muted small">{{ $booking->schedule->bus->bus_type }}</div>
                                     <div class="text-muted small">
-                                        {{ $booking->schedule->departure_location }}
+                                        <i class="bi bi-ticket-perforated"></i> {{ $booking->details->count() }} Ghế
+                                    </div>
+                                    <div>
+                                        @if($booking->schedule->bus->amenities)
+                                        <div class="text-muted small">
+                                            <i class="bi bi-star"></i> Tiện nghi: {{ $booking->schedule->bus->amenities }}
+                                        </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="mb-1">
-                            <div class="d-flex">
-                                <div class="text-center me-3" style="width: 60px;">
-                                    <div class="fw-bold text-danger">{{ $booking->schedule->arrival_time->format('H:i') }}</div>
-                                    <div class="text-muted small">({{ $booking->schedule->arrival_time->format('d/m') }})</div>
-                                    <div class="my-1">
-                                        <span class="badge bg-danger rounded-circle" style="width: 8px; height: 8px;"></span>
+                            <hr>
+
+                            <div class="mb-2">
+                                <div class="d-flex">
+                                    <div class="text-center me-3" style="width: 60px;">
+                                        <div class="fw-bold">{{ $booking->schedule->departure_time->format('H:i') }}</div>
+                                        <div class="text-muted small">({{ $booking->schedule->departure_time->format('d/m') }})</div>
+                                        <div class="my-1">
+                                            <span class="badge bg-primary rounded-circle" style="width: 8px; height: 8px;"></span>
+                                        </div>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <div class="fw-bold">{{ $booking->schedule->route->departure }}</div>
+                                        <div class="text-muted small">
+                                            {{ $booking->schedule->departure_location }}
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="flex-grow-1">
-                                    <div class="fw-bold">{{ $booking->schedule->route->destination }}</div>
-                                    <div class="text-muted small">
-                                        {{ $booking->schedule->arrival_location }}
+                            </div>
+
+                            <div class="mb-1">
+                                <div class="d-flex">
+                                    <div class="text-center me-3" style="width: 60px;">
+                                        <div class="fw-bold text-danger">{{ $booking->schedule->arrival_time->format('H:i') }}</div>
+                                        <div class="text-muted small">({{ $booking->schedule->arrival_time->format('d/m') }})</div>
+                                        <div class="my-1">
+                                            <span class="badge bg-danger rounded-circle" style="width: 8px; height: 8px;"></span>
+                                        </div>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <div class="fw-bold">{{ $booking->schedule->route->destination }}</div>
+                                        <div class="text-muted small">
+                                            {{ $booking->schedule->arrival_location }}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -223,8 +278,8 @@
                 </div>
             </div>
         </div>
-    </div>
 
+    </div>
     @include('footer')
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
@@ -263,4 +318,5 @@
         });
     </script>
 </body>
+
 </html>

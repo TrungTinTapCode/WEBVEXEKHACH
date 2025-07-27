@@ -1,12 +1,96 @@
 @extends('admin.layouts.app')
 
 @section('content')
+<style>
+    body {
+        background: url('/img/bgr8.jpg') no-repeat center center fixed;
+        background-size: cover;
+        background-color: #f4f4f4;
+    }
+
+    .card {
+        background-color: rgba(255, 255, 255, 0.96);
+        border-radius: 12px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+
+    .card-header {
+        background-color: #07bff;
+        color: #fff;
+        padding: 16px;
+        border-bottom: none;
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+    }
+
+    .card-title {
+        margin: 0;
+        font-size: 1.25rem;
+    }
+
+    .form-control {
+        border-radius: 8px;
+        box-shadow: none;
+        border-color: #ccc;
+    }
+
+    .btn-primary {
+        background-color: #069dd6;
+        border-color: #069dd6;
+        border-radius: 8px;
+    }
+
+    .btn-primary:hover {
+        background-color: #058bbf;
+        border-color: #058bbf;
+    }
+
+    .alert-info {
+        background-color: #d1ecf1;
+        color: #0c5460;
+        border-color: #bee5eb;
+        border-radius: 8px;
+    }
+
+    .table {
+        background-color: white;
+        margin-bottom: 0;
+    }
+
+    .table th,
+    .table td {
+        vertical-align: middle !important;
+        text-align: center;
+    }
+
+    .thead-light th {
+        background-color: #e9f5ff;
+    }
+
+    .table td.text-right {
+        text-align: right;
+    }
+
+    .container {
+        margin-top: 30px;
+    }
+
+    label {
+        font-weight: 500;
+    }
+
+    .table-responsive {
+        margin-top: 20px;
+    }
+</style>
+
 <div class="container">
     <div class="row">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Báo cáo doanh thu</h3>
+                    <h3 class="card-title text-black">Báo cáo doanh thu</h3>
                 </div>
                 <div class="card-body">
                     <form method="GET" action="{{ route('admin.reports.revenue') }}">

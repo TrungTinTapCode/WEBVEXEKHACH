@@ -39,9 +39,9 @@
         .register-box h4,
         .register-box .text-link,
         .register-box .alert {
-            background-color: rgba(255, 255, 255, 0.92);
-            padding: 10px;
+            background-color: rgb(255, 255, 255);
             border-radius: 10px;
+            padding:22px;
         }
 
         .btn-custom {
@@ -78,6 +78,31 @@
         .text-link {
             font-size: 20px;
         }
+
+        body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: url('{{ asset('img/bgr.jpg') }}') center/cover no-repeat;
+    /* opacity: 0.2; chỉnh độ mờ ở đây */
+    z-index: -1;
+    /* Nếu muốn làm mờ bằng blur: bỏ comment dòng dưới */
+    filter: blur(2px);
+}
+
+/* Nếu bạn vẫn muốn nền cho phần .thongtin thì giữ lại, hoặc xoá đi nếu chỉ dùng cho toàn trang */
+.register-container {
+    /* Có thể xóa nếu bạn đã dùng ::before cho body */
+    /* background-image: url('{{ asset('img/bgr.jpg') }}'); */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* padding: 50px 0; */
+    margin-bottom: 50px;
+
+}
+
+
     </style>
 </head>
 
@@ -86,7 +111,7 @@
 
     <div class="register-container">
         <div class="register-box">
-            <h4 class="text-center mb-4">ĐĂNG KÝ</h4>
+
 
             @if (session('success'))
             <div class="alert alert-success text-center">
@@ -103,6 +128,7 @@
             <form method="POST" action="{{ route('register.user') }}">
                 @csrf
                 <div class="mb-4">
+                    <h4 class="text-center mb-4">ĐĂNG KÝ</h4>
                     <label for="name" class="form-label">Họ và tên</label>
                     <input type="text" class="form-control" name="name" id="name" required>
                 </div>
@@ -128,11 +154,12 @@
                 </div>
 
                 <button type="submit" class="btn btn-custom w-100 mb-4">ĐĂNG KÝ</button>
-            </form>
-
-            <div class="text-link text-center mt-3">
+                <div class="text-link text-center mt-3">
                 Đã có tài khoản? <a href="{{ route('login.user') }}">Đăng nhập</a>
             </div>
+            </form>
+
+
         </div>
     </div>
 

@@ -411,7 +411,28 @@
 
 
 
-        /* ... (giữ nguyên các phần CSS còn lại bạn đã có) ... */
+         body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: url('{{ asset('img/bgr.jpg') }}') center/cover no-repeat;
+    /* opacity: 0.2; chỉnh độ mờ ở đây */
+    z-index: -1;
+    /* Nếu muốn làm mờ bằng blur: bỏ comment dòng dưới */
+    filter: blur(2px);
+}
+
+/* Nếu bạn vẫn muốn nền cho phần .thongtin thì giữ lại, hoặc xoá đi nếu chỉ dùng cho toàn trang */
+.container5 {
+    /* Có thể xóa nếu bạn đã dùng ::before cho body */
+    /* background-image: url('{{ asset('img/bgr.jpg') }}'); */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* padding: 50px 0; */
+    margin-bottom: 50px;
+
+}
     </style>
 </head>
 

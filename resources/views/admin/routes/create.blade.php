@@ -1,10 +1,64 @@
 @extends('admin.layouts.app')
 
 @section('content')
+<style>
+    body {
+        background: url('/img/bgr8.jpg') no-repeat center center fixed;
+        background-size: cover;
+        background-color: #f4f4f4;
+    }
+
+    .card {
+        background-color: rgba(255, 255, 255, 0.96);
+        border-radius: 12px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        margin-top: 40px;
+    }
+
+    .card-header {
+        background-color: #07bff !important;
+        color: #fff;
+        padding: 16px;
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+    }
+
+    .form-label {
+        font-weight: 500;
+        color: #333;
+    }
+
+    .form-control {
+        border-radius: 8px;
+        border-color: #ccc;
+        box-shadow: none;
+    }
+
+    .form-control:focus {
+        border-color: #07bff;
+        box-shadow: 0 0 0 0.1rem rgba(0, 123, 255, 0.25);
+    }
+
+    .btn-primary {
+        background-color: #069dd6;
+        border-color: #069dd6;
+        border-radius: 8px;
+    }
+
+    .btn-primary:hover {
+        background-color: #058bbf;
+        border-color: #058bbf;
+    }
+
+    .btn-secondary {
+        border-radius: 8px;
+    }
+</style>
+
 <div class="container">
     <div class="card shadow">
-        <div class="card-header" style="background-color: #07bff;">
-            <h3>Thêm tuyến xe mới</h3>
+        <div class="card-header" >
+            <h3 class="text-black">Thêm tuyến xe mới</h3>
         </div>
         <div class="card-body" style="background-color: #fff;">
             <form action="{{ route('admin.routes.store') }}" method="POST" enctype="multipart/form-data">

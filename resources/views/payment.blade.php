@@ -11,12 +11,48 @@
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
 
     <style>
-        .breadcrumb-item a {
-            color: #0090ff;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 16px;
-        }
+        body {
+    position: relative;
+    z-index: 0;
+}
+
+/* Đây là lớp nền mờ */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: url('{{ asset('img/bgr.jpg') }}') center/cover no-repeat;
+    /* opacity: 0.2; chỉnh độ mờ ở đây */
+    z-index: -1;
+    /* Nếu muốn làm mờ bằng blur: bỏ comment dòng dưới */
+    filter: blur(2px);
+}
+
+/* Nếu bạn vẫn muốn nền cho phần .thongtin thì giữ lại, hoặc xoá đi nếu chỉ dùng cho toàn trang */
+.payment {
+    /* Có thể xóa nếu bạn đã dùng ::before cho body */
+    /* background-image: url('{{ asset('img/bgr.jpg') }}'); */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* padding: 50px 0; */
+    margin-bottom: 50px;
+}
+
+
+        .breadcrumb a {
+    color: #fff !important;
+    text-decoration: none;
+}
+
+.breadcrumb-item.active {
+    color: #fff !important;
+}
+
+/* Màu cho dấu "/" ngăn cách */
+.breadcrumb-item + .breadcrumb-item::before {
+    color: #fff;
+}
 
         .left-section,
         .right-section {
@@ -136,7 +172,8 @@
 <body>
     @include('header')
 
-    <div class="container py-4">
+   <div class="payment">
+     <div class="container py-4">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('home') }}">Trang chủ</a></li>
@@ -149,7 +186,7 @@
             <div class="col-lg-8">
                 <div class="left-section">
                     <div class="alert alert-light border mb-4">
-                        Quý khách vui lòng thanh toán trong thời gian hiển thị bên. Nếu quá thời gian, <span class="text-danger fw-bold">ghế sẽ bị huỷ</span> và bạn cần chọn lại.
+                        Quý khách vui lòng thanh toán trong thời gian hiển thị bên phải. Nếu quá thời gian, <span class="text-danger fw-bold">ghế được chọn sẽ bị huỷ</span> và bạn cần chọn lại.
                     </div>
 
                     <div class="mb-3">
@@ -165,7 +202,7 @@
                         @csrf
                         <input type="hidden" name="payment_method" id="paymentMethodInput">
                         <input type="hidden" name="amount" value="{{ $totalAmount }}">
-                        
+
                         <div class="form-check mb-3">
                             <input class="form-check-input" type="checkbox" value="" id="onlinePayment" checked>
                             <label class="form-check-label fw-bold" for="onlinePayment">
@@ -242,7 +279,7 @@
                         <p><span class="info-label">Loại xe:</span> <span class="info-value text-danger">{{ $booking->schedule->bus->bus_type }}</span></p>
                         <p><span class="info-label">Chuyến:</span> <span class="info-value text-danger">{{ $booking->schedule->route->departure }} - {{ $booking->schedule->route->destination }}</span></p>
                         <p><span class="info-label">Khởi hành:</span> <span class="info-value">{{ $booking->schedule->departure_time->format('H:i d/m/Y') }}</span></p>
-                        <p><span class="info-label">Số Ghế:</span> 
+                        <p><span class="info-label">Số Ghế:</span>
                             <span class="info-value">
                                 @foreach($booking->details as $detail)
                                     {{ $detail->seat->seat_number }},
@@ -255,6 +292,7 @@
             </div>
         </div>
     </div>
+   </div>
 
     @include('footer')
 
@@ -286,20 +324,20 @@
         document.querySelectorAll('.payment-button').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
-                
+
                 if (!document.getElementById('onlinePayment').checked) {
                     alert('Chỉ hỗ trợ thanh toán online!');
                     return;
                 }
-                
+
                 if (!selectedBank) {
                     alert('Vui lòng chọn ngân hàng trước khi thanh toán!');
                     return;
                 }
-                
+
                 // Set payment method
                 document.getElementById('paymentMethodInput').value = selectedBank;
-                
+
                 // Submit form
                 document.getElementById('paymentForm').submit();
             });

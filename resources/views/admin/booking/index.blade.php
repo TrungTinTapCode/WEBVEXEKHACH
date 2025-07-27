@@ -3,12 +3,110 @@
 @section('title', 'Quản lý Đặt vé')
 
 @section('content')
+<style>
+    body {
+        background: url('/img/bgr8.jpg') no-repeat center center fixed;
+        background-size: cover;
+        background-color: #f4f4f4;
+    }
+
+    .card {
+        background-color: rgba(255, 255, 255, 0.96);
+        border-radius: 12px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+
+    .card-header {
+        background-color: #07bff;
+        color: #fff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px;
+        border-bottom: none;
+    }
+
+    .card-title {
+        margin: 0;
+        font-size: 1.25rem;
+    }
+
+    .card-tools .input-group {
+        width: 250px;
+    }
+
+    .btn-primary {
+        background-color: #069dd6;
+        border-color: #069dd6;
+    }
+
+    .btn-primary:hover {
+        background-color: #058bbf;
+        border-color: #058bbf;
+    }
+
+    .table {
+        background-color: white;
+        margin-bottom: 0;
+    }
+
+    .table th,
+    .table td {
+        vertical-align: middle !important;
+        text-align: center;
+    }
+
+    thead.bg-primary {
+        background-color: #07bff !important;
+    }
+
+    .badge {
+        padding: 6px 12px;
+        font-size: 0.85rem;
+        border-radius: 12px;
+    }
+
+    .badge-success {
+        background-color: #a8e6cf;
+        color: #2d4739;
+    }
+
+    .badge-info {
+        background-color: #d0f0fd;
+        color: #155774;
+    }
+
+    .badge-danger {
+        background-color: #fcdede;
+        color: #7e1c1c;
+    }
+
+    .badge-warning {
+        background-color: #fff4c2;
+        color: #8a6d1d;
+    }
+
+    .btn-sm {
+        padding: 4px 8px;
+        font-size: 0.875rem;
+    }
+
+    .mt-3 {
+        margin-top: 1.5rem !important;
+    }
+
+    .pagination {
+        justify-content: center;
+    }
+</style>
+
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title">Danh sách Đặt vé</h3>
+        <h3 class="card-title text-black">Danh sách Đặt vé</h3>
         <div class="card-tools">
             <div class="input-group input-group-sm">
-                <input type="text" class="form-control" placeholder="Tìm kiếm...">
+                <input type="text" class="form-control text-black" placeholder="Tìm kiếm...">
                 <div class="input-group-append">
                     <button class="btn btn-primary">
                         <i class="fas fa-search"></i>
@@ -19,7 +117,7 @@
     </div>
     <div class="card-body">
         <table class="table table-bordered table-hover">
-            <thead class="bg-primary text-white">
+            <thead class="bg-primary text-black">
                 <tr>
                     <th>Mã đặt vé</th>
                     <th>Khách hàng</th>

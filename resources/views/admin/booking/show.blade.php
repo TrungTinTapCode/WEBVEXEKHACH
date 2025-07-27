@@ -3,10 +3,74 @@
 @section('title', 'Chi tiết Đặt vé: ' . $booking->booking_code)
 
 @section('content')
+<style>
+    body {
+        background: url('/img/bgr8.jpg') no-repeat center center fixed;
+        background-size: cover;
+    }
+
+    .card {
+        background-color: rgba(255, 255, 255, 0.97);
+        border-radius: 12px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        margin-top: 30px;
+    }
+
+    .card-header {
+        background-color: #07bff !important;
+        color: white;
+        padding: 16px 24px;
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+    }
+
+    .card-title {
+        margin-bottom: 0;
+    }
+
+    h2, h3, h4 {
+        color: #333;
+        font-weight: 600;
+    }
+
+    table.table-bordered th {
+        background-color: #f1f1f1;
+        color: #333;
+    }
+
+    table.table-bordered td, table.table-bordered th {
+        vertical-align: middle;
+    }
+
+    .badge {
+        font-size: 0.9rem;
+        padding: 6px 10px;
+        border-radius: 6px;
+    }
+
+    .btn {
+        border-radius: 8px;
+        margin-top: 5px;
+    }
+
+    .btn-sm {
+        padding: 6px 12px;
+        font-size: 0.85rem;
+    }
+
+    .table-responsive {
+        margin-top: 15px;
+    }
+
+    .btn-secondary i {
+        margin-right: 6px;
+    }
+</style>
+
 <div class="card">
     <div class="card-header">
-        <h2 class="card-title"><strong>CHI TIẾT</strong></h2>
-        <h3 class="card-title">MÃ VÉ: {{ $booking->booking_code }}</h3>
+        <h3 class="card-title text-black"><strong>CHI TIẾT</strong></h3>
+        <h3 class="card-title text-black">MÃ VÉ: {{ $booking->booking_code }}</h3>
     </div>
     <div class="card-body">
         <div class="row">

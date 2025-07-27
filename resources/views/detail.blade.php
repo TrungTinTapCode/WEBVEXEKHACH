@@ -289,6 +289,13 @@
         .tiktok {
             background-color: #000000;
         }
+
+        body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: url('{{ asset('img/bgr.jpg') }}') center/cover no-repeat;
+    background-size: cover;
+    color: #000; /* chữ đen */
+}
     </style>
 </head>
 
@@ -323,11 +330,11 @@
         <div class="seat-selection">
             <div class="row mb-3">
                 <div class="col-md-6">
-                    <h5 class="text-success">ĐÓN / TRẢ TẬN NƠI</h5>
-                    <p class="text-muted">*Vé thuộc chuyến {{ $schedule->route->departure }} - {{ $schedule->route->destination }} ({{ \Carbon\Carbon::parse($schedule->departure_time)->format('d/m/Y') }})</p>
+                    <h5 class="text-success">ĐƯA/ĐÓN TẬN NƠI</h5>
+                    <p class="text-muted">*Chuyến xe {{ $schedule->route->departure }} - {{ $schedule->route->destination }} ({{ \Carbon\Carbon::parse($schedule->departure_time)->format('d/m/Y') }})</p>
                 </div>
                 <div class="col-md-6 text-end">
-                    <p class="fw-bold">KHÔNG CẦN THANH TOÁN TRƯỚC</p>
+
                 </div>
             </div>
 
@@ -366,7 +373,7 @@
                                 // Lấy tổng số ghế và chia đôi cho 2 tầng
                                 $totalSeats = $schedule->bus->total_seats;
                                 $halfSeats = ceil($totalSeats / 2);
-                                
+
                                 // Lọc ghế tầng dưới (từ ghế 1 đến nửa tổng số ghế)
                                 $lowerDeckSeats = $seats->filter(function($seat) use ($halfSeats) {
                                     $seatNumber = (int) preg_replace('/[^0-9]/', '', $seat->seat_number);
@@ -374,7 +381,7 @@
                                 })->sortBy(function($seat) {
                                     return (int) preg_replace('/[^0-9]/', '', $seat->seat_number);
                                 });
-                                
+
                                 $lowerDeckSeatPairs = $lowerDeckSeats->chunk(2);
                             @endphp
 
@@ -407,7 +414,7 @@
                                 })->sortBy(function($seat) {
                                     return (int) preg_replace('/[^0-9]/', '', $seat->seat_number);
                                 });
-                                
+
                                 $upperDeckSeatPairs = $upperDeckSeats->chunk(2);
                             @endphp
 
@@ -514,7 +521,7 @@
                     seatElement.classList.add('selected');
                     selectedSeats.push(seatId);
                 }
-                
+
                 updateTotalPrice();
                 updateSelectedSeatsInput();
             }
