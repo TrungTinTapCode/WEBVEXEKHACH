@@ -155,6 +155,13 @@ class UserController extends Controller
         $user->phone_number = $request->phone_number;
         $user->gender       = $request->gender;
         $user->save();
+        // Cập nhật thông tin khách hàng
+        $customer = $user->customer;
+        $customer->full_name = $request->name;
+        $customer->email     = $request->email;
+        $customer->phone_number = $request->phone_number;
+        // $customer->gender    = $request->gender;
+        $customer->save();
 
         return back()->with('success', 'Thông tin đã được cập nhật!');
     }
