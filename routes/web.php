@@ -89,18 +89,18 @@ Route::prefix('admin')->name('admin.')->group(function () {
     //Buses
     Route::resource('buses', BusController::class);
     Route::post('buses/{bus}/toggle-status', [BusController::class, 'toggleStatus'])->name('buses.toggle-status');
-    //Seats lỗi đang sửa
+    /*Seats lỗi đang sửa
     Route::post('/seats', [SeatController::class, 'store'])->name('seats.store');
     Route::get('/seats/{seat}/edit', [SeatController::class, 'edit'])->name('seats.edit');
     Route::put('/seats/{seat}', [SeatController::class, 'update'])->name('seats.update');
-    Route::delete('/seats/{seat}', [SeatController::class, 'destroy'])->name('seats.destroy');
+    Route::delete('/seats/{seat}', [SeatController::class, 'destroy'])->name('seats.destroy');*/
     //Schedules
     Route::resource('schedules', ScheduleController::class);
     Route::post('schedules/{schedule}/toggle-status', [ScheduleController::class, 'toggleStatus'])->name('schedules.toggle-status');
     //booking
     Route::get('/booking', [BookingController::class, 'index'])->name('booking.index');
     Route::get('/booking/{booking}', [BookingController::class, 'show'])->name('booking.show');
-    Route::post('/admin/booking/{booking}/update-status', [BookingController::class, 'updateStatus'])->name('booking.update-status');
+    Route::post('/booking/{booking}/update-status', [BookingController::class, 'updateStatus'])->name('booking.update-status');
     //Reports
     Route::get('/reports/revenue', [ReportController::class, 'revenue'])->name('reports.revenue');
     Route::get('/reports/trips', [ReportController::class, 'trips'])->name('reports.trips');

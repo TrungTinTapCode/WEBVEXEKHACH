@@ -176,7 +176,6 @@
                         <div class="fw-semibold mb-4">
                             Sau khi thanh toán, vui lòng đợi vài phút để hệ thống cập nhật trạng thái vé.
                         </div>
-
                         <div class="mb-4">
                             <h5 class="text-primary fw-bold">Thanh toán bằng thẻ nội địa</h5>
                             <div class="row g-2">
@@ -240,7 +239,7 @@
                         <p><span class="info-label">Họ tên:</span> <span class="info-value">{{ $booking->customer->full_name ?? 'Chưa có thông tin' }}</span></p>
                         <p><span class="info-label">Số điện thoại:</span> <span class="info-value">{{ $booking->customer->phone_number }}</span></p>
                         <p><span class="info-label">Điểm lên xe:</span> <span class="info-value">{{ $booking->schedule->route->departure }}</span></p>
-                        <p><span class="info-label">Loại ghế:</span> <span class="info-value text-danger">{{ $booking->schedule->bus->bus_type }}</span></p>
+                        <p><span class="info-label">Loại xe:</span> <span class="info-value text-danger">{{ $booking->schedule->bus->bus_type }}</span></p>
                         <p><span class="info-label">Chuyến:</span> <span class="info-value text-danger">{{ $booking->schedule->route->departure }} - {{ $booking->schedule->route->destination }}</span></p>
                         <p><span class="info-label">Khởi hành:</span> <span class="info-value">{{ $booking->schedule->departure_time->format('H:i d/m/Y') }}</span></p>
                         <p><span class="info-label">Số Ghế:</span> 
@@ -314,24 +313,30 @@
         });
     </script>
     <script>
+        const bankMap = {
+            'VIETCOMBANK': 'bank_transfer',
+            'AGRIBANK': 'bank_transfer',
+            'VIETINBANK': 'bank_transfer',
+            'BIDV': 'bank_transfer',
+            'VISA': 'credit_card',
+            'MASTERCARD': 'credit_card'
+        };
         document.querySelectorAll('.payment-button').forEach(btn => {
-    btn.addEventListener('click', () => {
-        if (!document.getElementById('onlinePayment').checked) {
-            alert('Chỉ hỗ trợ thanh toán online!');
-            return;
-        }
-        if (!selectedBank) {
-            alert('Vui lòng chọn ngân hàng trước khi thanh toán!');
-            return;
-        }
-        
-        // Set payment method
-        document.getElementById('paymentMethodInput').value = selectedBank;
-        
-        // Submit form
-        document.getElementById('paymentForm').submit();
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (!document.getElementById('onlinePayment').checked) {
+                alert('Chỉ hỗ trợ thanh toán online!');
+                return;
+            }
+            if (!selectedBank) {
+                alert('Vui lòng chọn ngân hàng trước khi thanh toán!');
+                return;
+            }
+            // Sử dụng map để lấy giá trị đúng
+            document.getElementById('paymentMethodInput').value = bankMap[selectedBank] || 'bank';
+            document.getElementById('paymentForm').submit();
+        });
     });
-});
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
 </body>

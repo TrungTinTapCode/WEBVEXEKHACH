@@ -12,6 +12,17 @@
 
 <body>
     @include('header')
+
+    @if(session('success'))
+        <div class="container mt-3">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <i class="bi bi-check-circle-fill me-2"></i>
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Đóng"></button>
+            </div>
+        </div>
+    @endif
+
 <div class="marquee-container py-2">
     <div class="marquee-content">
         <span class="marquee-text">
