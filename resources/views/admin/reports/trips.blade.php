@@ -185,7 +185,6 @@
                             <tr>
                                 <th>Mã đặt chỗ</th>
                                 <th>Ngày đặt</th>
-                                <th>Số khách</th>
                                 <th>Thanh toán</th>
                                 <th>Trạng thái</th>
                             </tr>
@@ -195,7 +194,6 @@
                             <tr>
                                 <td>{{ $booking->booking_id }}</td>
                                 <td>{{ $booking->created_at->format('d/m/Y H:i') }}</td>
-                                <td>{{ $booking->details->sum('quantity') }}</td>
                                 <td>{{ number_format($booking->total_amount) }} VNĐ</td>
                                 <td>
                                     <span class="badge bg-{{ $booking->status === 'completed' ? 'success' : 'warning' }}">
